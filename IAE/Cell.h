@@ -1,5 +1,5 @@
 //
-//  FirstViewController.h
+//  Cell.h
 //  IAE
 //
 //  Created by Philippe Nougaillon on 02/10/13.
@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FirstViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface Cell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *heureLabel;
 
 @end

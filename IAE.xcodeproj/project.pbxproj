@@ -23,6 +23,7 @@
 		4A045C7B17FC036400E2E2BA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A045C5717FC036300E2E2BA /* UIKit.framework */; };
 		4A045C8317FC036400E2E2BA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4A045C8117FC036400E2E2BA /* InfoPlist.strings */; };
 		4A045C8517FC036400E2E2BA /* IAETests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A045C8417FC036400E2E2BA /* IAETests.m */; };
+		4A045C9017FC299900E2E2BA /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A045C8F17FC299900E2E2BA /* Cell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,8 @@
 		4A045C8017FC036400E2E2BA /* IAETests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IAETests-Info.plist"; sourceTree = "<group>"; };
 		4A045C8217FC036400E2E2BA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4A045C8417FC036400E2E2BA /* IAETests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IAETests.m; sourceTree = "<group>"; };
+		4A045C8E17FC299900E2E2BA /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
+		4A045C8F17FC299900E2E2BA /* Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +130,8 @@
 				4A045C6F17FC036300E2E2BA /* SecondViewController.m */,
 				4A045C7117FC036400E2E2BA /* Images.xcassets */,
 				4A045C5A17FC036300E2E2BA /* Supporting Files */,
+				4A045C8E17FC299900E2E2BA /* Cell.h */,
+				4A045C8F17FC299900E2E2BA /* Cell.m */,
 			);
 			path = IAE;
 			sourceTree = "<group>";
@@ -258,6 +263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A045C9017FC299900E2E2BA /* Cell.m in Sources */,
 				4A045C7017FC036300E2E2BA /* SecondViewController.m in Sources */,
 				4A045C6417FC036300E2E2BA /* AppDelegate.m in Sources */,
 				4A045C6D17FC036300E2E2BA /* FirstViewController.m in Sources */,
@@ -480,6 +486,7 @@
 				4A045C8A17FC036400E2E2BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4A045C8B17FC036400E2E2BA /* Build configuration list for PBXNativeTarget "IAETests" */ = {
 			isa = XCConfigurationList;
@@ -488,6 +495,7 @@
 				4A045C8D17FC036400E2E2BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
