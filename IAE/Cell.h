@@ -10,5 +10,9 @@
 
 @interface Cell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *heureLabel;
+@property (weak, nonatomic) IBOutlet UILabel *salleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *titreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *subTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *memoLabel;
 
 @end
