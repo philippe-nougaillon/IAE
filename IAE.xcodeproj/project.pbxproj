@@ -24,6 +24,9 @@
 		4A045C8317FC036400E2E2BA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4A045C8117FC036400E2E2BA /* InfoPlist.strings */; };
 		4A045C8517FC036400E2E2BA /* IAETests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A045C8417FC036400E2E2BA /* IAETests.m */; };
 		4A045C9017FC299900E2E2BA /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A045C8F17FC299900E2E2BA /* Cell.m */; };
+		4AE478C018043B2400C8CD7E /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE478BF18043B2400C8CD7E /* Social.framework */; };
+		4AE478C218043B3100C8CD7E /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE478C118043B3100C8CD7E /* Accounts.framework */; };
+		4AE478C518044B0A00C8CD7E /* twitterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE478C418044B0A00C8CD7E /* twitterCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +64,10 @@
 		4A045C8417FC036400E2E2BA /* IAETests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IAETests.m; sourceTree = "<group>"; };
 		4A045C8E17FC299900E2E2BA /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
 		4A045C8F17FC299900E2E2BA /* Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
+		4AE478BF18043B2400C8CD7E /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		4AE478C118043B3100C8CD7E /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		4AE478C318044B0A00C8CD7E /* twitterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = twitterCell.h; sourceTree = "<group>"; };
+		4AE478C418044B0A00C8CD7E /* twitterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = twitterCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +75,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AE478C218043B3100C8CD7E /* Accounts.framework in Frameworks */,
+				4AE478C018043B2400C8CD7E /* Social.framework in Frameworks */,
 				4A045C5617FC036300E2E2BA /* CoreGraphics.framework in Frameworks */,
 				4A045C5817FC036300E2E2BA /* UIKit.framework in Frameworks */,
 				4A045C5417FC036300E2E2BA /* Foundation.framework in Frameworks */,
@@ -109,6 +118,8 @@
 		4A045C5217FC036300E2E2BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4AE478C118043B3100C8CD7E /* Accounts.framework */,
+				4AE478BF18043B2400C8CD7E /* Social.framework */,
 				4A045C5317FC036300E2E2BA /* Foundation.framework */,
 				4A045C5517FC036300E2E2BA /* CoreGraphics.framework */,
 				4A045C5717FC036300E2E2BA /* UIKit.framework */,
@@ -123,6 +134,8 @@
 				4A045C6217FC036300E2E2BA /* AppDelegate.h */,
 				4A045C6317FC036300E2E2BA /* AppDelegate.m */,
 				4A045C6517FC036300E2E2BA /* Main_iPhone.storyboard */,
+				4AE478C318044B0A00C8CD7E /* twitterCell.h */,
+				4AE478C418044B0A00C8CD7E /* twitterCell.m */,
 				4A045C6817FC036300E2E2BA /* Main_iPad.storyboard */,
 				4A045C6B17FC036300E2E2BA /* FirstViewController.h */,
 				4A045C6C17FC036300E2E2BA /* FirstViewController.m */,
@@ -212,6 +225,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Philippe Nougaillon";
 				TargetAttributes = {
+					4A045C4F17FC036300E2E2BA = {
+						DevelopmentTeam = CV79DX276R;
+					};
 					4A045C7617FC036400E2E2BA = {
 						TestTargetID = 4A045C4F17FC036300E2E2BA;
 					};
@@ -266,6 +282,7 @@
 				4A045C9017FC299900E2E2BA /* Cell.m in Sources */,
 				4A045C7017FC036300E2E2BA /* SecondViewController.m in Sources */,
 				4A045C6417FC036300E2E2BA /* AppDelegate.m in Sources */,
+				4AE478C518044B0A00C8CD7E /* twitterCell.m in Sources */,
 				4A045C6D17FC036300E2E2BA /* FirstViewController.m in Sources */,
 				4A045C6017FC036300E2E2BA /* main.m in Sources */,
 			);
@@ -404,10 +421,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IAE/IAE-Prefix.pch";
 				INFOPLIST_FILE = "IAE/IAE-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -417,10 +437,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IAE/IAE-Prefix.pch";
 				INFOPLIST_FILE = "IAE/IAE-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
