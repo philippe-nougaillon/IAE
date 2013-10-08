@@ -12,8 +12,8 @@
 @interface FirstViewController () {
 
     NSArray *jsonArray;
-    //NSDictionary *jsonDictionary;
     
+    __weak IBOutlet UITableView *planningTableView;
 }
 
 @end
@@ -25,13 +25,13 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 
-    [self loadData];
-
+    //[self loadData];
+    [self refreshButtonPressed:nil];
+    
 }
 
 -(void)loadData
 {
-
     // load Data from hyperplanning json flux
 
     NSURLRequest *request = [NSURLRequest requestWithURL:
@@ -42,7 +42,7 @@
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     if (data != nil) {
-        NSLog(@"OK");
+        //NSLog(@"OK");
     } else {
         if (error != nil)
             NSLog(@"Echec connection (%@)", [error localizedDescription]);
@@ -51,37 +51,50 @@
     }
     
     NSError *errorDecoding;
-
-    //jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
     
     jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
 
     //NSLog(@"%@",jsonArray);
-
-    /*
-    
-    for (NSInteger i = 0; i < jsonDictionary.count; i++ ) {
-        NSString *key = [NSString stringWithFormat:@"%d", i];
-        NSDictionary *obj = [jsonDictionary objectForKey:key];
-        NSString *heure = [obj objectForKey:@"heure"];
-        NSLog(@"%@",heure);
-    }
-     */
-
-    /*
-
-    for (NSDictionary *obj in jsonArray) {
-        NSString *heure = [obj objectForKey:@"heure"];
-        NSString *matiere = [obj objectForKey:@"matiere"];
-        NSString *enseignant = [obj objectForKey:@"enseignant"];
-        NSString *memo = [obj objectForKey:@"memo"];
-        NSString *salle = [obj objectForKey:@"salle"];
-        NSString *tdoptions = [obj objectForKey:@"tdoptions"];
-        NSLog(@"%@ %@ %@ %@ Avec:%@ Salle:%@", heure, matiere, memo, tdoptions, enseignant, salle);
-     }
-
-    */
 }
+
+- (IBAction)refreshButtonPressed:(id)sender {
+    
+    
+    //Start an activity indicator here
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+
+    UIActivityIndicatorView *activityView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    activityView.center=self.view.center;
+    activityView.backgroundColor = [UIColor lightGrayColor];
+    [activityView startAnimating];
+    [self.view addSubview:activityView];
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        //Call your function or whatever work that needs to be done
+        //Code in this part is run on a background thread
+
+        // Reload planning
+        [self loadData];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            
+            //Stop your activity indicator or anything else with the GUI
+            //Code here is run on the main thread
+
+            [planningTableView reloadData];
+            
+            // move to top
+            [planningTableView setContentOffset:CGPointZero animated:YES];
+            
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            [activityView removeFromSuperview];
+            
+        });
+    });
+ 
+}
+
 
 #pragma mark - Tableview Datasource
 
