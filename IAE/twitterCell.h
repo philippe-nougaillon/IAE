@@ -12,4 +12,5 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *twitterCellLabel;
 
+@property (weak, nonatomic) IBOutlet UIImageView *twitterProfileImage;
 @end

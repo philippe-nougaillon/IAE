@@ -25,8 +25,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 
-    //[self loadData];
-    [self refreshButtonPressed:nil];
+   [self refreshButtonPressed:nil];
     
 }
 

@@ -12,10 +12,8 @@
 #import "twitterCell.h"
 
 @interface SecondViewController ()
-{
-    NSArray *timelineData;
-}
 
+@property (strong, nonatomic) NSArray *timelineData;
 @property (nonatomic) ACAccountStore *accountStore;
 @property (weak, nonatomic) IBOutlet UITableView *twitterTableViewList;
 
@@ -28,10 +26,70 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-     _accountStore = [[ACAccountStore alloc] init];
-    [self fetchTimelineForUser:@"iaeparis"];
+    // _accountStore = [[ACAccountStore alloc] init];
+    //[self fetchTimelineForUser:@"iaeparis"];
+    
+    [self getTimeline];
     
 }
+
+-(void)getTimeline
+{
+
+    ACAccount *twitterAccount;
+    ACAccountStore *account = [[ACAccountStore alloc] init]; // Creates AccountStore object.
+    
+    // Asks for the Twitter accounts configured on the device.
+    ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    [account requestAccessToAccountsWithType:accountType options:nil completion:^(BOOL granted, NSError *error)
+     {
+         // If we have access to the Twitter accounts configured on the device we will contact the Twitter API.
+         if (granted == YES){
+         } else {
+             // Handle failure to get account access
+             NSLog(@"%@", [error localizedDescription]);
+         }
+     }];
+    
+    NSArray *arrayOfAccounts = [account accountsWithAccountType:accountType]; // Retrieves an array of Twitter accounts configured on the device.
+    
+    // If there is a leat one account we will contact the Twitter API.
+    if ([arrayOfAccounts count] > 0) {
+        twitterAccount = [arrayOfAccounts lastObject]; // Sets the last account on the device to the twitterAccount variable.
+    }
+
+    NSURL *requestAPI = [NSURL URLWithString:@"http://api.twitter.com/1.1/statuses/user_timeline.json"]; // API call that returns entires in a user's timeline.
+    
+    // The requestAPI requires us to tell it how much data to return so we use a NSDictionary to set the 'count'.
+    
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+    
+    [parameters setObject:@"10" forKey:@"count"];
+    [parameters setObject:@"1" forKey:@"include_entities"];
+    [parameters setObject:@"iaeparis" forKey:@"screen_name"];
+
+    // This is where we are getting the data using SLRequest.
+    
+    SLRequest *posts = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodGET URL:requestAPI parameters:parameters];
+    
+    posts.account = twitterAccount;
+    
+    // The postRequest: method call now accesses the NSData object returned.
+    [posts performRequestWithHandler: ^(NSData *response, NSHTTPURLResponse *urlResponse, NSError *error)
+     {
+         // The NSJSONSerialization class is then used to parse the data returned and assign it to our array.
+         
+         self.timelineData = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableLeaves error:&error];
+         if (self.timelineData.count != 0) {
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 [self.twitterTableViewList reloadData]; // Here we tell the table view to reload the data it just recieved.
+                 
+             });
+         }
+     }];
+
+}
+
 -(void)viewDidAppear:(BOOL)animated
 {
 
@@ -42,64 +100,6 @@
 - (BOOL)userHasAccessToTwitter
 {
     return [SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter];
-}
-
-- (void)fetchTimelineForUser:(NSString *)username
-{
-    //  Step 0: Check that the user has local Twitter accounts
-    if ([self userHasAccessToTwitter]) {
-        
-        //  Step 1:  Obtain access to the user's Twitter accounts
-        ACAccountType *twitterAccountType = [self.accountStore
-                                             accountTypeWithAccountTypeIdentifier:
-                                             ACAccountTypeIdentifierTwitter];
-        [self.accountStore
-         requestAccessToAccountsWithType:twitterAccountType
-         options:NULL
-         completion:^(BOOL granted, NSError *error) {
-             if (granted) {
-                 //  Step 2:  Create a request
-                 NSArray *twitterAccounts =
-                 [self.accountStore accountsWithAccountType:twitterAccountType];
-                 NSURL *url = [NSURL URLWithString:@"https://api.twitter.com"
-                               @"/1.1/statuses/user_timeline.json"];
-                 NSDictionary *params = @{@"screen_name" : username, @"include_rts" : @"0", @"trim_user" : @"1", @"count" : @"10"};
-                 SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodGET URL:url parameters:params];
-                 
-                 //  Attach an account to the request
-                 [request setAccount:[twitterAccounts lastObject]];
-                 
-                 //  Step 3:  Execute the request
-                 [request performRequestWithHandler:^(NSData *responseData,
-                                                      NSHTTPURLResponse *urlResponse,
-                                                      NSError *error) {
-                     if (responseData) {
-                         if (urlResponse.statusCode >= 200 && urlResponse.statusCode < 300) {
-                             NSError *jsonError;
-                             timelineData = [NSJSONSerialization JSONObjectWithData:responseData
-                                                                            options:NSJSONReadingAllowFragments error:&jsonError];
-                             
-                             if (timelineData) {
-                                 NSLog(@"Timeline Response: %@\n", timelineData);
-                             }
-                             else {
-                                 // Our JSON deserialization went awry
-                                 NSLog(@"JSON Error: %@", [jsonError localizedDescription]);
-                             }
-                         }
-                         else {
-                             // The server did not respond successfully... were we rate-limited?
-                             NSLog(@"The response status code is %d", urlResponse.statusCode);
-                         }
-                     }
-                 }];
-             }
-             else {
-                 // Access was not granted, or an error occurred
-                 NSLog(@"%@", [error localizedDescription]);
-             }
-         }];
-    }
 }
 
 
@@ -113,7 +113,7 @@
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    return timelineData.count;
+    return self.timelineData.count;
     
 }
 
@@ -121,16 +121,37 @@
 {
     
     static NSString *cellIdentifier = @"twitterCell";
+    NSString *imageUrl;
     
     twitterCell *cell = (twitterCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
-    NSDictionary *obj = [timelineData objectAtIndex:indexPath.row];
+    NSDictionary *obj = [self.timelineData objectAtIndex:indexPath.row];
     NSString *text = [obj objectForKey:@"text"];
-    
-    [cell.twitterCellLabel setText:text];
+    NSString *createdAt = [obj objectForKey:@"created_at"];
 
-    return cell;
+    [cell.twitterCellLabel setText:text];
     
+    // load user image (async)
+    NSDictionary *retweet = [obj objectForKey:@"retweeted_status"];
+    if (retweet.count > 0) {
+        NSDictionary *user = [retweet objectForKey:@"user"];
+        imageUrl = [user objectForKey:@"profile_image_url_https"];
+    } else {
+        NSDictionary *user = [obj objectForKey:@"user"];
+        imageUrl = [user objectForKey:@"profile_image_url"];
+    }
+    NSURL *imageURL = [NSURL URLWithString:imageUrl];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Update the UI
+            cell.twitterProfileImage.image = [UIImage imageWithData:imageData];
+        });
+    });
+    
+    return cell;
 }
 
 - (void)didReceiveMemoryWarning
