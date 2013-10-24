@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Philippe Nougaillon. All rights reserved.
 //
 
-#import "FirstViewController.h"
-#import "Cell.h"
+#import "PlanningViewController.h"
+#import "PlanningCell.h"
 
-@interface FirstViewController () {
+@interface PlanningViewController () {
 
     NSArray *jsonArray;
     
@@ -18,7 +18,7 @@
 
 @end
 
-@implementation FirstViewController
+@implementation PlanningViewController
 
 - (void)viewDidLoad
 {
@@ -114,7 +114,7 @@
 
     static NSString *cellIdentifier = @"Cell";
     
-    Cell *cell = (Cell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    PlanningCell *cell = (PlanningCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     NSDictionary *obj = [jsonArray objectAtIndex:indexPath.row];
     NSString *heure = [obj objectForKey:@"heure"];

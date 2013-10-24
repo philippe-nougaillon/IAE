@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="8YX-ce-x5E">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="8YX-ce-x5E">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
     </dependencies>
     <scenes>
-        <!--First View Controller - Planning-->
+        <!--Planning View Controller - Planning-->
         <scene sceneID="W3I-pn-N6e">
             <objects>
-                <viewController title="Planning" id="CZ4-MO-1fc" customClass="FirstViewController" sceneMemberID="viewController">
+                <viewController title="Planning" id="CZ4-MO-1fc" customClass="PlanningViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9B4-vP-IQ3"/>
                         <viewControllerLayoutGuide type="bottom" id="F5S-qa-wHT"/>
@@ -34,7 +34,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="fgf-s9-Odn" customClass="Cell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="fgf-s9-Odn" customClass="PlanningCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="75"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fgf-s9-Odn" id="yJQ-wR-fqo">
@@ -77,11 +77,11 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="TitreLabel" destination="MqW-He-f8x" id="jyt-V6-0XB"/>
-                                            <outlet property="heureLabel" destination="PIO-KK-R8E" id="NYz-Xf-ZDv"/>
-                                            <outlet property="memoLabel" destination="dfF-eY-EpK" id="O9N-Xx-Nxy"/>
-                                            <outlet property="salleLabel" destination="8Nl-pN-r9Z" id="UhM-Th-Ulp"/>
-                                            <outlet property="subTitleLabel" destination="Ixu-fU-p92" id="6k6-Ix-82R"/>
-                                            <outlet property="titreLabel" destination="MqW-He-f8x" id="dWI-xj-ESn"/>
+                                            <outlet property="heureLabel" destination="PIO-KK-R8E" id="LyV-aN-7ea"/>
+                                            <outlet property="memoLabel" destination="dfF-eY-EpK" id="rFx-2y-aWs"/>
+                                            <outlet property="salleLabel" destination="8Nl-pN-r9Z" id="899-Uh-G1x"/>
+                                            <outlet property="subTitleLabel" destination="Ixu-fU-p92" id="6IO-zA-keK"/>
+                                            <outlet property="titreLabel" destination="MqW-He-f8x" id="5YR-p2-jvh"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -102,10 +102,36 @@
             </objects>
             <point key="canvasLocation" x="653" y="-138"/>
         </scene>
-        <!--Second View Controller - Actualités-->
+        <!--Articles View Controller - Actualités-->
+        <scene sceneID="OKV-8C-6g1">
+            <objects>
+                <viewController id="b6X-kR-t3K" customClass="ArticlesViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LLk-RP-RGB"/>
+                        <viewControllerLayoutGuide type="bottom" id="rKF-V3-QbX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7NU-tt-WkD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="lpc-sS-zoY">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Actualités" id="wmW-wO-CDr"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OwS-1e-44y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="209" y="836"/>
+        </scene>
+        <!--Twitter View Controller - Twitter-->
         <scene sceneID="ot8-2e-RuS">
             <objects>
-                <viewController title="Actualités" id="QUy-BD-bpt" customClass="SecondViewController" sceneMemberID="viewController">
+                <viewController title="Twitter" id="QUy-BD-bpt" customClass="TwitterViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="76F-5a-HhS"/>
                         <viewControllerLayoutGuide type="bottom" id="btJ-Nv-Nka"/>
@@ -158,7 +184,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Actualités" image="second" id="Z7h-1E-pvt"/>
+                    <tabBarItem key="tabBarItem" title="Twitter" image="second" id="Z7h-1E-pvt"/>
                     <connections>
                         <outlet property="twitterTableViewList" destination="lYe-iF-G6R" id="1eO-XF-gBf"/>
                     </connections>
@@ -181,6 +207,7 @@
                     <connections>
                         <segue destination="CZ4-MO-1fc" kind="relationship" relationship="viewControllers" id="SUk-Ux-ee1"/>
                         <segue destination="QUy-BD-bpt" kind="relationship" relationship="viewControllers" id="M8t-EP-wfW"/>
+                        <segue destination="b6X-kR-t3K" kind="relationship" relationship="viewControllers" id="PdV-jE-SfQ"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FNP-y4-bzi" sceneMemberID="firstResponder"/>

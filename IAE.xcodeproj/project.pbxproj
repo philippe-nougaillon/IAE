@@ -15,15 +15,16 @@
 		4A045C6417FC036300E2E2BA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A045C6317FC036300E2E2BA /* AppDelegate.m */; };
 		4A045C6717FC036300E2E2BA /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A045C6517FC036300E2E2BA /* Main_iPhone.storyboard */; };
 		4A045C6A17FC036300E2E2BA /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A045C6817FC036300E2E2BA /* Main_iPad.storyboard */; };
-		4A045C6D17FC036300E2E2BA /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A045C6C17FC036300E2E2BA /* FirstViewController.m */; };
-		4A045C7017FC036300E2E2BA /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A045C6F17FC036300E2E2BA /* SecondViewController.m */; };
+		4A045C6D17FC036300E2E2BA /* PlanningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A045C6C17FC036300E2E2BA /* PlanningViewController.m */; };
+		4A045C7017FC036300E2E2BA /* TwitterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A045C6F17FC036300E2E2BA /* TwitterViewController.m */; };
 		4A045C7217FC036400E2E2BA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A045C7117FC036400E2E2BA /* Images.xcassets */; };
 		4A045C7917FC036400E2E2BA /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A045C7817FC036400E2E2BA /* XCTest.framework */; };
 		4A045C7A17FC036400E2E2BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A045C5317FC036300E2E2BA /* Foundation.framework */; };
 		4A045C7B17FC036400E2E2BA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A045C5717FC036300E2E2BA /* UIKit.framework */; };
 		4A045C8317FC036400E2E2BA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4A045C8117FC036400E2E2BA /* InfoPlist.strings */; };
 		4A045C8517FC036400E2E2BA /* IAETests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A045C8417FC036400E2E2BA /* IAETests.m */; };
-		4A045C9017FC299900E2E2BA /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A045C8F17FC299900E2E2BA /* Cell.m */; };
+		4A045C9017FC299900E2E2BA /* PlanningCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A045C8F17FC299900E2E2BA /* PlanningCell.m */; };
+		4A27B9A018195FD800CE3F76 /* ArticlesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A27B99F18195FD800CE3F76 /* ArticlesViewController.m */; };
 		4AE478C018043B2400C8CD7E /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE478BF18043B2400C8CD7E /* Social.framework */; };
 		4AE478C218043B3100C8CD7E /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE478C118043B3100C8CD7E /* Accounts.framework */; };
 		4AE478C518044B0A00C8CD7E /* twitterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE478C418044B0A00C8CD7E /* twitterCell.m */; };
@@ -52,18 +53,20 @@
 		4A045C6317FC036300E2E2BA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4A045C6617FC036300E2E2BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		4A045C6917FC036300E2E2BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		4A045C6B17FC036300E2E2BA /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		4A045C6C17FC036300E2E2BA /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		4A045C6E17FC036300E2E2BA /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		4A045C6F17FC036300E2E2BA /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		4A045C6B17FC036300E2E2BA /* PlanningViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlanningViewController.h; sourceTree = "<group>"; };
+		4A045C6C17FC036300E2E2BA /* PlanningViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlanningViewController.m; sourceTree = "<group>"; };
+		4A045C6E17FC036300E2E2BA /* TwitterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwitterViewController.h; sourceTree = "<group>"; };
+		4A045C6F17FC036300E2E2BA /* TwitterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwitterViewController.m; sourceTree = "<group>"; };
 		4A045C7117FC036400E2E2BA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4A045C7717FC036400E2E2BA /* IAETests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IAETests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A045C7817FC036400E2E2BA /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		4A045C8017FC036400E2E2BA /* IAETests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IAETests-Info.plist"; sourceTree = "<group>"; };
 		4A045C8217FC036400E2E2BA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4A045C8417FC036400E2E2BA /* IAETests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IAETests.m; sourceTree = "<group>"; };
-		4A045C8E17FC299900E2E2BA /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
-		4A045C8F17FC299900E2E2BA /* Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
+		4A045C8E17FC299900E2E2BA /* PlanningCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanningCell.h; sourceTree = "<group>"; };
+		4A045C8F17FC299900E2E2BA /* PlanningCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanningCell.m; sourceTree = "<group>"; };
+		4A27B99E18195FD800CE3F76 /* ArticlesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticlesViewController.h; path = ../ArticlesViewController.h; sourceTree = "<group>"; };
+		4A27B99F18195FD800CE3F76 /* ArticlesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticlesViewController.m; path = ../ArticlesViewController.m; sourceTree = "<group>"; };
 		4AE478BF18043B2400C8CD7E /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		4AE478C118043B3100C8CD7E /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		4AE478C318044B0A00C8CD7E /* twitterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = twitterCell.h; sourceTree = "<group>"; };
@@ -134,17 +137,19 @@
 				4A045C6217FC036300E2E2BA /* AppDelegate.h */,
 				4A045C6317FC036300E2E2BA /* AppDelegate.m */,
 				4A045C6517FC036300E2E2BA /* Main_iPhone.storyboard */,
-				4AE478C318044B0A00C8CD7E /* twitterCell.h */,
-				4AE478C418044B0A00C8CD7E /* twitterCell.m */,
 				4A045C6817FC036300E2E2BA /* Main_iPad.storyboard */,
-				4A045C6B17FC036300E2E2BA /* FirstViewController.h */,
-				4A045C6C17FC036300E2E2BA /* FirstViewController.m */,
-				4A045C6E17FC036300E2E2BA /* SecondViewController.h */,
-				4A045C6F17FC036300E2E2BA /* SecondViewController.m */,
+				4A27B99E18195FD800CE3F76 /* ArticlesViewController.h */,
+				4A27B99F18195FD800CE3F76 /* ArticlesViewController.m */,
+				4A045C6B17FC036300E2E2BA /* PlanningViewController.h */,
+				4A045C6C17FC036300E2E2BA /* PlanningViewController.m */,
+				4A045C6E17FC036300E2E2BA /* TwitterViewController.h */,
+				4A045C6F17FC036300E2E2BA /* TwitterViewController.m */,
 				4A045C7117FC036400E2E2BA /* Images.xcassets */,
 				4A045C5A17FC036300E2E2BA /* Supporting Files */,
-				4A045C8E17FC299900E2E2BA /* Cell.h */,
-				4A045C8F17FC299900E2E2BA /* Cell.m */,
+				4A045C8E17FC299900E2E2BA /* PlanningCell.h */,
+				4A045C8F17FC299900E2E2BA /* PlanningCell.m */,
+				4AE478C318044B0A00C8CD7E /* twitterCell.h */,
+				4AE478C418044B0A00C8CD7E /* twitterCell.m */,
 			);
 			path = IAE;
 			sourceTree = "<group>";
@@ -279,11 +284,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A045C9017FC299900E2E2BA /* Cell.m in Sources */,
-				4A045C7017FC036300E2E2BA /* SecondViewController.m in Sources */,
+				4A045C9017FC299900E2E2BA /* PlanningCell.m in Sources */,
+				4A045C7017FC036300E2E2BA /* TwitterViewController.m in Sources */,
 				4A045C6417FC036300E2E2BA /* AppDelegate.m in Sources */,
+				4A27B9A018195FD800CE3F76 /* ArticlesViewController.m in Sources */,
 				4AE478C518044B0A00C8CD7E /* twitterCell.m in Sources */,
-				4A045C6D17FC036300E2E2BA /* FirstViewController.m in Sources */,
+				4A045C6D17FC036300E2E2BA /* PlanningViewController.m in Sources */,
 				4A045C6017FC036300E2E2BA /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

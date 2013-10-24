@@ -6,12 +6,12 @@
 //  Copyright (c) 2013 Philippe Nougaillon. All rights reserved.
 //
 
-#import "SecondViewController.h"
+#import "TwitterViewController.h"
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
 #import "twitterCell.h"
 
-@interface SecondViewController ()
+@interface TwitterViewController ()
 
 @property (strong, nonatomic) NSArray *timelineData;
 @property (nonatomic) ACAccountStore *accountStore;
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation SecondViewController
+@implementation TwitterViewController
 
 - (void)viewDidLoad
 {

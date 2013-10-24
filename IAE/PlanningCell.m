@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Philippe Nougaillon. All rights reserved.
 //
 
-#import "Cell.h"
+#import "PlanningCell.h"
 
-@implementation Cell
+@implementation PlanningCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

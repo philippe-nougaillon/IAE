@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SecondViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface TwitterViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @end

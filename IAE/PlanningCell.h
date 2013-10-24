@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface Cell : UITableViewCell
+@interface PlanningCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *heureLabel;
 @property (weak, nonatomic) IBOutlet UILabel *salleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *titreLabel;
