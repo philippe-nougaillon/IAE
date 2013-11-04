@@ -11,5 +11,6 @@
 @interface ArticlesCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *image;
 @property (weak, nonatomic) IBOutlet UILabel *titre;
+@property (weak, nonatomic) IBOutlet UILabel *date;
 
 @end

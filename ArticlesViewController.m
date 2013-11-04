@@ -8,6 +8,7 @@
 
 #import "ArticlesViewController.h"
 #import "ArticlesCell.h"
+#import "ArticleDetailsViewController.h"
 
 @interface ArticlesViewController () {
 
@@ -49,20 +50,20 @@
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     if (data != nil) {
-        NSLog(@"OK");
+        //NSLog(@"OK");
     } else {
         if (error != nil)
             NSLog(@"Echec connection (%@)", [error localizedDescription]);
         else
-            NSLog(@"Echec de la onnection");
+            NSLog(@"Echec de la connection");
     }
     
     NSError *errorDecoding;
     
     jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
     
-    NSLog(@"jsonArray= %@",jsonArray);
-    NSLog(@"error= %@",errorDecoding);
+    //NSLog(@"jsonArray= %@",jsonArray);
+    //NSLog(@"error= %@",errorDecoding);
 
 }
 
@@ -90,6 +91,18 @@
     
     NSDictionary *obj = [jsonArray objectAtIndex:indexPath.row];
     NSString *titre = [obj objectForKey:@"node_title"];
+    
+    NSString *postDatetimeStamp = [obj objectForKey:@"node_created"];
+    
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:[postDatetimeStamp doubleValue]];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeStyle:NSDateFormatterFullStyle];
+    [dateFormatter setDateStyle:NSDateFormatterFullStyle];
+    [dateFormatter setLocale:[NSLocale currentLocale]];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm:ss"];
+    NSString *dateFinal = [dateFormatter stringFromDate:date];
+    
 
     NSDictionary *imageArray = [obj objectForKey:@"Image"];
     
@@ -112,9 +125,36 @@
     }
     
     [cell.titre setText:titre];
-
+    [cell.date setText:dateFinal];
+    
     return cell;
 }
+
+# pragma mark -SEGUE
+
+// This will get called too before the view appears
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"openDetailView"]) {
+        
+        // get the index of select item
+        UITableViewCell *cell = (UITableViewCell*)sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        
+        // which article to open ?
+        NSDictionary *obj = [jsonArray objectAtIndex:indexPath.row];
+        NSString *nid = [obj objectForKey:@"nid"];
+        
+        // Get destination view
+        ArticleDetailsViewController *vc = [segue destinationViewController];
+        
+        // Pass the information to your destination view
+        vc.indexOfArticle = nid;
+    }
+}
+
+
+
 
 - (void)didReceiveMemoryWarning
 {
