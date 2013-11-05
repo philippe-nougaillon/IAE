@@ -40,7 +40,7 @@
 
 -(void)loadData
 {
-    // load Data from hyperplanning json flux
+    // load Articles json flux
     
     NSURLRequest *request = [NSURLRequest requestWithURL:
                              [NSURL URLWithString:@"http://iae.philnoug.com/rest/articles.json"]];

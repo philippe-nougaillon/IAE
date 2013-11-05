@@ -12,8 +12,8 @@
     
     NSDictionary *jsonArray;
     
-    __weak IBOutlet UIImageView *imageDetail;
-    __weak IBOutlet UITextView *textDetail;
+
+    __weak IBOutlet UIWebView *articleWebview;
 }
 
 @end
@@ -59,8 +59,8 @@
     
     jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
     
-    NSLog(@"jsonArray= %@",jsonArray);
-    NSLog(@"error= %@",errorDecoding);
+    //NSLog(@"jsonArray= %@",jsonArray);
+    //NSLog(@"error= %@",errorDecoding);
     
 }
 
@@ -72,15 +72,11 @@
     
     [self loadData];
     
-    
     NSDictionary  *body = [jsonArray objectForKey:@"body"];
-    NSDictionary  *und = [body objectForKey:@"und"];
-
-    NSString *textArticle = [und objectForKey:@"safe_value"];
+    NSArray  *und = [body objectForKey:@"und"];
+    NSString *textArticle =[[und objectAtIndex:0] objectForKey:@"safe_value"];
     
-    
-    [textDetail setText:textArticle];
-
+    [articleWebview loadHTMLString:textArticle baseURL:nil];
     
 }
 
