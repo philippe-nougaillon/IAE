@@ -127,7 +127,7 @@
     
     NSDictionary *obj = [self.timelineData objectAtIndex:indexPath.row];
     NSString *text = [obj objectForKey:@"text"];
-    NSString *createdAt = [obj objectForKey:@"created_at"];
+    //NSString *createdAt = [obj objectForKey:@"created_at"];
 
     [cell.twitterCellLabel setText:text];
     

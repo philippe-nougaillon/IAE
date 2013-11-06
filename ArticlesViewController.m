@@ -61,6 +61,16 @@
     NSError *errorDecoding;
     
     jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
+  
+    
+    //applications Documents dirctory path
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory,@"data.json"];
+    //[jsonArray writeToFile:filePath atomically:YES];
+    
+    
+//    [jsonArray writeToFile:<#(NSString *)#> atomically:<#(BOOL)#>]
     
     //NSLog(@"jsonArray= %@",jsonArray);
     //NSLog(@"error= %@",errorDecoding);

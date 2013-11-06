@@ -53,6 +53,8 @@
             NSLog(@"Echec connection (%@)", [error localizedDescription]);
         else
             NSLog(@"Echec de la connection");
+        
+        return;
     }
     
     NSError *errorDecoding;
