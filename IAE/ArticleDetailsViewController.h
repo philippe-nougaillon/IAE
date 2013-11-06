@@ -12,5 +12,4 @@
 
 @property (weak,nonatomic) NSString *indexOfArticle;
 
-
 @end

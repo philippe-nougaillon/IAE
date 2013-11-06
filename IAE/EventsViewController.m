@@ -8,13 +8,13 @@
 
 #import "EventsViewController.h"
 #import "EventsCell.h"
+#import "EventDetailsViewController.h"
 
 @interface EventsViewController () {
     
     NSArray *jsonArray;
     
 }
-
 
 @end
 
@@ -178,5 +178,30 @@
 }
 
  */
+
+// This will get called too before the view appears
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"openEventDetails"]) {
+        
+        // get the index of select item
+        EventsCell *cell = (EventsCell*)sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        
+        // which article to open ?
+        NSDictionary *obj = [jsonArray objectAtIndex:indexPath.row];
+        NSString *nid = [obj objectForKey:@"nid"];
+        
+        // Get destination view
+        EventDetailsViewController *vc = [segue destinationViewController];
+        
+        // Pass the information to your destination view
+        vc.indexOfEvent = nid;
+        vc.eventTitre = cell.titleEvent.text;
+        vc.eventDate = cell.dateEvent.text;
+        vc.eventSubTitle = cell.subTitleEvent.text;
+    }
+}
+
 
 @end

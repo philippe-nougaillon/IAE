@@ -26,6 +26,7 @@
 		4A045C9017FC299900E2E2BA /* PlanningCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A045C8F17FC299900E2E2BA /* PlanningCell.m */; };
 		4A1F0D181827BD0200027A8B /* ArticlesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1F0D171827BD0200027A8B /* ArticlesCell.m */; };
 		4A27B9A018195FD800CE3F76 /* ArticlesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A27B99F18195FD800CE3F76 /* ArticlesViewController.m */; };
+		4AC744C1182A55E00087E45F /* EventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC744C0182A55E00087E45F /* EventDetailsViewController.m */; };
 		4AD246891827ECEE00ACDF4E /* ArticleDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD246881827ECEE00ACDF4E /* ArticleDetailsViewController.m */; };
 		4AE478C018043B2400C8CD7E /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE478BF18043B2400C8CD7E /* Social.framework */; };
 		4AE478C218043B3100C8CD7E /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE478C118043B3100C8CD7E /* Accounts.framework */; };
@@ -73,6 +74,8 @@
 		4A1F0D171827BD0200027A8B /* ArticlesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticlesCell.m; sourceTree = "<group>"; };
 		4A27B99E18195FD800CE3F76 /* ArticlesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticlesViewController.h; path = ../ArticlesViewController.h; sourceTree = "<group>"; };
 		4A27B99F18195FD800CE3F76 /* ArticlesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticlesViewController.m; path = ../ArticlesViewController.m; sourceTree = "<group>"; };
+		4AC744BF182A55E00087E45F /* EventDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailsViewController.h; sourceTree = "<group>"; };
+		4AC744C0182A55E00087E45F /* EventDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailsViewController.m; sourceTree = "<group>"; };
 		4AD246871827ECEE00ACDF4E /* ArticleDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleDetailsViewController.h; sourceTree = "<group>"; };
 		4AD246881827ECEE00ACDF4E /* ArticleDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleDetailsViewController.m; sourceTree = "<group>"; };
 		4AE478BF18043B2400C8CD7E /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -151,6 +154,8 @@
 				4A045C6517FC036300E2E2BA /* Main_iPhone.storyboard */,
 				4AF8D0EE18293B1300437A49 /* EventsViewController.h */,
 				4AF8D0EF18293B1300437A49 /* EventsViewController.m */,
+				4AC744BF182A55E00087E45F /* EventDetailsViewController.h */,
+				4AC744C0182A55E00087E45F /* EventDetailsViewController.m */,
 				4A045C6817FC036300E2E2BA /* Main_iPad.storyboard */,
 				4A27B99E18195FD800CE3F76 /* ArticlesViewController.h */,
 				4A27B99F18195FD800CE3F76 /* ArticlesViewController.m */,
@@ -310,6 +315,7 @@
 				4A045C7017FC036300E2E2BA /* TwitterViewController.m in Sources */,
 				4AF8D0ED18293A3100437A49 /* EventsCell.m in Sources */,
 				4A045C6417FC036300E2E2BA /* AppDelegate.m in Sources */,
+				4AC744C1182A55E00087E45F /* EventDetailsViewController.m in Sources */,
 				4A27B9A018195FD800CE3F76 /* ArticlesViewController.m in Sources */,
 				4AE478C518044B0A00C8CD7E /* twitterCell.m in Sources */,
 				4A045C6D17FC036300E2E2BA /* PlanningViewController.m in Sources */,
