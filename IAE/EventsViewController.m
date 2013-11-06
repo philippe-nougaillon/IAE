@@ -56,7 +56,7 @@
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     if (data != nil) {
-        //NSLog(@"OK");
+        NSLog(@"Event dAta OK");
     } else {
         if (error != nil)
             NSLog(@"Echec connection (%@)", [error localizedDescription]);
@@ -68,7 +68,7 @@
     
     jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
     
-    NSLog(@"jsonArray= %@",jsonArray);
+    //NSLog(@"jsonArray= %@",jsonArray);
     //NSLog(@"error= %@",errorDecoding);
     
 }
@@ -200,6 +200,8 @@
         vc.eventTitre = cell.titleEvent.text;
         vc.eventDate = cell.dateEvent.text;
         vc.eventSubTitle = cell.subTitleEvent.text;
+        vc.navigationItem.title = cell.titleEvent.text;
+
     }
 }
 

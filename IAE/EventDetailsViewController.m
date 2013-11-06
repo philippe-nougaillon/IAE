@@ -49,7 +49,7 @@
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     if (data != nil) {
-        //NSLog(@"OK");
+        NSLog(@"Event details data OK");
     } else {
         if (error != nil)
             NSLog(@"Echec connection (%@)", [error localizedDescription]);
@@ -74,7 +74,7 @@
  
     [labelTitle setText:self.eventTitre];
     [labelDate setText:self.eventDate];
-    [labelSubTitle setText:self.eventSubTitle];
+    //[labelSubTitle setText:self.eventSubTitle];
  
     // load event details
     [self loadData];

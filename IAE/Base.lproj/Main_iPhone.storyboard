@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <navigationItem title="Aujourd'hui" id="M2T-FM-dUr">
+                                    <navigationItem title="Planning d'aujourd'hui" id="M2T-FM-dUr">
                                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="S83-dh-lxz">
                                             <connections>
                                                 <action selector="refreshButtonPressed:" destination="CZ4-MO-1fc" id="mAY-VK-NgW"/>
@@ -93,7 +93,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Planning" image="first" id="u1e-5L-l1D"/>
+                    <tabBarItem key="tabBarItem" title="Planning" id="u1e-5L-l1D"/>
                     <connections>
                         <outlet property="planningTableView" destination="QIY-JO-Fvm" id="mkE-hu-Apq"/>
                     </connections>
@@ -102,7 +102,7 @@
             </objects>
             <point key="canvasLocation" x="653" y="-138"/>
         </scene>
-        <!--Articles View Controller-->
+        <!--Articles View Controller - Actualités IAE Paris-->
         <scene sceneID="OKV-8C-6g1">
             <objects>
                 <viewController id="b6X-kR-t3K" customClass="ArticlesViewController" sceneMemberID="viewController">
@@ -115,7 +115,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="lpc-sS-zoY">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -126,7 +126,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="99"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="seK-Jl-LUh">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="seK-Jl-LUh">
                                                     <rect key="frame" x="0.0" y="0.0" width="80" height="99"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
@@ -134,14 +134,14 @@
                                                     <rect key="frame" x="88" y="20" width="199" height="79"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jMf-Qc-f6V">
                                                     <rect key="frame" x="88" y="0.0" width="199" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
-                                                    <color key="textColor" red="0.70196080207824707" green="0.70196080207824707" blue="0.70196080207824707" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -162,7 +162,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="8KS-B0-0lk"/>
+                    <navigationItem key="navigationItem" title="Actualités IAE Paris" id="8KS-B0-0lk"/>
                     <connections>
                         <outlet property="tableView" destination="lpc-sS-zoY" id="57m-z5-WnT"/>
                     </connections>
@@ -205,7 +205,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="suA-zg-S3o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1614" y="570"/>
+            <point key="canvasLocation" x="1644" y="570"/>
         </scene>
         <!--Twitter View Controller - Twitter-->
         <scene sceneID="ot8-2e-RuS">
@@ -286,13 +286,14 @@
                     <connections>
                         <segue destination="kxA-ez-4uc" kind="relationship" relationship="viewControllers" id="PdV-jE-SfQ"/>
                         <segue destination="hRr-bz-aKP" kind="relationship" relationship="viewControllers" id="TWB-hi-5Qe"/>
+                        <segue destination="CZ4-MO-1fc" kind="relationship" relationship="viewControllers" id="BtQ-v6-xrO"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FNP-y4-bzi" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="87" y="359"/>
         </scene>
-        <!--Events View Controller-->
+        <!--Events View Controller - Agenda-->
         <scene sceneID="P8Y-HH-Trr">
             <objects>
                 <tableViewController id="alA-C0-E9v" customClass="EventsViewController" sceneMemberID="viewController">
@@ -343,7 +344,7 @@
                             <outlet property="delegate" destination="alA-C0-E9v" id="vov-11-YFW"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="E2F-BF-qdW"/>
+                    <navigationItem key="navigationItem" title="Agenda" id="E2F-BF-qdW"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nvo-jZ-M1c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -362,7 +363,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uwg-1m-5lH">
-                                <rect key="frame" x="0.0" y="215" width="320" height="305"/>
+                                <rect key="frame" x="0.0" y="66" width="320" height="452"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </webView>
@@ -373,24 +374,18 @@
                                     <navigationItem title="Title" id="Cwy-dd-IFb"/>
                                 </items>
                             </navigationBar>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="LvJ-L6-3ZZ">
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="LvJ-L6-3ZZ">
                                 <rect key="frame" x="20" y="77" width="280" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MP6-UA-bcu">
-                                <rect key="frame" x="20" y="126" width="280" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="dke-2j-fTg">
-                                <rect key="frame" x="20" y="148" width="280" height="48"/>
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MP6-UA-bcu">
+                                <rect key="frame" x="20" y="124" width="280" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -400,18 +395,17 @@
                     <connections>
                         <outlet property="articleWebview" destination="Uwg-1m-5lH" id="lUG-U7-gq6"/>
                         <outlet property="labelDate" destination="MP6-UA-bcu" id="tJn-C3-639"/>
-                        <outlet property="labelSubTitle" destination="dke-2j-fTg" id="aGY-xR-oe1"/>
                         <outlet property="labelTitle" destination="LvJ-L6-3ZZ" id="hVR-8X-oLY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8CT-nN-kWC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1596" y="1260"/>
+            <point key="canvasLocation" x="1644" y="1263"/>
         </scene>
-        <!--Navigation Controller - Actualités-->
+        <!--Navigation Controller - Agenda-->
         <scene sceneID="8O7-L1-zXy">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kxA-ez-4uc" sceneMemberID="viewController">
+                <navigationController title="Agenda" automaticallyAdjustsScrollViewInsets="NO" id="kxA-ez-4uc" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Actualités" id="wmW-wO-CDr"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="X7W-Nm-Vmc">
@@ -427,11 +421,11 @@
             </objects>
             <point key="canvasLocation" x="653" y="570"/>
         </scene>
-        <!--Navigation Controller - Item-->
+        <!--Navigation Controller - Agenda-->
         <scene sceneID="1CE-PM-kdA">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hRr-bz-aKP" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Cfa-8D-kfD"/>
+                    <tabBarItem key="tabBarItem" title="Agenda" id="Cfa-8D-kfD"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="06Z-Zd-u2d"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="773-Ah-ndY">
@@ -449,7 +443,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
         <image name="second" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

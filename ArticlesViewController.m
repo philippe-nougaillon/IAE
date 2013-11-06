@@ -138,7 +138,7 @@
     if ([[segue identifier] isEqualToString:@"openDetailView"]) {
         
         // get the index of select item
-        UITableViewCell *cell = (UITableViewCell*)sender;
+        ArticlesCell *cell = (ArticlesCell*)sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
         
         // which article to open ?
@@ -150,6 +150,7 @@
         
         // Pass the information to your destination view
         vc.indexOfArticle = nid;
+        vc.navigationItem.title = cell.titre.text;
     }
 }
 
