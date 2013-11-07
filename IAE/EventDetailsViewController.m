@@ -83,13 +83,35 @@
     //[labelSubTitle setText:self.eventSubTitle];
  
     // load event details
-    [self loadData];
+    //Start an activity indicator here
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
-    NSDictionary  *body = [jsonArray objectForKey:@"body"];
-    NSArray  *und = [body objectForKey:@"und"];
-    NSString *textArticle =[[und objectAtIndex:0] objectForKey:@"safe_value"];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        //Call your function or whatever work that needs to be done
+        //Code in this part is run on a background thread
+        
+        // Reload planning
+        [self loadData];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            
+            //Stop your activity indicator or anything else with the GUI
+            //Code here is run on the main thread
+            
+            NSDictionary  *body = [jsonArray objectForKey:@"body"];
+            NSArray  *und = [body objectForKey:@"und"];
+            NSString *textArticle =[[und objectAtIndex:0] objectForKey:@"safe_value"];
+            
+            [articleWebview loadHTMLString:textArticle baseURL:nil];
+            
+            // move to top
+            //[articlesTableView setContentOffset:CGPointZero animated:YES];
+            
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     
-    [articleWebview loadHTMLString:textArticle baseURL:nil];
+        });
+    });
     
 }
 

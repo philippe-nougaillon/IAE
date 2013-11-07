@@ -139,7 +139,7 @@
     [dateFormatter setTimeStyle:NSDateFormatterFullStyle];
     [dateFormatter setDateStyle:NSDateFormatterFullStyle];
     [dateFormatter setLocale:[NSLocale currentLocale]];
-    [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm:ss"];
+    [dateFormatter setDateFormat:@"dd/MM/yyyy HH:mm:ss"];
     NSString *dateFinal = [dateFormatter stringFromDate:date];
     
 
