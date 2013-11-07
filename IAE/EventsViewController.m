@@ -14,6 +14,7 @@
     
     NSArray *jsonArray;
     
+    IBOutlet UITableView *eventsTableView;
 }
 
 @end
@@ -39,7 +40,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    [self loadData];
+   [self refreshButtonPressed:nil];
 
 }
 
@@ -73,6 +74,43 @@
     //NSLog(@"jsonArray= %@",jsonArray);
     //NSLog(@"error= %@",errorDecoding);
     
+}
+- (IBAction)refreshButtonPressed:(id)sender {
+
+    
+    //Start an activity indicator here
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
+    UIActivityIndicatorView *activityView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    activityView.center=self.view.center;
+    activityView.backgroundColor = [UIColor lightGrayColor];
+    [activityView startAnimating];
+    [self.view addSubview:activityView];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        //Call your function or whatever work that needs to be done
+        //Code in this part is run on a background thread
+        
+        // Reload planning
+        [self loadData];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            
+            //Stop your activity indicator or anything else with the GUI
+            //Code here is run on the main thread
+            
+            [eventsTableView reloadData];
+            
+            // move to top
+            //[articlesTableView setContentOffset:CGPointZero animated:YES];
+            
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            [activityView removeFromSuperview];
+            
+        });
+    });
+
 }
 
 
@@ -118,7 +156,7 @@
     [dateFormatterFR setTimeStyle:NSDateFormatterFullStyle];
     [dateFormatterFR setDateStyle:NSDateFormatterFullStyle];
     [dateFormatterFR setLocale:[NSLocale currentLocale]];
-    [dateFormatterFR setDateFormat:@"dd-MM-yyyy HH:mm:ss"];
+    [dateFormatterFR setDateFormat:@"dd/MM/yyyy HH:mm"];
     NSString *dateFR = [dateFormatterFR stringFromDate:dateUS];
 
 
@@ -185,7 +223,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"openEventDetails"]) {
-        
         // get the index of select item
         EventsCell *cell = (EventsCell*)sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
@@ -202,8 +239,7 @@
         vc.eventTitre = cell.titleEvent.text;
         vc.eventDate = cell.dateEvent.text;
         vc.eventSubTitle = cell.subTitleEvent.text;
-        vc.navigationItem.title = cell.titleEvent.text;
-
+        vc.navigationItem.title = cell.dateEvent.text;
     }
 }
 

@@ -48,16 +48,12 @@
         else
             NSLog(@"Echec de la onnection");
     }
-    
     NSError *errorDecoding;
-    
     jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
-
     //NSLog(@"%@",jsonArray);
 }
 
 - (IBAction)refreshButtonPressed:(id)sender {
-    
     
     //Start an activity indicator here
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];

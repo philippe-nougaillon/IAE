@@ -13,7 +13,7 @@
 @interface ArticlesViewController () {
 
     NSArray *jsonArray;
-
+    __weak IBOutlet UITableView *articlesTableView;
 }
 
 @end
@@ -34,14 +34,12 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    [self loadData];
+    [self refreshButtonPressed:nil];
 }
-
 
 -(void)loadData
 {
     // load Articles json flux
-    
     NSURLRequest *request = [NSURLRequest requestWithURL:
                              [NSURL URLWithString:@"http://iae.philnoug.com/rest/articles.json"]];
     NSURLResponse *response;
@@ -62,19 +60,44 @@
     
     jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
   
-    
-    //applications Documents dirctory path
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory,@"data.json"];
-    //[jsonArray writeToFile:filePath atomically:YES];
-    
-    
-//    [jsonArray writeToFile:<#(NSString *)#> atomically:<#(BOOL)#>]
-    
     //NSLog(@"jsonArray= %@",jsonArray);
     //NSLog(@"error= %@",errorDecoding);
-
+}
+- (IBAction)refreshButtonPressed:(id)sender {
+    
+    //Start an activity indicator here
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
+    UIActivityIndicatorView *activityView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    activityView.center=self.view.center;
+    activityView.backgroundColor = [UIColor lightGrayColor];
+    [activityView startAnimating];
+    [self.view addSubview:activityView];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        //Call your function or whatever work that needs to be done
+        //Code in this part is run on a background thread
+        
+        // Reload planning
+        [self loadData];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            
+            //Stop your activity indicator or anything else with the GUI
+            //Code here is run on the main thread
+            
+            [articlesTableView reloadData];
+            
+            // move to top
+            //[articlesTableView setContentOffset:CGPointZero animated:YES];
+            
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            [activityView removeFromSuperview];
+            
+        });
+    });
+    
 }
 
 
@@ -87,9 +110,7 @@
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
     return jsonArray.count;
-    
 }
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -163,8 +184,6 @@
         vc.navigationItem.title = cell.titre.text;
     }
 }
-
-
 
 
 - (void)didReceiveMemoryWarning
