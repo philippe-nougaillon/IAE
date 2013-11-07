@@ -35,7 +35,7 @@
 {
     // load Data from hyperplanning json flux
     
-    NSLog(@"index article : %@", _indexOfArticle);
+    //NSLog(@"index article : %@", _indexOfArticle);
 
     NSString *url = [@"http://iae.philnoug.com/rest/node/" stringByAppendingString:_indexOfArticle];
     url = [url stringByAppendingString:@".json"];
@@ -48,7 +48,7 @@
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     if (data != nil) {
-        NSLog(@"Articles data OK");
+        //NSLog(@"Articles data OK");
     } else {
         if (error != nil)
             NSLog(@"Echec connection (%@)", [error localizedDescription]);
