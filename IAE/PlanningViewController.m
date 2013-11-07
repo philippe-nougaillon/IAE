@@ -34,7 +34,8 @@
     // load Data from hyperplanning json flux
 
     NSURLRequest *request = [NSURLRequest requestWithURL:
-                                    [NSURL URLWithString:@"https://entiae.univ-paris1.fr/hyperjson/index.php"]];
+                                    [NSURL URLWithString:@"https://entiae.univ-paris1.fr/hyperjson/index.php"]
+                                             cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
     NSURLResponse *response;
     NSError *error;
     

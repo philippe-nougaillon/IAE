@@ -13,8 +13,6 @@
     NSDictionary *jsonArray;
     
     __weak IBOutlet UILabel *labelTitle;
-    __weak IBOutlet UILabel *labelDate;
-    __weak IBOutlet UILabel *labelSubTitle;
     __weak IBOutlet UIWebView *articleWebview;
 }
 
@@ -42,7 +40,8 @@
     NSString *url = [@"http://iae.philnoug.com/rest/node/" stringByAppendingString:_indexOfEvent];
     url = [url stringByAppendingString:@".json"];
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]
+                             cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
     NSURLResponse *response;
     NSError *error;
     
@@ -79,8 +78,6 @@
 	// Do any additional setup after loading the view.
  
     [labelTitle setText:self.eventTitre];
-    [labelDate setText:self.eventDate];
-    //[labelSubTitle setText:self.eventSubTitle];
  
     // load event details
     //Start an activity indicator here

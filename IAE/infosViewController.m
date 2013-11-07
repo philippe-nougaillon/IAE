@@ -34,6 +34,24 @@
     [[UIApplication sharedApplication] openURL:url];
     
 }
+- (IBAction)openWebButonPressed:(id)sender {
+    
+    NSURL *url = [NSURL URLWithString:@"http://www.iae-paris.com"];
+    [[UIApplication sharedApplication] openURL:url];
+    
+}
+- (IBAction)phoneCallButtonPressed:(id)sender {
+    
+    NSURL *url = [NSURL URLWithString:@"tel:0153552800"];
+    [[UIApplication sharedApplication] openURL:url];
+    
+}
+- (IBAction)composeMailButtonPressed:(id)sender {
+    
+    NSURL *url = [NSURL URLWithString:@"mailto:iae@univ-paris1.fr"];
+    [[UIApplication sharedApplication] openURL:url];
+    
+}
 
 - (void)didReceiveMemoryWarning
 {

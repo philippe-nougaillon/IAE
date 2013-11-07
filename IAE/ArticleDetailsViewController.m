@@ -40,7 +40,8 @@
     NSString *url = [@"http://iae.philnoug.com/rest/node/" stringByAppendingString:_indexOfArticle];
     url = [url stringByAppendingString:@".json"];
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]
+                             cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
     NSURLResponse *response;
     NSError *error;
     
@@ -105,8 +106,6 @@
             
         });
     });
-    
-    
     
 }
 
