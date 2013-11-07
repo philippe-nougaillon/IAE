@@ -26,6 +26,7 @@
 		4A045C9017FC299900E2E2BA /* PlanningCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A045C8F17FC299900E2E2BA /* PlanningCell.m */; };
 		4A1F0D181827BD0200027A8B /* ArticlesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1F0D171827BD0200027A8B /* ArticlesCell.m */; };
 		4A20BCC5182BC6BF00E5EF8C /* iae-paris1-rue.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A20BCC4182BC6BF00E5EF8C /* iae-paris1-rue.png */; };
+		4A20BCCB182BE5E000E5EF8C /* navBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A20BCCA182BE5E000E5EF8C /* navBar.png */; };
 		4A27B9A018195FD800CE3F76 /* ArticlesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A27B99F18195FD800CE3F76 /* ArticlesViewController.m */; };
 		4A90FDEB182ABB470067CBFE /* infosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A90FDEA182ABB470067CBFE /* infosViewController.m */; };
 		4AC744C1182A55E00087E45F /* EventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC744C0182A55E00087E45F /* EventDetailsViewController.m */; };
@@ -75,6 +76,7 @@
 		4A1F0D161827BD0200027A8B /* ArticlesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticlesCell.h; sourceTree = "<group>"; };
 		4A1F0D171827BD0200027A8B /* ArticlesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticlesCell.m; sourceTree = "<group>"; };
 		4A20BCC4182BC6BF00E5EF8C /* iae-paris1-rue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iae-paris1-rue.png"; sourceTree = "<group>"; };
+		4A20BCCA182BE5E000E5EF8C /* navBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navBar.png; sourceTree = "<group>"; };
 		4A27B99E18195FD800CE3F76 /* ArticlesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticlesViewController.h; path = ../ArticlesViewController.h; sourceTree = "<group>"; };
 		4A27B99F18195FD800CE3F76 /* ArticlesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticlesViewController.m; path = ../ArticlesViewController.m; sourceTree = "<group>"; };
 		4A90FDE9182ABB470067CBFE /* infosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = infosViewController.h; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 		4A045C5917FC036300E2E2BA /* IAE */ = {
 			isa = PBXGroup;
 			children = (
+				4A20BCCA182BE5E000E5EF8C /* navBar.png */,
 				4A20BCC4182BC6BF00E5EF8C /* iae-paris1-rue.png */,
 				4A045C6217FC036300E2E2BA /* AppDelegate.h */,
 				4A045C6317FC036300E2E2BA /* AppDelegate.m */,
@@ -296,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A045C6A17FC036300E2E2BA /* Main_iPad.storyboard in Resources */,
+				4A20BCCB182BE5E000E5EF8C /* navBar.png in Resources */,
 				4A20BCC5182BC6BF00E5EF8C /* iae-paris1-rue.png in Resources */,
 				4A045C7217FC036400E2E2BA /* Images.xcassets in Resources */,
 				4A045C6717FC036300E2E2BA /* Main_iPhone.storyboard in Resources */,

@@ -25,7 +25,12 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 
-   [self refreshButtonPressed:nil];
+    // change navigation bar background
+    [self.navigationController.navigationBar
+     setBackgroundImage:[UIImage imageNamed:@"navBar.png"]
+     forBarMetrics:UIBarMetricsDefault];
+
+    [self refreshButtonPressed:nil];
     
 }
 

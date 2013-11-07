@@ -27,7 +27,16 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    // change navigation bar background
+    [self.navigationController.navigationBar
+     setBackgroundImage:[UIImage imageNamed:@"navBar.png"]
+     forBarMetrics:UIBarMetricsDefault];
+
+ //   [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navBar.png"] forBarMetrics:UIBarMetricsDefault];
+    
 }
+
 - (IBAction)buttonPressed:(id)sender {
     
     NSURL *url = [NSURL URLWithString:@"http://maps.apple.com/?q=IAE+PARIS,21+rue+broca,Paris,France"];
