@@ -41,7 +41,9 @@
 {
     // load Articles json flux
     NSURLRequest *request = [NSURLRequest requestWithURL:
-                             [NSURL URLWithString:@"http://iae.philnoug.com/rest/articles.json"]];
+                             [NSURL URLWithString:@"http://iae.philnoug.com/rest/articles.json"]
+                             cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10
+                             ];
     NSURLResponse *response;
     NSError *error;
     
@@ -54,6 +56,12 @@
             NSLog(@"Echec connection (%@)", [error localizedDescription]);
         else
             NSLog(@"Echec de la connection");
+        
+        UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"Oups..." message:@"Echec de la connection" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+        alertView1.alertViewStyle = UIAlertViewStyleDefault;
+        [alertView1 show];
+        
+        return;
     }
     
     NSError *errorDecoding;

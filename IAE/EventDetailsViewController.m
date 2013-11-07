@@ -55,6 +55,12 @@
             NSLog(@"Echec connection (%@)", [error localizedDescription]);
         else
             NSLog(@"Echec de la connection");
+        
+        UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"Oups..." message:@"Echec de la connection" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+        alertView1.alertViewStyle = UIAlertViewStyleDefault;
+        [alertView1 show];
+        
+        return;
     }
     
     NSError *errorDecoding;
