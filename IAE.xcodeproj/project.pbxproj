@@ -27,7 +27,6 @@
 		4A1F0D181827BD0200027A8B /* ArticlesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1F0D171827BD0200027A8B /* ArticlesCell.m */; };
 		4A20BCC5182BC6BF00E5EF8C /* iae-paris1-rue.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A20BCC4182BC6BF00E5EF8C /* iae-paris1-rue.png */; };
 		4A20BCCB182BE5E000E5EF8C /* navBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A20BCCA182BE5E000E5EF8C /* navBar.png */; };
-		4A27B9A018195FD800CE3F76 /* ArticlesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A27B99F18195FD800CE3F76 /* ArticlesViewController.m */; };
 		4A3681B0182D2AA500310672 /* ArticlesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3681AF182D2AA500310672 /* ArticlesTableViewController.m */; };
 		4A48368B182CED4D009E7970 /* planning.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A48368A182CED4D009E7970 /* planning.png */; };
 		4A48368F182CEE98009E7970 /* agenda.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A48368E182CEE98009E7970 /* agenda.png */; };
@@ -82,8 +81,6 @@
 		4A1F0D171827BD0200027A8B /* ArticlesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticlesCell.m; sourceTree = "<group>"; };
 		4A20BCC4182BC6BF00E5EF8C /* iae-paris1-rue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iae-paris1-rue.png"; sourceTree = "<group>"; };
 		4A20BCCA182BE5E000E5EF8C /* navBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navBar.png; sourceTree = "<group>"; };
-		4A27B99E18195FD800CE3F76 /* ArticlesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticlesViewController.h; path = ../ArticlesViewController.h; sourceTree = "<group>"; };
-		4A27B99F18195FD800CE3F76 /* ArticlesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticlesViewController.m; path = ../ArticlesViewController.m; sourceTree = "<group>"; };
 		4A3681AE182D2AA500310672 /* ArticlesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticlesTableViewController.h; sourceTree = "<group>"; };
 		4A3681AF182D2AA500310672 /* ArticlesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticlesTableViewController.m; sourceTree = "<group>"; };
 		4A48368A182CED4D009E7970 /* planning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = planning.png; sourceTree = "<group>"; };
@@ -180,24 +177,15 @@
 				4AC744BF182A55E00087E45F /* EventDetailsViewController.h */,
 				4AC744C0182A55E00087E45F /* EventDetailsViewController.m */,
 				4A045C6817FC036300E2E2BA /* Main_iPad.storyboard */,
-				4A27B99E18195FD800CE3F76 /* ArticlesViewController.h */,
-				4A27B99F18195FD800CE3F76 /* ArticlesViewController.m */,
 				4AD246871827ECEE00ACDF4E /* ArticleDetailsViewController.h */,
 				4AD246881827ECEE00ACDF4E /* ArticleDetailsViewController.m */,
 				4A045C6B17FC036300E2E2BA /* PlanningViewController.h */,
 				4A045C6C17FC036300E2E2BA /* PlanningViewController.m */,
+				4A3681B1182D363100310672 /* TableViewCell */,
 				4A045C6E17FC036300E2E2BA /* TwitterViewController.h */,
 				4A045C6F17FC036300E2E2BA /* TwitterViewController.m */,
 				4A045C7117FC036400E2E2BA /* Images.xcassets */,
 				4A045C5A17FC036300E2E2BA /* Supporting Files */,
-				4AF8D0EB18293A3100437A49 /* EventsCell.h */,
-				4AF8D0EC18293A3100437A49 /* EventsCell.m */,
-				4A045C8E17FC299900E2E2BA /* PlanningCell.h */,
-				4A045C8F17FC299900E2E2BA /* PlanningCell.m */,
-				4AE478C318044B0A00C8CD7E /* twitterCell.h */,
-				4AE478C418044B0A00C8CD7E /* twitterCell.m */,
-				4A1F0D161827BD0200027A8B /* ArticlesCell.h */,
-				4A1F0D171827BD0200027A8B /* ArticlesCell.m */,
 			);
 			path = IAE;
 			sourceTree = "<group>";
@@ -229,6 +217,21 @@
 				4A045C8117FC036400E2E2BA /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4A3681B1182D363100310672 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				4AF8D0EB18293A3100437A49 /* EventsCell.h */,
+				4AF8D0EC18293A3100437A49 /* EventsCell.m */,
+				4A045C8E17FC299900E2E2BA /* PlanningCell.h */,
+				4A045C8F17FC299900E2E2BA /* PlanningCell.m */,
+				4AE478C318044B0A00C8CD7E /* twitterCell.h */,
+				4AE478C418044B0A00C8CD7E /* twitterCell.m */,
+				4A1F0D161827BD0200027A8B /* ArticlesCell.h */,
+				4A1F0D171827BD0200027A8B /* ArticlesCell.m */,
+			);
+			name = TableViewCell;
 			sourceTree = "<group>";
 		};
 		4A483687182CEC83009E7970 /* Images */ = {
@@ -359,7 +362,6 @@
 				4AF8D0ED18293A3100437A49 /* EventsCell.m in Sources */,
 				4A045C6417FC036300E2E2BA /* AppDelegate.m in Sources */,
 				4AC744C1182A55E00087E45F /* EventDetailsViewController.m in Sources */,
-				4A27B9A018195FD800CE3F76 /* ArticlesViewController.m in Sources */,
 				4AE478C518044B0A00C8CD7E /* twitterCell.m in Sources */,
 				4A045C6D17FC036300E2E2BA /* PlanningViewController.m in Sources */,
 				4A045C6017FC036300E2E2BA /* main.m in Sources */,
