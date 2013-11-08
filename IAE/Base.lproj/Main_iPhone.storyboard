@@ -95,7 +95,7 @@
             </objects>
             <point key="canvasLocation" x="1179" y="-138"/>
         </scene>
-        <!--Articles View Controller - IAE - Paris-->
+        <!--Articles View Controller - Actualités-->
         <scene sceneID="OKV-8C-6g1">
             <objects>
                 <viewController id="b6X-kR-t3K" customClass="ArticlesViewController" sceneMemberID="viewController">
@@ -132,7 +132,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jMf-Qc-f6V">
-                                                    <rect key="frame" x="100" y="0.0" width="187" height="21"/>
+                                                    <rect key="frame" x="103" y="0.0" width="187" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
                                                     <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -160,7 +160,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="IAE - Paris" id="8KS-B0-0lk">
+                    <navigationItem key="navigationItem" title="Actualités" id="8KS-B0-0lk">
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="poh-9i-MVS">
                             <connections>
                                 <action selector="refreshButtonPressed:" destination="b6X-kR-t3K" id="Er4-CV-nIV"/>
@@ -413,7 +413,7 @@
         <scene sceneID="8O7-L1-zXy">
             <objects>
                 <navigationController title="Agenda" automaticallyAdjustsScrollViewInsets="NO" id="kxA-ez-4uc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Actualités" id="wmW-wO-CDr"/>
+                    <tabBarItem key="tabBarItem" title="Actualités" image="actualites2.png" id="wmW-wO-CDr"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="X7W-Nm-Vmc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -531,7 +531,7 @@
         <scene sceneID="1CE-PM-kdA">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hRr-bz-aKP" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Agenda" id="Cfa-8D-kfD"/>
+                    <tabBarItem key="tabBarItem" title="Agenda" image="agenda.png" id="Cfa-8D-kfD"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="06Z-Zd-u2d"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="773-Ah-ndY">
@@ -551,7 +551,7 @@
         <scene sceneID="vSe-DN-5Mi">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TiZ-Zn-qWE" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Planning" id="u1e-5L-l1D"/>
+                    <tabBarItem key="tabBarItem" title="Planning" image="planning.png" id="u1e-5L-l1D"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="puz-8N-F9v">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -570,7 +570,7 @@
         <scene sceneID="diZ-XN-pvf">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lGt-LB-osd" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Infos" id="cel-qL-FLe"/>
+                    <tabBarItem key="tabBarItem" title="Infos" image="logo-IAE.png" id="cel-qL-FLe"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2gQ-4F-Iem">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -587,7 +587,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="actualites2.png" width="28" height="30"/>
+        <image name="agenda.png" width="26" height="30"/>
         <image name="iae-paris1-rue.png" width="250" height="134"/>
+        <image name="logo-IAE.png" width="30" height="30"/>
+        <image name="planning.png" width="27" height="30"/>
         <image name="second" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
