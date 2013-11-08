@@ -169,7 +169,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="articlesTableView" destination="lpc-sS-zoY" id="Ygv-ve-RMy"/>
-                        <outlet property="tableView" destination="lpc-sS-zoY" id="57m-z5-WnT"/>
+                        <outlet property="tableView" destination="lpc-sS-zoY" id="jfG-oP-qit"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OwS-1e-44y" userLabel="First Responder" sceneMemberID="firstResponder"/>

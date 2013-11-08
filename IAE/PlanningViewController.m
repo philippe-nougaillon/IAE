@@ -24,6 +24,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    // Uncomment the following line to preserve selection between presentations.
+    //self.clearsSelectionOnViewWillAppear = NO;
 
     // change navigation bar background
     [self.navigationController.navigationBar
@@ -71,9 +74,8 @@
     //Start an activity indicator here
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 
-    UIActivityIndicatorView *activityView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    UIActivityIndicatorView *activityView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     activityView.center=self.view.center;
-    activityView.backgroundColor = [UIColor lightGrayColor];
     [activityView startAnimating];
     [self.view addSubview:activityView];
 

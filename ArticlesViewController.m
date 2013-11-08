@@ -82,9 +82,8 @@
     //Start an activity indicator here
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
-    UIActivityIndicatorView *activityView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    UIActivityIndicatorView *activityView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     activityView.center=self.view.center;
-    activityView.backgroundColor = [UIColor lightGrayColor];
     [activityView startAnimating];
     [self.view addSubview:activityView];
     
@@ -102,9 +101,6 @@
             //Code here is run on the main thread
             
             [articlesTableView reloadData];
-            
-            // move to top
-            //[articlesTableView setContentOffset:CGPointZero animated:YES];
             
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             [activityView removeFromSuperview];
