@@ -28,6 +28,7 @@
 		4A20BCC5182BC6BF00E5EF8C /* iae-paris1-rue.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A20BCC4182BC6BF00E5EF8C /* iae-paris1-rue.png */; };
 		4A20BCCB182BE5E000E5EF8C /* navBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A20BCCA182BE5E000E5EF8C /* navBar.png */; };
 		4A27B9A018195FD800CE3F76 /* ArticlesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A27B99F18195FD800CE3F76 /* ArticlesViewController.m */; };
+		4A3681B0182D2AA500310672 /* ArticlesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3681AF182D2AA500310672 /* ArticlesTableViewController.m */; };
 		4A48368B182CED4D009E7970 /* planning.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A48368A182CED4D009E7970 /* planning.png */; };
 		4A48368F182CEE98009E7970 /* agenda.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A48368E182CEE98009E7970 /* agenda.png */; };
 		4A483691182CEEEA009E7970 /* actualites2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A483690182CEEEA009E7970 /* actualites2.png */; };
@@ -83,6 +84,8 @@
 		4A20BCCA182BE5E000E5EF8C /* navBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navBar.png; sourceTree = "<group>"; };
 		4A27B99E18195FD800CE3F76 /* ArticlesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticlesViewController.h; path = ../ArticlesViewController.h; sourceTree = "<group>"; };
 		4A27B99F18195FD800CE3F76 /* ArticlesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticlesViewController.m; path = ../ArticlesViewController.m; sourceTree = "<group>"; };
+		4A3681AE182D2AA500310672 /* ArticlesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticlesTableViewController.h; sourceTree = "<group>"; };
+		4A3681AF182D2AA500310672 /* ArticlesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticlesTableViewController.m; sourceTree = "<group>"; };
 		4A48368A182CED4D009E7970 /* planning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = planning.png; sourceTree = "<group>"; };
 		4A48368E182CEE98009E7970 /* agenda.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = agenda.png; sourceTree = "<group>"; };
 		4A483690182CEEEA009E7970 /* actualites2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = actualites2.png; sourceTree = "<group>"; };
@@ -168,6 +171,8 @@
 				4A045C6217FC036300E2E2BA /* AppDelegate.h */,
 				4A045C6317FC036300E2E2BA /* AppDelegate.m */,
 				4A045C6517FC036300E2E2BA /* Main_iPhone.storyboard */,
+				4A3681AE182D2AA500310672 /* ArticlesTableViewController.h */,
+				4A3681AF182D2AA500310672 /* ArticlesTableViewController.m */,
 				4A90FDE9182ABB470067CBFE /* infosViewController.h */,
 				4A90FDEA182ABB470067CBFE /* infosViewController.m */,
 				4AF8D0EE18293B1300437A49 /* EventsViewController.h */,
@@ -348,6 +353,7 @@
 			files = (
 				4AD246891827ECEE00ACDF4E /* ArticleDetailsViewController.m in Sources */,
 				4A1F0D181827BD0200027A8B /* ArticlesCell.m in Sources */,
+				4A3681B0182D2AA500310672 /* ArticlesTableViewController.m in Sources */,
 				4A045C9017FC299900E2E2BA /* PlanningCell.m in Sources */,
 				4A045C7017FC036300E2E2BA /* TwitterViewController.m in Sources */,
 				4AF8D0ED18293A3100437A49 /* EventsCell.m in Sources */,
