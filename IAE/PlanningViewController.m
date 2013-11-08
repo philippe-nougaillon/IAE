@@ -93,7 +93,7 @@
             [planningTableView reloadData];
             
             // move to top
-            [planningTableView setContentOffset:CGPointZero animated:YES];
+            //[planningTableView setContentOffset:CGPointZero animated:YES];
             
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             [activityView removeFromSuperview];

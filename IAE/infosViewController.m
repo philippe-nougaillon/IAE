@@ -32,9 +32,6 @@
     [self.navigationController.navigationBar
      setBackgroundImage:[UIImage imageNamed:@"navBar.png"]
      forBarMetrics:UIBarMetricsDefault];
-
- //   [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navBar.png"] forBarMetrics:UIBarMetricsDefault];
-    
 }
 
 - (IBAction)buttonPressed:(id)sender {
@@ -60,6 +57,18 @@
     NSURL *url = [NSURL URLWithString:@"mailto:iae@univ-paris1.fr"];
     [[UIApplication sharedApplication] openURL:url];
     
+}
+- (IBAction)phonCall2buttonPressed:(id)sender {
+    
+    [[UIApplication sharedApplication] openURL:
+     [NSURL URLWithString:@"tel:0179361040"]];
+
+}
+- (IBAction)map2buttonPressed:(id)sender {
+    
+    NSURL *url = [NSURL URLWithString:@"http://maps.apple.com/?q=IAE+PARIS,37+rue+de+La+Rochefoucauld,Paris,France"];
+    [[UIApplication sharedApplication] openURL:url];
+
 }
 
 - (void)didReceiveMemoryWarning
