@@ -180,7 +180,7 @@
                                 <rect key="frame" x="0.0" y="24" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <navigationItem title="Title" id="H2y-fO-sdi"/>
+                                    <navigationItem id="H2y-fO-sdi"/>
                                 </items>
                             </navigationBar>
                             <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ijn-3n-QSw">
