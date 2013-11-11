@@ -44,7 +44,12 @@
     
     // refresh data
     [self refreshButtonPressed:nil];
-
+    
+    // register to refresh UI when ApplicationDidBecomeActive
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(refreshListView)
+                                                name:UIApplicationDidBecomeActiveNotification
+                                              object:nil];
 }
 
 -(void)loadData
@@ -81,8 +86,10 @@
     //NSLog(@"jsonArray= %@",jsonArray);
     //NSLog(@"error= %@",errorDecoding);
 }
-- (IBAction)refreshButtonPressed:(id)sender {
-    
+
+-(void)refreshListView {
+
+
     //Start an activity indicator here
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
@@ -111,7 +118,13 @@
             
         });
     });
+
+}
+
+- (IBAction)refreshButtonPressed:(id)sender {
     
+    [self refreshListView];
+
 }
 
 

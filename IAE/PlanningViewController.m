@@ -35,6 +35,11 @@
 
     [self refreshButtonPressed:nil];
     
+    // register to refresh UI when ApplicationDidBecomeActive
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(refreshListView)
+                                                name:UIApplicationDidBecomeActiveNotification
+                                              object:nil];
 }
 
 -(void)loadData
@@ -69,21 +74,21 @@
     //NSLog(@"%@",jsonArray);
 }
 
-- (IBAction)refreshButtonPressed:(id)sender {
-    
+-(void)refreshListView{
+
     //Start an activity indicator here
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-
+    
     UIActivityIndicatorView *activityView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     activityView.center=self.view.center;
     [activityView startAnimating];
     [self.view addSubview:activityView];
-
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         //Call your function or whatever work that needs to be done
         //Code in this part is run on a background thread
-
+        
         // Reload planning
         [self loadData];
         
@@ -91,7 +96,7 @@
             
             //Stop your activity indicator or anything else with the GUI
             //Code here is run on the main thread
-
+            
             [planningTableView reloadData];
             
             // move to top
@@ -102,7 +107,13 @@
             
         });
     });
- 
+
+}
+
+- (IBAction)refreshButtonPressed:(id)sender {
+
+    [self refreshListView];
+
 }
 
 
