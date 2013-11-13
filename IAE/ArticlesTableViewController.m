@@ -56,9 +56,7 @@
 {
     // load Articles json flux
     NSURLRequest *request = [NSURLRequest requestWithURL:
-                             [NSURL URLWithString:@"http://iae.philnoug.com/rest/articles.json"]
-                                             cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10
-                             ];
+                             [NSURL URLWithString:@"http://iae.philnoug.com/rest/articles.json"]];
     NSURLResponse *response;
     NSError *error;
     
@@ -88,7 +86,6 @@
 }
 
 -(void)refreshListView {
-
 
     //Start an activity indicator here
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];

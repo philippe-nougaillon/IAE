@@ -56,7 +56,7 @@
     // load Events json flux
     NSURLRequest *request = [NSURLRequest requestWithURL:
                              [NSURL URLWithString:@"http://iae.philnoug.com/rest/events.json"]
-                             cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+                             ];
     NSURLResponse *response;
     NSError *error;
     

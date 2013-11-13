@@ -40,8 +40,7 @@
     NSString *url = [@"http://iae.philnoug.com/rest/node/" stringByAppendingString:_indexOfEvent];
     url = [url stringByAppendingString:@".json"];
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]
-                             cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     NSURLResponse *response;
     NSError *error;
     

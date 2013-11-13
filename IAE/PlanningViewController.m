@@ -47,15 +47,14 @@
     // load Data from hyperplanning json flux
 
     NSURLRequest *request = [NSURLRequest requestWithURL:
-                                    [NSURL URLWithString:@"https://entiae.univ-paris1.fr/hyperjson/index.php"]
-                                             cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+                                    [NSURL URLWithString:@"https://entiae.univ-paris1.fr/hyperjson/index.php"]];
     NSURLResponse *response;
     NSError *error;
     
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     if (data != nil) {
-        //NSLog(@"OK");
+        NSLog(@"loadData Planning OK");
     } else {
         if (error != nil)
             NSLog(@"Echec connection (%@)", [error localizedDescription]);
