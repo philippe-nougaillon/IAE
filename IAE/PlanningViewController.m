@@ -8,11 +8,11 @@
 
 #import "PlanningViewController.h"
 #import "PlanningCell.h"
+#import "Reachability.h"
 
 @interface PlanningViewController () {
 
     NSArray *jsonArray;
-    
     __weak IBOutlet UITableView *planningTableView;
 }
 
@@ -42,35 +42,44 @@
                                               object:nil];
 }
 
--(void)loadData
+-(BOOL)loadData
 {
     // load Data from hyperplanning json flux
 
-    NSURLRequest *request = [NSURLRequest requestWithURL:
-                                    [NSURL URLWithString:@"https://entiae.univ-paris1.fr/hyperjson/index.php"]];
-    NSURLResponse *response;
-    NSError *error;
+    Reachability* reachability = [Reachability reachabilityWithHostName:@"google.com"];
+    NetworkStatus remoteHostStatus = [reachability currentReachabilityStatus];
     
-    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    if(remoteHostStatus != NotReachable) {
     
-    if (data != nil) {
-        NSLog(@"loadData Planning OK");
+        NSURLRequest *request = [NSURLRequest requestWithURL:
+                                 [NSURL URLWithString:@"https://entiae.univ-paris1.fr/hyperjson/index.php"]];
+        NSURLResponse *response;
+        NSError *error;
+        NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        
+        if (data != nil) {
+            NSLog(@"loadData Planning OK");
+        } else {
+            if (error != nil)
+                NSLog(@"Echec connection (%@)", [error localizedDescription]);
+            else
+                NSLog(@"Echec de la onnection");
+            
+            UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"Oups..." message:@"Echec de la connection" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+            alertView1.alertViewStyle = UIAlertViewStyleDefault;
+            [alertView1 show];
+            
+            return NO;
+        }
+        NSError *errorDecoding;
+        jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
+        //NSLog(@"%@",jsonArray);
+        return YES;
+        
     } else {
-        if (error != nil)
-            NSLog(@"Echec connection (%@)", [error localizedDescription]);
-        else
-            NSLog(@"Echec de la onnection");
-        
-        UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"Oups..." message:@"Echec de la connection" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-        alertView1.alertViewStyle = UIAlertViewStyleDefault;
-        [alertView1 show];
-        
-        return;
-
+        NSLog(@"Not connected");
+        return NO;
     }
-    NSError *errorDecoding;
-    jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
-    //NSLog(@"%@",jsonArray);
 }
 
 -(void)refreshListView{
@@ -89,14 +98,15 @@
         //Code in this part is run on a background thread
         
         // Reload planning
-        [self loadData];
+        BOOL isDataLoaded = [self loadData];
         
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             
             //Stop your activity indicator or anything else with the GUI
             //Code here is run on the main thread
             
-            [planningTableView reloadData];
+            if (isDataLoaded)
+                [planningTableView reloadData];
             
             // move to top
             //[planningTableView setContentOffset:CGPointZero animated:YES];

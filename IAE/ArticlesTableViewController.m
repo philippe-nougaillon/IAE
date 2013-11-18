@@ -9,6 +9,7 @@
 #import "ArticlesTableViewController.h"
 #import "ArticlesCell.h"
 #import "ArticleDetailsViewController.h"
+#import "Reachability.h"
 
 @interface ArticlesTableViewController () {
 
@@ -52,37 +53,48 @@
                                               object:nil];
 }
 
--(void)loadData
+-(BOOL)loadData
 {
-    // load Articles json flux
-    NSURLRequest *request = [NSURLRequest requestWithURL:
-                             [NSURL URLWithString:@"http://iae.philnoug.com/rest/articles.json"]];
-    NSURLResponse *response;
-    NSError *error;
-    
-    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    
-    if (data != nil) {
-        //NSLog(@"OK");
+    Reachability* reachability = [Reachability reachabilityWithHostName:@"google.com"];
+    NetworkStatus remoteHostStatus = [reachability currentReachabilityStatus];
+        
+    if(remoteHostStatus != NotReachable) {
+        
+        // load Articles json flux
+        NSURLRequest *request = [NSURLRequest requestWithURL:
+                                 [NSURL URLWithString:@"http://iae.philnoug.com/rest/articles.json"]];
+        NSURLResponse *response;
+        NSError *error;
+        
+        NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        
+        if (data != nil) {
+            //NSLog(@"OK");
+        } else {
+            if (error != nil)
+                NSLog(@"Echec connection (%@)", [error localizedDescription]);
+            else
+                NSLog(@"Echec de la connection");
+            
+            UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"Oups..." message:@"Echec de la connection" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+            alertView1.alertViewStyle = UIAlertViewStyleDefault;
+            [alertView1 show];
+            
+            return NO;
+        }
+        
+        NSError *errorDecoding;
+        
+        jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
+        //NSLog(@"jsonArray= %@",jsonArray);
+        //NSLog(@"error= %@",errorDecoding);
+        return YES;
+
     } else {
-        if (error != nil)
-            NSLog(@"Echec connection (%@)", [error localizedDescription]);
-        else
-            NSLog(@"Echec de la connection");
-        
-        UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"Oups..." message:@"Echec de la connection" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-        alertView1.alertViewStyle = UIAlertViewStyleDefault;
-        [alertView1 show];
-        
-        return;
+        NSLog(@"NOT Connected !");
+        return NO;
     }
-    
-    NSError *errorDecoding;
-    
-    jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
-    
-    //NSLog(@"jsonArray= %@",jsonArray);
-    //NSLog(@"error= %@",errorDecoding);
+
 }
 
 -(void)refreshListView {
@@ -101,14 +113,14 @@
         //Code in this part is run on a background thread
         
         // Reload planning
-        [self loadData];
+        BOOL isDataloaded = [self loadData];
         
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             
             //Stop your activity indicator or anything else with the GUI
             //Code here is run on the main thread
-            
-            [articlesTableView reloadData];
+            if (isDataloaded)
+                [articlesTableView reloadData];
             
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             [activityView removeFromSuperview];

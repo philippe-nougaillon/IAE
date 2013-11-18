@@ -28,6 +28,8 @@
 		4A20BCC5182BC6BF00E5EF8C /* iae-paris1-rue.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A20BCC4182BC6BF00E5EF8C /* iae-paris1-rue.png */; };
 		4A20BCCB182BE5E000E5EF8C /* navBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A20BCCA182BE5E000E5EF8C /* navBar.png */; };
 		4A3681B0182D2AA500310672 /* ArticlesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3681AF182D2AA500310672 /* ArticlesTableViewController.m */; };
+		4A45BADD183A0F4600F75772 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A45BADC183A0F4600F75772 /* SystemConfiguration.framework */; };
+		4A45BAE0183A10C600F75772 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A45BADF183A10C600F75772 /* Reachability.m */; };
 		4A48368B182CED4D009E7970 /* planning.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A48368A182CED4D009E7970 /* planning.png */; };
 		4A48368F182CEE98009E7970 /* agenda.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A48368E182CEE98009E7970 /* agenda.png */; };
 		4A483691182CEEEA009E7970 /* actualites2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A483690182CEEEA009E7970 /* actualites2.png */; };
@@ -83,6 +85,9 @@
 		4A20BCCA182BE5E000E5EF8C /* navBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navBar.png; sourceTree = "<group>"; };
 		4A3681AE182D2AA500310672 /* ArticlesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticlesTableViewController.h; sourceTree = "<group>"; };
 		4A3681AF182D2AA500310672 /* ArticlesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticlesTableViewController.m; sourceTree = "<group>"; };
+		4A45BADC183A0F4600F75772 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		4A45BADE183A10C600F75772 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		4A45BADF183A10C600F75772 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		4A48368A182CED4D009E7970 /* planning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = planning.png; sourceTree = "<group>"; };
 		4A48368E182CEE98009E7970 /* agenda.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = agenda.png; sourceTree = "<group>"; };
 		4A483690182CEEEA009E7970 /* actualites2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = actualites2.png; sourceTree = "<group>"; };
@@ -108,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A45BADD183A0F4600F75772 /* SystemConfiguration.framework in Frameworks */,
 				4AE478C218043B3100C8CD7E /* Accounts.framework in Frameworks */,
 				4AE478C018043B2400C8CD7E /* Social.framework in Frameworks */,
 				4A045C5617FC036300E2E2BA /* CoreGraphics.framework in Frameworks */,
@@ -151,6 +157,7 @@
 		4A045C5217FC036300E2E2BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4A45BADC183A0F4600F75772 /* SystemConfiguration.framework */,
 				4AE478C118043B3100C8CD7E /* Accounts.framework */,
 				4AE478BF18043B2400C8CD7E /* Social.framework */,
 				4A045C5317FC036300E2E2BA /* Foundation.framework */,
@@ -164,6 +171,8 @@
 		4A045C5917FC036300E2E2BA /* IAE */ = {
 			isa = PBXGroup;
 			children = (
+				4A45BADE183A10C600F75772 /* Reachability.h */,
+				4A45BADF183A10C600F75772 /* Reachability.m */,
 				4A483687182CEC83009E7970 /* Images */,
 				4A045C6217FC036300E2E2BA /* AppDelegate.h */,
 				4A045C6317FC036300E2E2BA /* AppDelegate.m */,
@@ -364,6 +373,7 @@
 				4AC744C1182A55E00087E45F /* EventDetailsViewController.m in Sources */,
 				4AE478C518044B0A00C8CD7E /* twitterCell.m in Sources */,
 				4A045C6D17FC036300E2E2BA /* PlanningViewController.m in Sources */,
+				4A45BAE0183A10C600F75772 /* Reachability.m in Sources */,
 				4A045C6017FC036300E2E2BA /* main.m in Sources */,
 				4A90FDEB182ABB470067CBFE /* infosViewController.m in Sources */,
 				4AF8D0F018293B1300437A49 /* EventsViewController.m in Sources */,
