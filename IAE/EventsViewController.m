@@ -166,7 +166,7 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate *dateUS = [dateFormatter dateFromString:dateEvent];
-
+    
     // conversion date US en string FR
     NSDateFormatter *dateFormatterFR = [[NSDateFormatter alloc] init];
     [dateFormatterFR setTimeStyle:NSDateFormatterFullStyle];
@@ -205,7 +205,6 @@
         vc.indexOfEvent = nid;
         vc.eventTitre = cell.titleEvent.text;
         vc.eventDate = cell.dateEvent.text;
-        //vc.navigationItem.title = cell.dateEvent.text;
     }
 }
 

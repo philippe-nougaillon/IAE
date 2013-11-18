@@ -82,10 +82,9 @@
             
             return NO;
         }
-        
         NSError *errorDecoding;
-        
         jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
+
         //NSLog(@"jsonArray= %@",jsonArray);
         //NSLog(@"error= %@",errorDecoding);
         return YES;
@@ -158,22 +157,17 @@
     
     NSDictionary *obj = [jsonArray objectAtIndex:indexPath.row];
     NSString *titre = [obj objectForKey:@"node_title"];
-    
     NSString *postDatetimeStamp = [obj objectForKey:@"node_created"];
-    
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:[postDatetimeStamp doubleValue]];
-    
+
+    // formate la date
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setTimeStyle:NSDateFormatterFullStyle];
     [dateFormatter setDateStyle:NSDateFormatterFullStyle];
     [dateFormatter setLocale:[NSLocale currentLocale]];
-    [dateFormatter setDateFormat:@"dd/MM/yyyy HH:mm:ss"];
+    [dateFormatter setDateFormat:@"dd MMM yyyy HH:mm:ss"];
     NSString *dateFinal = [dateFormatter stringFromDate:date];
-    
-    
     NSDictionary *imageArray = [obj objectForKey:@"Image"];
-    
-    //NSLog(@"imageArray = %@",imageArray);
     
     if (imageArray.count >0) {
         NSString *imageFileName = [imageArray  objectForKey:@"filename"];
@@ -188,7 +182,6 @@
                 cell.image.image = [UIImage imageWithData:imageData];
             });
         });
-        
     }
     
     [cell.titre setText:titre];

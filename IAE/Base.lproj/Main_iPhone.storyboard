@@ -378,8 +378,8 @@
                                     <navigationItem title="Title" id="Cwy-dd-IFb"/>
                                 </items>
                             </navigationBar>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="LvJ-L6-3ZZ">
-                                <rect key="frame" x="20" y="106" width="280" height="46"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="286" translatesAutoresizingMaskIntoConstraints="NO" id="LvJ-L6-3ZZ">
+                                <rect key="frame" x="14" y="112" width="286" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -396,7 +396,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="VH0-bk-Fdp"/>
+                    <navigationItem key="navigationItem" id="VH0-bk-Fdp">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="QBy-w2-fwl">
+                            <connections>
+                                <action selector="addEventButtonPressed:" destination="TFg-Yk-G37" id="ViE-o0-m99"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="articleWebview" destination="Uwg-1m-5lH" id="lUG-U7-gq6"/>
                         <outlet property="dateEvent" destination="05n-qB-NOP" id="T7R-vP-w82"/>

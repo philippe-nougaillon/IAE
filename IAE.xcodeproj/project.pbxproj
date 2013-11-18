@@ -30,6 +30,7 @@
 		4A3681B0182D2AA500310672 /* ArticlesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3681AF182D2AA500310672 /* ArticlesTableViewController.m */; };
 		4A45BADD183A0F4600F75772 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A45BADC183A0F4600F75772 /* SystemConfiguration.framework */; };
 		4A45BAE0183A10C600F75772 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A45BADF183A10C600F75772 /* Reachability.m */; };
+		4A45BAE2183A40DF00F75772 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A45BAE1183A40DF00F75772 /* EventKit.framework */; };
 		4A48368B182CED4D009E7970 /* planning.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A48368A182CED4D009E7970 /* planning.png */; };
 		4A48368F182CEE98009E7970 /* agenda.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A48368E182CEE98009E7970 /* agenda.png */; };
 		4A483691182CEEEA009E7970 /* actualites2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A483690182CEEEA009E7970 /* actualites2.png */; };
@@ -88,6 +89,7 @@
 		4A45BADC183A0F4600F75772 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		4A45BADE183A10C600F75772 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		4A45BADF183A10C600F75772 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		4A45BAE1183A40DF00F75772 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		4A48368A182CED4D009E7970 /* planning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = planning.png; sourceTree = "<group>"; };
 		4A48368E182CEE98009E7970 /* agenda.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = agenda.png; sourceTree = "<group>"; };
 		4A483690182CEEEA009E7970 /* actualites2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = actualites2.png; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A45BAE2183A40DF00F75772 /* EventKit.framework in Frameworks */,
 				4A45BADD183A0F4600F75772 /* SystemConfiguration.framework in Frameworks */,
 				4AE478C218043B3100C8CD7E /* Accounts.framework in Frameworks */,
 				4AE478C018043B2400C8CD7E /* Social.framework in Frameworks */,
@@ -157,6 +160,7 @@
 		4A045C5217FC036300E2E2BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4A45BAE1183A40DF00F75772 /* EventKit.framework */,
 				4A45BADC183A0F4600F75772 /* SystemConfiguration.framework */,
 				4AE478C118043B3100C8CD7E /* Accounts.framework */,
 				4AE478BF18043B2400C8CD7E /* Social.framework */,

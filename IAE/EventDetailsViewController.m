@@ -8,10 +8,12 @@
 
 #import "EventDetailsViewController.h"
 #import "Reachability.h"
+#import "EventKit/EventKit.h"
 
 @interface EventDetailsViewController () {
 
     NSDictionary *jsonArray;
+    NSDate *eventDateUS;
     
     __weak IBOutlet UILabel *labelTitle;
     __weak IBOutlet UIWebView *articleWebview;
@@ -106,11 +108,24 @@
             if (isDataLoaded) {
                 NSDictionary  *body = [jsonArray objectForKey:@"body"];
                 NSArray  *und = [body objectForKey:@"und"];
+
                 NSString *textArticle =[[und objectAtIndex:0] objectForKey:@"safe_value"];
-                
                 [articleWebview loadHTMLString:textArticle baseURL:nil];
-                // update event date label
-                [dateEvent setText:self.eventDate];
+                
+                // Get event full event date
+                body = [jsonArray objectForKey:@"field_when"];
+                und = [body objectForKey:@"und"];
+                
+                NSString *dateWhen = [[und objectAtIndex:0] objectForKey:@"value"];
+
+                // convert date
+                NSDateFormatter *dateFormatterUS = [[NSDateFormatter alloc] init];
+                //NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"Europe/Paris"];
+                //[dateFormatterUS setTimeZone:timeZone];
+                [dateFormatterUS setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                eventDateUS = [dateFormatterUS dateFromString:dateWhen];
+                
+               [dateEvent setText:self.eventDate];
             }
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     
@@ -118,7 +133,29 @@
     });
     
 }
+- (IBAction)addEventButtonPressed:(id)sender {
 
+    // add event to device calendar
+    
+    EKEventStore *store = [[EKEventStore alloc] init];
+    [store requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
+        if (!granted) { return; }
+        EKEvent *event = [EKEvent eventWithEventStore:store];
+        event.title = self.eventTitre;
+        event.startDate = eventDateUS;
+        event.endDate = [event.startDate dateByAddingTimeInterval:60*60];  //set 1 hour meeting
+        [event setCalendar:[store defaultCalendarForNewEvents]];
+        NSError *err = nil;
+        [store saveEvent:event span:EKSpanThisEvent commit:YES error:&err];
+        //NSString *savedEventId = event.eventIdentifier;  //this is so you can access this event later
+        if (err == nil) {
+            UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"Agenda" message:@"Date ajoutée à votre calendrier" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+            alertView1.alertViewStyle = UIAlertViewStyleDefault;
+            [alertView1 show];
+        }
+    }];
+
+}
 
 - (void)didReceiveMemoryWarning
 {
