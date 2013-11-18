@@ -15,6 +15,8 @@
     
     __weak IBOutlet UILabel *labelTitle;
     __weak IBOutlet UIWebView *articleWebview;
+    __weak IBOutlet UILabel *dateEvent;
+    
 }
 
 @end
@@ -107,6 +109,8 @@
                 NSString *textArticle =[[und objectAtIndex:0] objectForKey:@"safe_value"];
                 
                 [articleWebview loadHTMLString:textArticle baseURL:nil];
+                // update event date label
+                [dateEvent setText:self.eventDate];
             }
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     

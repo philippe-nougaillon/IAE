@@ -122,7 +122,6 @@
 - (IBAction)refreshButtonPressed:(id)sender {
 
     [self refreshListView];
-
 }
 
 
@@ -135,9 +134,7 @@
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
-    return jsonArray.count;
-    
+   return jsonArray.count;
 }
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

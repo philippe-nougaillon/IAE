@@ -53,7 +53,6 @@
 
 -(BOOL)loadData
 {
-    
     Reachability* reachability = [Reachability reachabilityWithHostName:@"google.com"];
     NetworkStatus remoteHostStatus = [reachability currentReachabilityStatus];
     
@@ -88,11 +87,9 @@
         //NSLog(@"jsonArray= %@",jsonArray);
         //NSLog(@"error= %@",errorDecoding);
         return YES;
-
     } else {
         NSLog(@"NOT Connected !");
         return NO;
-    
     }
 }
 
@@ -175,12 +172,15 @@
     [dateFormatterFR setTimeStyle:NSDateFormatterFullStyle];
     [dateFormatterFR setDateStyle:NSDateFormatterFullStyle];
     [dateFormatterFR setLocale:[NSLocale currentLocale]];
-    [dateFormatterFR setDateFormat:@"dd/MM/yyyy HH:mm"];
+    //[dateFormatterFR setDateFormat:@"dd MMM yyyy HH:mm"];
+    [dateFormatterFR setDateFormat:@"dd MMM"];
     NSString *dateFR = [dateFormatterFR stringFromDate:dateUS];
 
     // Affichage cellule
     [cell.titleEvent setText:titre];
-    [cell.dateEvent setText:[@"Le " stringByAppendingString:dateFR]];
+    //[cell.dateEvent setText:[@"Le " stringByAppendingString:dateFR]];
+    
+    [cell.dateEvent setText:dateFR];
     [cell.subTitleEvent setText:soustitre];
     
     return cell;
@@ -205,8 +205,7 @@
         vc.indexOfEvent = nid;
         vc.eventTitre = cell.titleEvent.text;
         vc.eventDate = cell.dateEvent.text;
-        vc.eventSubTitle = cell.subTitleEvent.text;
-        vc.navigationItem.title = cell.dateEvent.text;
+        //vc.navigationItem.title = cell.dateEvent.text;
     }
 }
 
