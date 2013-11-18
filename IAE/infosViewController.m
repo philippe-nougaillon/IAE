@@ -9,7 +9,9 @@
 #import "infosViewController.h"
 
 @interface infosViewController ()
+@property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
 
+@property (weak, nonatomic) IBOutlet UIView *myInfosView;
 @end
 
 @implementation infosViewController
@@ -27,6 +29,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    //self.myScrollView.scrollEnabled = YES;
+    //[self.myScrollView setContentSize:CGSizeMake(400, 1000)];
     
     // change navigation bar background
     [self.navigationController.navigationBar
@@ -69,6 +73,23 @@
     NSURL *url = [NSURL URLWithString:@"http://maps.apple.com/?q=IAE+PARIS,37+rue+de+La+Rochefoucauld,Paris,France"];
     [[UIApplication sharedApplication] openURL:url];
 
+}
+- (IBAction)socialButtonPressed:(UIButton*)sender {
+    
+    NSString *buttonLabel = sender.titleLabel.text;
+    NSURL *url;
+    
+    if ([buttonLabel isEqualToString:@"linkedIn"])
+        url = [NSURL URLWithString:@"http://www.linkedin.com/company/iaeparis/products"];
+    if ([buttonLabel isEqualToString:@"youtube"])
+        url = [NSURL URLWithString:@"http://www.youtube.com/user/iaeparis"];
+    if ([buttonLabel isEqualToString:@"facebook"])
+        url = [NSURL URLWithString:@"https://www.facebook.com/iaeparis"];
+    if ([buttonLabel isEqualToString:@"twitter"])
+        url = [NSURL URLWithString:@"https://twitter.com/iaeparis"];
+    
+    [[UIApplication sharedApplication] openURL:url];
+    
 }
 
 - (void)didReceiveMemoryWarning

@@ -131,8 +131,9 @@
     
         });
     });
-    
 }
+
+
 - (IBAction)addEventButtonPressed:(id)sender {
 
 
@@ -153,7 +154,7 @@
         }];
         
          dispatch_async(dispatch_get_main_queue(), ^(void) {
-             UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"IAE" message:@"Date ajoutée à votre agenda" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+             UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"IAE" message:@"Cette date a bien été ajoutée à votre agenda" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
              alertView1.alertViewStyle = UIAlertViewStyleDefault;
              [alertView1 show];
          });
