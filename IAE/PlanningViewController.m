@@ -57,25 +57,27 @@
         NSError *error;
         NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
         
-        if (data != nil) {
-            NSLog(@"loadData Planning OK");
-        } else {
+        if (data == nil) {
             if (error != nil)
                 NSLog(@"Echec connection (%@)", [error localizedDescription]);
             else
                 NSLog(@"Echec de la onnection");
             
-            UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"Oups..." message:@"Echec de la connection" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-            alertView1.alertViewStyle = UIAlertViewStyleDefault;
-            [alertView1 show];
+            //UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"Oups..." message:@"Echec de la connection" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+            //alertView1.alertViewStyle = UIAlertViewStyleDefault;
+            //[alertView1 show];
             
             return NO;
         }
         NSError *errorDecoding;
         jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
-        //NSLog(@"%@",jsonArray);
-        return YES;
-        
+        if (errorDecoding == nil) {
+            //NSLog(@"jsonArray= %@",jsonArray);
+            return YES;
+        } else {
+            NSLog(@"errorDecoding= %@",errorDecoding);
+            return NO;
+        }
     } else {
         NSLog(@"Not connected");
         return NO;

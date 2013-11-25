@@ -39,7 +39,7 @@
 -(BOOL)loadData
 {
     
-    Reachability* reachability = [Reachability reachabilityWithHostName:@"google.com"];
+    Reachability  *reachability = [Reachability reachabilityWithHostName:@"google.com"];
     NetworkStatus remoteHostStatus = [reachability currentReachabilityStatus];
     
     if(remoteHostStatus != NotReachable) {
@@ -54,26 +54,28 @@
         
         NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
         
-        if (data != nil) {
-            //NSLog(@"Event details data OK");
-        } else {
+        if (data == nil) {
             if (error != nil)
                 NSLog(@"Echec connection (%@)", [error localizedDescription]);
             else
                 NSLog(@"Echec de la connection");
             
-            UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"Oups..." message:@"Echec de la connection" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-            alertView1.alertViewStyle = UIAlertViewStyleDefault;
-            [alertView1 show];
+            //UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"Oups..." message:@"Echec de la connection" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+            //alertView1.alertViewStyle = UIAlertViewStyleDefault;
+            //[alertView1 show];
             
             return NO;
         }
         
         NSError *errorDecoding;
         jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
-        //NSLog(@"jsonArray= %@",jsonArray);
-        //NSLog(@"error= %@",errorDecoding);
-        return YES;
+        if (errorDecoding == nil) {
+            //NSLog(@"jsonArray= %@",jsonArray);
+            return YES;
+        } else {
+            NSLog(@"errorDecoding= %@",errorDecoding);
+            return NO;
+        }
     } else {
         return NO;
     }
@@ -154,7 +156,9 @@
         }];
         
          dispatch_async(dispatch_get_main_queue(), ^(void) {
-             UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"IAE" message:@"Cette date a bien été ajoutée à votre agenda" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+             
+             NSString *msg = [@"Ajouté à votre agenda au " stringByAppendingString:self.eventDate];
+             UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:self.eventTitre message:msg delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
              alertView1.alertViewStyle = UIAlertViewStyleDefault;
              [alertView1 show];
          });

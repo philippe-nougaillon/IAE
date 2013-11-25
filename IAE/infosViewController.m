@@ -9,9 +9,8 @@
 #import "infosViewController.h"
 
 @interface infosViewController ()
-@property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
-
-@property (weak, nonatomic) IBOutlet UIView *myInfosView;
+    @property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
+    @property (weak, nonatomic) IBOutlet UIView *myInfosView;
 @end
 
 @implementation infosViewController
@@ -29,8 +28,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    //self.myScrollView.scrollEnabled = YES;
-    //[self.myScrollView setContentSize:CGSizeMake(400, 1000)];
+    
+    // change scrollview height in order to show all content
+    [self.myScrollView setContentSize:CGSizeMake(320, 630)];
     
     // change navigation bar background
     [self.navigationController.navigationBar
