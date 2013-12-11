@@ -5,6 +5,7 @@
 //
 
 #import <Availability.h>
+#import <CoreData/CoreData.h>
 
 
 #ifndef __IPHONE_5_0

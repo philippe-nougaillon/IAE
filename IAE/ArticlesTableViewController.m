@@ -6,19 +6,25 @@
 //  Copyright (c) 2013 Philippe Nougaillon. All rights reserved.
 //
 
+#import "Reachability.h"
+#import "AppDelegate.h"
+
 #import "ArticlesTableViewController.h"
 #import "ArticlesCell.h"
 #import "ArticleDetailsViewController.h"
-#import "Reachability.h"
+#import "Article.h"
+
 
 @interface ArticlesTableViewController () {
 
-    NSArray *jsonArray;
     __weak IBOutlet UITableView *articlesTableView;
 
 }
+@property (nonatomic,strong)NSArray *fetchedRecordsArray;
+@property (nonatomic,strong)NSArray *jsonArray;
 
 @end
+
 
 @implementation ArticlesTableViewController
 
@@ -39,61 +45,28 @@
     //self.clearsSelectionOnViewWillAppear = NO;
  
     // change navigation bar background
-    [self.navigationController.navigationBar
-     setBackgroundImage:[UIImage imageNamed:@"navBar.png"]
-     forBarMetrics:UIBarMetricsDefault];
+    //[self.navigationController.navigationBar
+    // setBackgroundImage:[UIImage imageNamed:@"navBar.png"]
+    // forBarMetrics:UIBarMetricsDefault];
     
     // refresh data
     [self refreshButtonPressed:nil];
     
     // register to refresh UI when ApplicationDidBecomeActive
     [[NSNotificationCenter defaultCenter]addObserver:self
-                                            selector:@selector(refreshListView)
+                                            selector:@selector(loadData)
                                                 name:UIApplicationDidBecomeActiveNotification
                                               object:nil];
+
+    [self loadData];
+
 }
 
--(BOOL)loadData
+-(void)loadData
 {
     Reachability* reachability = [Reachability reachabilityWithHostName:@"google.com"];
     NetworkStatus remoteHostStatus = [reachability currentReachabilityStatus];
-        
-    if(remoteHostStatus != NotReachable) {
-        
-        // load Articles json flux
-        NSURLRequest *request = [NSURLRequest requestWithURL:
-                                 [NSURL URLWithString:@"http://iae.philnoug.com/rest/articles.json"]];
-        NSURLResponse *response;
-        NSError *error;
-        
-        NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-        if (data == nil) {
-            if (error != nil)
-                NSLog(@"Echec connection (%@)", [error localizedDescription]);
-            else
-                NSLog(@"Echec de la connection");
-
-            return NO;
-        }
-
-        NSError *errorDecoding;
-        jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
-        if (errorDecoding == nil) {
-            //NSLog(@"jsonArray= %@",jsonArray);
-            return YES;
-        } else {
-            NSLog(@"errorDecoding= %@",errorDecoding);
-            return NO;
-        }
-    } else {
-        NSLog(@"NOT Connected !");
-        return NO;
-    }
-
-}
-
--(void)refreshListView {
-
+    
     //Start an activity indicator here
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
@@ -102,33 +75,198 @@
     [activityView startAnimating];
     [self.view addSubview:activityView];
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    if(remoteHostStatus != NotReachable) {
         
-        //Call your function or whatever work that needs to be done
-        //Code in this part is run on a background thread
+        // setup database context
+        AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+        self.managedObjectContext = appDelegate.managedObjectContext;
         
-        // Reload planning
-        BOOL isDataloaded = [self loadData];
+        NSLog(@"managed context set");
         
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            
-            //Stop your activity indicator or anything else with the GUI
-            //Code here is run on the main thread
-            if (isDataloaded)
-                [articlesTableView reloadData];
-            
-            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-            [activityView removeFromSuperview];
-            
-        });
-    });
+        // check if database exist
+        if (appDelegate.isDatabaseExist) {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                
+                // get all items
+                self.fetchedRecordsArray = [self getAllArticles];
+                
+                dispatch_async(dispatch_get_main_queue(), ^(void) {
+                    // refresh tableview with local data
+                    [self.tableView reloadData];
+                    
+                    // Check if remote data are more recent
+                    if ([self refreshLocalData]) {
+                        self.fetchedRecordsArray = [self getAllArticles];
+                        [self.tableView reloadData];
+                    }
+                    
+                });
+            });
+        } else {
+            // reload data from json and store items
+            [self addAllRemoteArticlesToLocalDatabase];
+            self.fetchedRecordsArray = [self getAllArticles];
+            [self.tableView reloadData];
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        [activityView removeFromSuperview];
+        
+    } else {
+        NSLog(@"NOT Connected !");
+    }
 
 }
 
+
 - (IBAction)refreshButtonPressed:(id)sender {
     
-    [self refreshListView];
+    [self loadData];
 
+}
+
+-(NSArray*)getRemoteArticles {
+    
+    // read json remote source
+    NSURLRequest *request = [NSURLRequest requestWithURL:
+                             [NSURL URLWithString:@"http://iae.philnoug.com/rest/articles.json"]];
+    NSURLResponse *response;
+    NSError *error;
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    NSArray *jsonArray;
+    NSError *errorDecoding;
+    jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
+    
+    return jsonArray;
+}
+
+-(BOOL)refreshLocalData {
+    
+    //
+    // check if json is more recent than local items
+    //
+    
+    BOOL refreshLocalData = NO;
+    NSLog(@"refresh Local Data");
+    
+    // read json remote source
+    NSArray *jsonArray = [self getRemoteArticles];
+    
+    //get first article nid
+    NSDictionary *obj = [jsonArray firstObject];
+    NSString *remoteArticleNid = [obj objectForKey:@"nid"];
+    
+    // get last article in local storage
+    Article *localFirstArticle = [self.fetchedRecordsArray firstObject];
+    int localNid = [localFirstArticle.nid intValue];
+    
+    // add each new remote item
+    for (int index=0; index < jsonArray.count; index++) {
+        
+        //get Article title and date
+        NSDictionary *obj = [jsonArray objectAtIndex:index];
+        int remoteNid = [[obj objectForKey:@"nid"] intValue];
+        
+        // if remote item id is lower then last item id, add it
+        if (remoteNid > localNid) {
+            NSLog(@"adding item id:%@", remoteArticleNid);
+            
+            // save Item to database
+            [self addArticleToLocalDatabase:obj];
+            
+            refreshLocalData = YES;
+        }
+    }
+    return refreshLocalData;
+}
+
+-(void)addAllRemoteArticlesToLocalDatabase {
+    
+    NSLog(@"store data from json items");
+    
+    // read json source
+    NSURLRequest *request = [NSURLRequest requestWithURL:
+                             [NSURL URLWithString:@"http://iae.philnoug.com/rest/articles.json"]];
+    NSURLResponse *response;
+    NSError *error;
+    
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    
+    NSArray *jsonArray;
+    NSError *errorDecoding;
+    jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
+    
+    // for each array item
+    for (int index=0; index < jsonArray.count; index++) {
+        
+        //get Article title and date
+        NSDictionary *obj = [jsonArray objectAtIndex:index];
+        
+        // save Item to database
+        [self addArticleToLocalDatabase:obj];
+    }
+}
+
+-(void)addArticleToLocalDatabase:(NSDictionary*)obj {
+    
+    // save an item to database
+    //
+    
+    NSString *titre = [obj objectForKey:@"node_title"];
+    NSString *nid = [obj objectForKey:@"nid"];
+    
+    // date format
+    NSString *postDatetimeStamp = [obj objectForKey:@"node_created"];
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:[postDatetimeStamp doubleValue]];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeStyle:NSDateFormatterFullStyle];
+    [dateFormatter setDateStyle:NSDateFormatterFullStyle];
+    [dateFormatter setLocale:[NSLocale currentLocale]];
+    [dateFormatter setDateFormat:@"dd MMM yyyy HH:mm:ss"];
+    NSString *dateFinal = [dateFormatter stringFromDate:date];
+    
+    // get image filename
+    NSDictionary *imageArray = [obj objectForKey:@"Image"];
+    NSString *imageFileName;
+    if (imageArray.count >0)
+        imageFileName = [imageArray objectForKey:@"filename"];
+    
+    // Add Entry to Article Database
+    Article *newEntry = [NSEntityDescription insertNewObjectForEntityForName:@"Article"
+                                                      inManagedObjectContext:self.managedObjectContext];
+    
+    newEntry.title = titre;
+    newEntry.nid = nid;
+    newEntry.image = imageFileName;
+    newEntry.postDate = dateFinal;
+    newEntry.read =[NSNumber numberWithInt:0];
+    
+    NSError *error;
+    if (![self.managedObjectContext save:&error]) {
+        NSLog(@"Whoops, couldn't new item save: %@", [error localizedDescription]);
+    }
+}
+
+-(NSArray*)getAllArticles
+{
+    // initializing NSFetchRequest
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    //Setting Entity to be Queried
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Article"
+                                              inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
+                                        initWithKey:@"nid" ascending:NO];
+    
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    NSError* error;
+    
+    // Query on managedObjectContext With Generated fetchRequest
+    NSArray *fetchedRecords = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    // Returning Fetched Records
+    return fetchedRecords;
 }
 
 
@@ -141,48 +279,31 @@
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return jsonArray.count;
+    return self.fetchedRecordsArray.count;
 }
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     static NSString *cellIdentifier = @"ArticlesCell";
-    
     ArticlesCell *cell = (ArticlesCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    Article *article = [self.fetchedRecordsArray objectAtIndex:indexPath.row];
     
-    NSDictionary *obj = [jsonArray objectAtIndex:indexPath.row];
-    NSString *titre = [obj objectForKey:@"node_title"];
-    NSString *postDatetimeStamp = [obj objectForKey:@"node_created"];
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:[postDatetimeStamp doubleValue]];
-
-    // formate la date
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setTimeStyle:NSDateFormatterFullStyle];
-    [dateFormatter setDateStyle:NSDateFormatterFullStyle];
-    [dateFormatter setLocale:[NSLocale currentLocale]];
-    [dateFormatter setDateFormat:@"dd MMM yyyy HH:mm:ss"];
-    NSString *dateFinal = [dateFormatter stringFromDate:date];
-    NSDictionary *imageArray = [obj objectForKey:@"Image"];
+    NSURL *imageURL = [NSURL URLWithString:[@"http://iae.philnoug.com/sites/default/files/field/image/" stringByAppendingString:article.image]];
     
-    if (imageArray.count >0) {
-        NSString *imageFileName = [imageArray  objectForKey:@"filename"];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
         
-        NSURL *imageURL = [NSURL URLWithString:[@"http://iae.philnoug.com/sites/default/files/field/image/" stringByAppendingString:imageFileName]];
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                // Update the UI
-                cell.image.image = [UIImage imageWithData:imageData];
-            });
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Update the UI
+            cell.image.image = [UIImage imageWithData:imageData];
         });
-    }
+    });
     
-    [cell.titre setText:titre];
-    [cell.date setText:dateFinal];
-    
+    [cell.titre setText:article.title];
+    [cell.date setText:article.postDate];
+    if ([article.read intValue] == 1)
+        [cell.titre setTextColor:[UIColor grayColor]];
+
     return cell;
 }
 
@@ -198,8 +319,22 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
         
         // which article to open ?
-        NSDictionary *obj = [jsonArray objectAtIndex:indexPath.row];
+        NSDictionary *obj = [self.jsonArray objectAtIndex:indexPath.row];
         NSString *nid = [obj objectForKey:@"nid"];
+        
+        // which article to open ?
+        Article *article = [self.fetchedRecordsArray objectAtIndex:indexPath.row];
+        
+        //mark article as read
+        article.read = [NSNumber numberWithInt:1];
+        [cell.titre setTextColor:[UIColor grayColor]];
+
+        // update the database
+        NSError *error;
+        if (![self.managedObjectContext save:&error]) {
+            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        }
+        
         
         // Get destination view
         ArticleDetailsViewController *vc = [segue destinationViewController];
@@ -209,7 +344,6 @@
         vc.navigationItem.title = cell.titre.text;
     }
 }
-
 
 - (void)didReceiveMemoryWarning
 {

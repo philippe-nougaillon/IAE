@@ -40,6 +40,8 @@
 		4A483691182CEEEA009E7970 /* actualites2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A483690182CEEEA009E7970 /* actualites2.png */; };
 		4A483693182CF058009E7970 /* logo-IAE.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A483692182CF058009E7970 /* logo-IAE.png */; };
 		4A90FDEB182ABB470067CBFE /* infosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A90FDEA182ABB470067CBFE /* infosViewController.m */; };
+		4AAE222F18587D95003A3227 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4AAE222D18587D95003A3227 /* Model.xcdatamodeld */; };
+		4AAE223218587EBF003A3227 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAE223118587EBF003A3227 /* Article.m */; };
 		4AC744C1182A55E00087E45F /* EventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC744C0182A55E00087E45F /* EventDetailsViewController.m */; };
 		4AD246891827ECEE00ACDF4E /* ArticleDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD246881827ECEE00ACDF4E /* ArticleDetailsViewController.m */; };
 		4AE478C018043B2400C8CD7E /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE478BF18043B2400C8CD7E /* Social.framework */; };
@@ -104,6 +106,9 @@
 		4A483692182CF058009E7970 /* logo-IAE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-IAE.png"; sourceTree = "<group>"; };
 		4A90FDE9182ABB470067CBFE /* infosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = infosViewController.h; sourceTree = "<group>"; };
 		4A90FDEA182ABB470067CBFE /* infosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = infosViewController.m; sourceTree = "<group>"; };
+		4AAE222E18587D95003A3227 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		4AAE223018587EBF003A3227 /* Article.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Article.h; sourceTree = "<group>"; };
+		4AAE223118587EBF003A3227 /* Article.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Article.m; sourceTree = "<group>"; };
 		4AC744BF182A55E00087E45F /* EventDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailsViewController.h; sourceTree = "<group>"; };
 		4AC744C0182A55E00087E45F /* EventDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailsViewController.m; sourceTree = "<group>"; };
 		4AD246871827ECEE00ACDF4E /* ArticleDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleDetailsViewController.h; sourceTree = "<group>"; };
@@ -207,6 +212,9 @@
 				4A045C6F17FC036300E2E2BA /* TwitterViewController.m */,
 				4A045C7117FC036400E2E2BA /* Images.xcassets */,
 				4A045C5A17FC036300E2E2BA /* Supporting Files */,
+				4AAE222D18587D95003A3227 /* Model.xcdatamodeld */,
+				4AAE223018587EBF003A3227 /* Article.h */,
+				4AAE223118587EBF003A3227 /* Article.m */,
 			);
 			path = IAE;
 			sourceTree = "<group>";
@@ -385,11 +393,13 @@
 			files = (
 				4AD246891827ECEE00ACDF4E /* ArticleDetailsViewController.m in Sources */,
 				4A1F0D181827BD0200027A8B /* ArticlesCell.m in Sources */,
+				4AAE222F18587D95003A3227 /* Model.xcdatamodeld in Sources */,
 				4A3681B0182D2AA500310672 /* ArticlesTableViewController.m in Sources */,
 				4A045C9017FC299900E2E2BA /* PlanningCell.m in Sources */,
 				4A045C7017FC036300E2E2BA /* TwitterViewController.m in Sources */,
 				4AF8D0ED18293A3100437A49 /* EventsCell.m in Sources */,
 				4A045C6417FC036300E2E2BA /* AppDelegate.m in Sources */,
+				4AAE223218587EBF003A3227 /* Article.m in Sources */,
 				4AC744C1182A55E00087E45F /* EventDetailsViewController.m in Sources */,
 				4AE478C518044B0A00C8CD7E /* twitterCell.m in Sources */,
 				4A045C6D17FC036300E2E2BA /* PlanningViewController.m in Sources */,
@@ -633,6 +643,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4AAE222D18587D95003A3227 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4AAE222E18587D95003A3227 /* Model.xcdatamodel */,
+			);
+			currentVersion = 4AAE222E18587D95003A3227 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4A045C4817FC036300E2E2BA /* Project object */;
 }
