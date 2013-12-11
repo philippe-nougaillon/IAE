@@ -271,26 +271,34 @@
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentifier = @"ArticlesCell";
+    static NSString *cellIdentifier = @"ArticleCell";
     ArticlesCell *cell = (ArticlesCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+  
+    // update cell with article content
     Article *article = [self.fetchedRecordsArray objectAtIndex:indexPath.row];
-    
-    NSURL *imageURL = [NSURL URLWithString:[@"http://iae.philnoug.com/sites/default/files/field/image/" stringByAppendingString:article.image]];
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // Update the UI
-            cell.image.image = [UIImage imageWithData:imageData];
-        });
-    });
-    
     [cell.titre setText:article.title];
     [cell.date setText:article.postDate];
     if ([article.read intValue] == 1)
         [cell.titre setTextColor:[UIColor grayColor]];
 
+    // load article image
+    cell.image.image = nil; // or cell.poster.image = [UIImage imageNamed:@"placeholder.png"];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        NSURL *imageURL = [NSURL URLWithString:[@"http://iae.philnoug.com/sites/default/files/field/image/"         stringByAppendingString:article.image]];
+        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+        if (imageData) {
+            UIImage *image = [UIImage imageWithData:imageData];
+            if (image) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    ArticlesCell *updateCell = (id)[tableView cellForRowAtIndexPath:indexPath];
+                    if (updateCell)
+                        updateCell.image.image = image;
+                });
+            }
+        }
+    });
+    
     return cell;
 }
 

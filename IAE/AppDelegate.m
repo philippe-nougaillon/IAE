@@ -120,7 +120,7 @@
         NSUInteger count = [self.managedObjectContext countForFetchRequest:fetchRequest
                                                                      error:&error];
         if (count == 0) {
-            NSLog(@"isDatabaseExist Error: %@", error);
+            NSLog(@"isDatabaseExist:NO Error: %@", error);
             return NO;
         } else {
             return YES;
