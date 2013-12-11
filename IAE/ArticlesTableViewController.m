@@ -281,8 +281,9 @@
     if ([article.read intValue] == 1)
         [cell.titre setTextColor:[UIColor grayColor]];
 
-    // load article image
-    cell.image.image = nil; // or cell.poster.image = [UIImage imageNamed:@"placeholder.png"];
+    // async load article image
+    //
+    cell.image.image = nil;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         NSURL *imageURL = [NSURL URLWithString:[@"http://iae.philnoug.com/sites/default/files/field/image/"         stringByAppendingString:article.image]];
