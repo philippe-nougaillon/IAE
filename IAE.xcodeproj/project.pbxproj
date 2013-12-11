@@ -42,6 +42,7 @@
 		4A90FDEB182ABB470067CBFE /* infosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A90FDEA182ABB470067CBFE /* infosViewController.m */; };
 		4AAE222F18587D95003A3227 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4AAE222D18587D95003A3227 /* Model.xcdatamodeld */; };
 		4AAE223218587EBF003A3227 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAE223118587EBF003A3227 /* Article.m */; };
+		4AAE22361858CDFA003A3227 /* date_to_calendar-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AAE22351858CDFA003A3227 /* date_to_calendar-small.png */; };
 		4AC744C1182A55E00087E45F /* EventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC744C0182A55E00087E45F /* EventDetailsViewController.m */; };
 		4AD246891827ECEE00ACDF4E /* ArticleDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD246881827ECEE00ACDF4E /* ArticleDetailsViewController.m */; };
 		4AE478C018043B2400C8CD7E /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE478BF18043B2400C8CD7E /* Social.framework */; };
@@ -109,6 +110,7 @@
 		4AAE222E18587D95003A3227 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		4AAE223018587EBF003A3227 /* Article.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Article.h; sourceTree = "<group>"; };
 		4AAE223118587EBF003A3227 /* Article.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Article.m; sourceTree = "<group>"; };
+		4AAE22351858CDFA003A3227 /* date_to_calendar-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "date_to_calendar-small.png"; sourceTree = "<group>"; };
 		4AC744BF182A55E00087E45F /* EventDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailsViewController.h; sourceTree = "<group>"; };
 		4AC744C0182A55E00087E45F /* EventDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailsViewController.m; sourceTree = "<group>"; };
 		4AD246871827ECEE00ACDF4E /* ArticleDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleDetailsViewController.h; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 		4A483687182CEC83009E7970 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4AAE22351858CDFA003A3227 /* date_to_calendar-small.png */,
 				4A45BAEB183A7A1400F75772 /* Twitter-Logo-Icon.png */,
 				4A45BAE9183A792B00F75772 /* facebook-logo-icon.png */,
 				4A45BAE5183A77A300F75772 /* youtube_icon.png */,
@@ -371,6 +374,7 @@
 				4A45BAEA183A792B00F75772 /* facebook-logo-icon.png in Resources */,
 				4A45BAE6183A77A300F75772 /* youtube_icon.png in Resources */,
 				4A045C6717FC036300E2E2BA /* Main_iPhone.storyboard in Resources */,
+				4AAE22361858CDFA003A3227 /* date_to_calendar-small.png in Resources */,
 				4A48368B182CED4D009E7970 /* planning.png in Resources */,
 				4A045C5E17FC036300E2E2BA /* InfoPlist.strings in Resources */,
 			);

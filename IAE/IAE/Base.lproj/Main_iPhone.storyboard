@@ -371,7 +371,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="05n-qB-NOP">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="05n-qB-NOP">
                                 <rect key="frame" x="0.0" y="83" width="63" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -383,7 +383,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="VH0-bk-Fdp">
-                        <barButtonItem key="rightBarButtonItem" image="date_to_calendar-small.png" style="plain" id="QBy-w2-fwl">
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="QBy-w2-fwl">
                             <connections>
                                 <action selector="addEventButtonPressed:" destination="TFg-Yk-G37" id="ViE-o0-m99"/>
                             </connections>
@@ -708,7 +708,6 @@
         <image name="Twitter-Logo-Icon.png" width="66" height="66"/>
         <image name="actualites2.png" width="28" height="30"/>
         <image name="agenda.png" width="26" height="30"/>
-        <image name="date_to_calendar-small.png" width="30" height="30"/>
         <image name="facebook-logo-icon.png" width="66" height="66"/>
         <image name="iae-paris1-rue.png" width="250" height="134"/>
         <image name="logo-IAE.png" width="30" height="30"/>
