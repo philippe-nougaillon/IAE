@@ -36,11 +36,6 @@
 
     // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear = NO;
- 
-    // change navigation bar background
-    [self.navigationController.navigationBar
-     setBackgroundImage:[UIImage imageNamed:@"navBar.png"]
-     forBarMetrics:UIBarMetricsDefault];
     
     [self refreshButtonPressed:nil];
     

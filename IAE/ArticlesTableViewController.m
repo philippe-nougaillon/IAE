@@ -41,24 +41,11 @@
 {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    //self.clearsSelectionOnViewWillAppear = NO;
- 
-    // change navigation bar background
-    //[self.navigationController.navigationBar
-    // setBackgroundImage:[UIImage imageNamed:@"navBar.png"]
-    // forBarMetrics:UIBarMetricsDefault];
-    
-    // refresh data
-    [self refreshButtonPressed:nil];
-    
     // register to refresh UI when ApplicationDidBecomeActive
     [[NSNotificationCenter defaultCenter]addObserver:self
                                             selector:@selector(loadData)
                                                 name:UIApplicationDidBecomeActiveNotification
                                               object:nil];
-
-    [self loadData];
 
 }
 
@@ -319,10 +306,6 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
         
         // which article to open ?
-        NSDictionary *obj = [self.jsonArray objectAtIndex:indexPath.row];
-        NSString *nid = [obj objectForKey:@"nid"];
-        
-        // which article to open ?
         Article *article = [self.fetchedRecordsArray objectAtIndex:indexPath.row];
         
         //mark article as read
@@ -340,7 +323,7 @@
         ArticleDetailsViewController *vc = [segue destinationViewController];
         
         // Pass the information to your destination view
-        vc.indexOfArticle = nid;
+        vc.indexOfArticle = article.nid;
         vc.navigationItem.title = cell.titre.text;
     }
 }

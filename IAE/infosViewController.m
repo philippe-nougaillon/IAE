@@ -32,11 +32,7 @@
     // change scrollview height in order to show all content
     [self.myScrollView setContentSize:CGSizeMake(320, 630)];
     
-    // change navigation bar background
-    [self.navigationController.navigationBar
-     setBackgroundImage:[UIImage imageNamed:@"navBar.png"]
-     forBarMetrics:UIBarMetricsDefault];
-}
+ }
 
 - (IBAction)buttonPressed:(id)sender {
     
