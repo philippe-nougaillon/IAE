@@ -9,11 +9,11 @@
 #import "ArticleDetailsViewController.h"
 #import "Reachability.h"
 
-@interface ArticleDetailsViewController (){
-    
-    NSDictionary *jsonArray;
+@interface ArticleDetailsViewController ()
+{
     __weak IBOutlet UIWebView *articleWebview;
 }
+@property (nonatomic,strong)NSDictionary *jsonArray;
 
 @end
 
@@ -60,7 +60,7 @@
             return NO;
         }
         NSError *errorDecoding;
-        jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
+        self.jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
         if (errorDecoding == nil) {
             //NSLog(@"jsonArray= %@",jsonArray);
             return YES;
@@ -95,7 +95,7 @@
             //Stop your activity indicator or anything else with the GUI
             //Code here is run on the main thread
             if (isDataloaded) {
-                NSDictionary  *body = [jsonArray objectForKey:@"body"];
+                NSDictionary  *body = [self.jsonArray objectForKey:@"body"];
                 NSArray  *und = [body objectForKey:@"und"];
                 NSString *textArticle =[[und objectAtIndex:0] objectForKey:@"safe_value"];
                 [articleWebview loadHTMLString:textArticle baseURL:nil];
