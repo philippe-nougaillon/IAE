@@ -40,10 +40,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // get localdata or remote if first launch
+    [self loadData];
 
     // register to refresh UI when ApplicationDidBecomeActive
     [[NSNotificationCenter defaultCenter]addObserver:self
-                                            selector:@selector(loadData)
+                                            selector:@selector(refreshArticlesList)
                                                 name:UIApplicationDidBecomeActiveNotification
                                               object:nil];
 
@@ -51,27 +54,32 @@
 
 -(void)loadData
 {
-    Reachability* reachability = [Reachability reachabilityWithHostName:@"google.com"];
+    // load data from local items or stored items
+    //
+    
+    Reachability *reachability = [Reachability reachabilityWithHostName:@"google.com"];
     NetworkStatus remoteHostStatus = [reachability currentReachabilityStatus];
-    
-    //Start an activity indicator here
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    
-    UIActivityIndicatorView *activityView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    activityView.center=self.view.center;
-    [activityView startAnimating];
-    [self.view addSubview:activityView];
-    
+
+    // check if network is up
     if(remoteHostStatus != NotReachable) {
+
+        NSLog(@"loadata");
+        //Start an activity indicator here
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         
+        UIActivityIndicatorView *activityView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        activityView.center=self.view.center;
+        [activityView startAnimating];
+        [self.view addSubview:activityView];
+       
         // setup database context
         AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
         self.managedObjectContext = appDelegate.managedObjectContext;
         
-        NSLog(@"managed context set");
-        
         // check if database exist
         if (appDelegate.isDatabaseExist) {
+            NSLog(@"loadata database exist");
+
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 
                 // get all items
@@ -80,13 +88,7 @@
                 dispatch_async(dispatch_get_main_queue(), ^(void) {
                     // refresh tableview with local data
                     [self.tableView reloadData];
-                    
-                    // Check if remote data are more recent
-                    if ([self refreshLocalData]) {
-                        self.fetchedRecordsArray = [self getAllArticles];
-                        [self.tableView reloadData];
-                    }
-                    
+                                        
                 });
             });
         } else {
@@ -95,19 +97,21 @@
             self.fetchedRecordsArray = [self getAllArticles];
             [self.tableView reloadData];
         }
+        // hide activity monitor
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         [activityView removeFromSuperview];
-        
     } else {
         NSLog(@"NOT Connected !");
+        UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"" message:@"Pas de connection" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+        alertView1.alertViewStyle = UIAlertViewStyleDefault;
+        [alertView1 show];
     }
-
 }
 
 
 - (IBAction)refreshButtonPressed:(id)sender {
     
-    [self loadData];
+    [self refreshArticlesList];
 
 }
 
@@ -119,11 +123,38 @@
     NSURLResponse *response;
     NSError *error;
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    NSArray *jsonArray;
-    NSError *errorDecoding;
-    jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
     
-    return jsonArray;
+    if (error == nil) {
+        NSArray *jsonArray;
+        NSError *errorDecoding;
+        jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
+        return jsonArray;
+    }
+    else
+        return nil;
+    
+}
+
+-(void)refreshArticlesList {
+    
+    NSLog(@"refreshArticlesList");
+
+    // Check if remote data are more recent
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        // Check if remote data are more recent
+        BOOL refresh = [self refreshLocalData];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            
+            if (refresh) {
+                // refresh tableview with local data
+                self.fetchedRecordsArray = [self getAllArticles];
+                [self.tableView reloadData];
+                NSLog(@"refreshArticlesList tableView reloadData");
+            }
+        });
+    });
 }
 
 -(BOOL)refreshLocalData {
@@ -131,36 +162,43 @@
     //
     // check if json is more recent than local items
     //
-    
     BOOL refreshLocalData = NO;
-    NSLog(@"refresh Local Data");
     
-    // read json remote source
-    NSArray *jsonArray = [self getRemoteArticles];
+    Reachability *reachability = [Reachability reachabilityWithHostName:@"google.com"];
+    NetworkStatus remoteHostStatus = [reachability currentReachabilityStatus];
     
-    //get first article nid
-    NSDictionary *obj = [jsonArray firstObject];
-    NSString *remoteArticleNid = [obj objectForKey:@"nid"];
-    
-    // get last article in local storage
-    Article *localFirstArticle = [self.fetchedRecordsArray firstObject];
-    int localNid = [localFirstArticle.nid intValue];
-    
-    // add each new remote item
-    for (int index=0; index < jsonArray.count; index++) {
+    // check if network is up
+    if(remoteHostStatus != NotReachable) {
+ 
+        NSLog(@"refresh Local Data");
         
-        //get Article title and date
-        NSDictionary *obj = [jsonArray objectAtIndex:index];
-        int remoteNid = [[obj objectForKey:@"nid"] intValue];
+        // read json remote source
+        NSArray *jsonArray = [self getRemoteArticles];
         
-        // if remote item id is lower then last item id, add it
-        if (remoteNid > localNid) {
-            NSLog(@"adding item id:%@", remoteArticleNid);
+        //get first article nid
+        NSDictionary *obj = [jsonArray firstObject];
+        NSString *remoteArticleNid = [obj objectForKey:@"nid"];
+        
+        // get last article in local storage
+        Article *localFirstArticle = [self.fetchedRecordsArray firstObject];
+        int localNid = [localFirstArticle.nid intValue];
+        
+        // add each new remote item
+        for (int index=0; index < jsonArray.count; index++) {
             
-            // save Item to database
-            [self addArticleToLocalDatabase:obj];
+            //get Article title and date
+            NSDictionary *obj = [jsonArray objectAtIndex:index];
+            int remoteNid = [[obj objectForKey:@"nid"] intValue];
             
-            refreshLocalData = YES;
+            // if remote item id is lower then last item id, add it
+            if (remoteNid > localNid) {
+                NSLog(@"adding item id:%@", remoteArticleNid);
+                
+                // save Item to database
+                [self addArticleToLocalDatabase:obj];
+                
+                refreshLocalData = YES;
+            }
         }
     }
     return refreshLocalData;
@@ -177,6 +215,16 @@
     NSError *error;
     
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    if (data == nil) {
+        if (error != nil)
+            NSLog(@"Echec connection (%@)", [error localizedDescription]);
+        else
+            NSLog(@"Echec de la connection");
+        
+        UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"Echec de la connection" message:@"Il semble que vous n'avez pas accès à internet." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+        alertView1.alertViewStyle = UIAlertViewStyleDefault;
+        [alertView1 show];
+    }
     
     NSArray *jsonArray;
     NSError *errorDecoding;
