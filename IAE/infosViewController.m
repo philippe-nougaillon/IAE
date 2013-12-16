@@ -81,7 +81,6 @@
         url = [NSURL URLWithString:@"https://twitter.com/iaeparis"];
     
     [[UIApplication sharedApplication] openURL:url];
-    
 }
 
 - (void)didReceiveMemoryWarning
