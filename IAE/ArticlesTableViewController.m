@@ -260,18 +260,29 @@
     NSString *dateFinal = [dateFormatter stringFromDate:date];
     
     // get image filename
+    NSString *filePathToImage;
     NSDictionary *imageArray = [obj objectForKey:@"Image"];
-    NSString *imageFileName;
-    if (imageArray.count >0)
-        imageFileName = [imageArray objectForKey:@"filename"];
-    
+    if (imageArray.count >0) {
+        NSString *imageFileName = [imageArray objectForKey:@"filename"];
+        
+        // load image
+        NSURL *imageURL = [NSURL URLWithString:[@"http://iae.philnoug.com/sites/default/files/field/image/"         stringByAppendingString:imageFileName]];
+        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+        
+        // save image into app's document folder
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        filePathToImage = [NSString stringWithFormat:@"%@/%@", documentsDirectory, imageFileName];
+        [imageData writeToFile:filePathToImage atomically:NO];
+    }
+
     // Add Entry to Article Database
     Article *newEntry = [NSEntityDescription insertNewObjectForEntityForName:@"Article"
                                                       inManagedObjectContext:self.managedObjectContext];
     
     newEntry.title = titre;
     newEntry.nid = nid;
-    newEntry.image = imageFileName;
+    newEntry.image = filePathToImage;
     newEntry.postDate = dateFinal;
     newEntry.read =[NSNumber numberWithInt:0];
     
@@ -328,25 +339,9 @@
     [cell.date setText:article.postDate];
     if ([article.read intValue] == 1)
         [cell.titre setTextColor:[UIColor grayColor]];
-
-    // async load article image
-    //
-    cell.image.image = nil;
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        NSURL *imageURL = [NSURL URLWithString:[@"http://iae.philnoug.com/sites/default/files/field/image/"         stringByAppendingString:article.image]];
-        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-        if (imageData) {
-            UIImage *image = [UIImage imageWithData:imageData];
-            if (image) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    ArticlesCell *updateCell = (id)[tableView cellForRowAtIndexPath:indexPath];
-                    if (updateCell)
-                        updateCell.image.image = image;
-                });
-            }
-        }
-    });
+    UIImage *articleCellImage = [UIImage imageWithContentsOfFile:article.image];
+    cell.image.image = articleCellImage;
     
     return cell;
 }
@@ -374,7 +369,6 @@
         if (![self.managedObjectContext save:&error]) {
             NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
         }
-        
         
         // Get destination view
         ArticleDetailsViewController *vc = [segue destinationViewController];
