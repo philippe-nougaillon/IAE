@@ -13,7 +13,6 @@
 @interface EventDetailsViewController ()
 @property (nonatomic,strong)NSDictionary *jsonArray;
 @property (nonatomic,strong)NSDate *eventDateUS;
-
 @property (weak, nonatomic) IBOutlet UILabel *labelTitle;
 @property (weak, nonatomic) IBOutlet UIWebView *articleWebview;
 @property (weak, nonatomic) IBOutlet UILabel *dateEvent;
@@ -74,9 +73,7 @@
     } else {
         return NO;
     }
-    
 }
-
 
 - (void)viewDidLoad
 {

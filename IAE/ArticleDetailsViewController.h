@@ -9,7 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ArticleDetailsViewController : UIViewController
-
 @property (weak,nonatomic) NSString *indexOfArticle;
-
 @end

@@ -9,9 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface EventDetailsViewController : UIViewController
-
 @property (weak,nonatomic) NSString *indexOfEvent;
 @property (weak,nonatomic) NSString *eventTitre;
 @property (weak,nonatomic) NSString *eventDate;
-
 @end

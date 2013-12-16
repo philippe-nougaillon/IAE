@@ -13,7 +13,6 @@
 @interface PlanningViewController ()
 @property (nonatomic,strong)NSArray *jsonArray;
 @property (weak, nonatomic) IBOutlet UITableView *planningTableView;
-
 @end
 
 @implementation PlanningViewController

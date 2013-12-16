@@ -16,11 +16,9 @@
 
 
 @interface ArticlesTableViewController ()
-
 @property (strong, nonatomic) IBOutlet UITableView *articlesTableView;
 @property (nonatomic,strong)NSArray *fetchedRecordsArray;
 @property (nonatomic,strong)NSArray *jsonArray;
-
 @end
 
 

@@ -10,10 +10,8 @@
 #import "Reachability.h"
 
 @interface ArticleDetailsViewController ()
-
 @property (nonatomic,strong)NSDictionary *jsonArray;
 @property (weak, nonatomic) IBOutlet UIWebView *articleWebview;
-
 @end
 
 @implementation ArticleDetailsViewController

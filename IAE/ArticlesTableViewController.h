@@ -9,7 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ArticlesTableViewController : UITableViewController
-
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-
 @end

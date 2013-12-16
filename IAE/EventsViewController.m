@@ -12,10 +12,8 @@
 #import "Reachability.h"
 
 @interface EventsViewController ()
-
 @property (strong, nonatomic) IBOutlet UITableView *eventsTableView;
 @property (nonatomic,strong)NSArray *jsonArray;
-
 @end
 
 @implementation EventsViewController
