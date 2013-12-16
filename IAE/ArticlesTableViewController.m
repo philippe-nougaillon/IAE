@@ -331,6 +331,8 @@
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"ArticleCell";
+    UIColor *blueIAE = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:128/255.0 alpha:1];
+
     ArticlesCell *cell = (ArticlesCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
   
     // update cell with article content
@@ -339,6 +341,8 @@
     [cell.date setText:article.postDate];
     if ([article.read intValue] == 1)
         [cell.titre setTextColor:[UIColor grayColor]];
+    else
+        [cell.titre setTextColor:blueIAE];
     
     UIImage *articleCellImage = [UIImage imageWithContentsOfFile:article.image];
     cell.image.image = articleCellImage;

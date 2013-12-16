@@ -81,26 +81,27 @@
     
     //Start an activity indicator here
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    
+
+    UIActivityIndicatorView *activityView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    activityView.center=self.view.center;
+    [activityView startAnimating];
+    [self.view addSubview:activityView];
+
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        //Call your function or whatever work that needs to be done
-        //Code in this part is run on a background thread
         
         // Reload planning
         BOOL isDataloaded = [self loadData];
         
         dispatch_async(dispatch_get_main_queue(), ^(void) {
-
-            //Stop your activity indicator or anything else with the GUI
-            //Code here is run on the main thread
-            if (isDataloaded) {
+             // update webview
+             if (isDataloaded) {
                 NSDictionary  *body = [self.jsonArray objectForKey:@"body"];
                 NSArray  *und = [body objectForKey:@"und"];
                 NSString *textArticle =[[und objectAtIndex:0] objectForKey:@"safe_value"];
                 [articleWebview loadHTMLString:textArticle baseURL:nil];
             }
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            [activityView removeFromSuperview];
         });
     });
 }
