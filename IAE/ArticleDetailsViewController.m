@@ -10,10 +10,9 @@
 #import "Reachability.h"
 
 @interface ArticleDetailsViewController ()
-{
-    __weak IBOutlet UIWebView *articleWebview;
-}
+
 @property (nonatomic,strong)NSDictionary *jsonArray;
+@property (weak, nonatomic) IBOutlet UIWebView *articleWebview;
 
 @end
 
@@ -87,9 +86,10 @@
     [activityView startAnimating];
     [self.view addSubview:activityView];
 
+    // async load of article content
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        // Reload planning
+        // load article content
         BOOL isDataloaded = [self loadData];
         
         dispatch_async(dispatch_get_main_queue(), ^(void) {
@@ -98,7 +98,7 @@
                 NSDictionary  *body = [self.jsonArray objectForKey:@"body"];
                 NSArray  *und = [body objectForKey:@"und"];
                 NSString *textArticle =[[und objectAtIndex:0] objectForKey:@"safe_value"];
-                [articleWebview loadHTMLString:textArticle baseURL:nil];
+                [self.articleWebview loadHTMLString:textArticle baseURL:nil];
             }
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             [activityView removeFromSuperview];

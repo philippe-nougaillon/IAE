@@ -10,17 +10,13 @@
 #import "Reachability.h"
 #import "EventKit/EventKit.h"
 
-@interface EventDetailsViewController () {
+@interface EventDetailsViewController ()
+@property (nonatomic,strong)NSDictionary *jsonArray;
+@property (nonatomic,strong)NSDate *eventDateUS;
 
-    NSDictionary *jsonArray;
-    NSDate *eventDateUS;
-    
-    __weak IBOutlet UILabel *labelTitle;
-    __weak IBOutlet UIWebView *articleWebview;
-    __weak IBOutlet UILabel *dateEvent;
-    
-}
-
+@property (weak, nonatomic) IBOutlet UILabel *labelTitle;
+@property (weak, nonatomic) IBOutlet UIWebView *articleWebview;
+@property (weak, nonatomic) IBOutlet UILabel *dateEvent;
 @end
 
 @implementation EventDetailsViewController
@@ -68,9 +64,8 @@
         }
         
         NSError *errorDecoding;
-        jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
+        self.jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
         if (errorDecoding == nil) {
-            //NSLog(@"jsonArray= %@",jsonArray);
             return YES;
         } else {
             NSLog(@"errorDecoding= %@",errorDecoding);
@@ -88,46 +83,38 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
  
-    [labelTitle setText:self.eventTitre];
+    [self.labelTitle setText:self.eventTitre];
  
     // load event details
+    //
     //Start an activity indicator here
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        //Call your function or whatever work that needs to be done
-        //Code in this part is run on a background thread
-        
-        // Reload planning
+        // Reload event detail
         BOOL isDataLoaded = [self loadData];
         
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             
-            //Stop your activity indicator or anything else with the GUI
-            //Code here is run on the main thread
-            
             if (isDataLoaded) {
-                NSDictionary  *body = [jsonArray objectForKey:@"body"];
+                NSDictionary  *body = [self.jsonArray objectForKey:@"body"];
                 NSArray  *und = [body objectForKey:@"und"];
-
+                
                 NSString *textArticle =[[und objectAtIndex:0] objectForKey:@"safe_value"];
-                [articleWebview loadHTMLString:textArticle baseURL:nil];
+                [self.articleWebview loadHTMLString:textArticle baseURL:nil];
                 
                 // Get event full event date
-                body = [jsonArray objectForKey:@"field_when"];
+                body = [self.jsonArray objectForKey:@"field_when"];
                 und = [body objectForKey:@"und"];
-                
                 NSString *dateWhen = [[und objectAtIndex:0] objectForKey:@"value"];
-
+                
                 // convert date
                 NSDateFormatter *dateFormatterUS = [[NSDateFormatter alloc] init];
-                //NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"Europe/Paris"];
-                //[dateFormatterUS setTimeZone:timeZone];
                 [dateFormatterUS setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-                eventDateUS = [dateFormatterUS dateFromString:dateWhen];
+                self.eventDateUS = [dateFormatterUS dateFromString:dateWhen];
                 
-               [dateEvent setText:self.eventDate];
+                [self.dateEvent setText:self.eventDate];
             }
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     
@@ -138,8 +125,8 @@
 
 - (IBAction)addEventButtonPressed:(id)sender {
 
-
     // add event to device calendar
+    //
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     
         EKEventStore *store = [[EKEventStore alloc] init];
@@ -147,7 +134,7 @@
             if (!granted) { return; }
             EKEvent *event = [EKEvent eventWithEventStore:store];
             event.title = self.eventTitre;
-            event.startDate = eventDateUS;
+            event.startDate = self.eventDateUS;
             event.endDate = [event.startDate dateByAddingTimeInterval:60*60];  //set 1 hour meeting
             [event setCalendar:[store defaultCalendarForNewEvents]];
             NSError *err = nil;
@@ -156,13 +143,12 @@
         }];
         
          dispatch_async(dispatch_get_main_queue(), ^(void) {
-             
+             // Update UI
              NSString *msg = [@"Ajouté à votre agenda au " stringByAppendingString:self.eventDate];
              UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:self.eventTitre message:msg delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
              alertView1.alertViewStyle = UIAlertViewStyleDefault;
              [alertView1 show];
          });
-        
     });
     
 }

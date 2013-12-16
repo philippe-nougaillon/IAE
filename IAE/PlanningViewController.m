@@ -10,11 +10,9 @@
 #import "PlanningCell.h"
 #import "Reachability.h"
 
-@interface PlanningViewController () {
-
-    NSArray *jsonArray;
-    __weak IBOutlet UITableView *planningTableView;
-}
+@interface PlanningViewController ()
+@property (nonatomic,strong)NSArray *jsonArray;
+@property (weak, nonatomic) IBOutlet UITableView *planningTableView;
 
 @end
 
@@ -62,7 +60,7 @@
             return NO;
         }
         NSError *errorDecoding;
-        jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
+        self.jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
         if (errorDecoding == nil) {
             //NSLog(@"jsonArray= %@",jsonArray);
             return YES;
@@ -78,36 +76,27 @@
 
 -(void)refreshListView{
 
-    //Start an activity indicator here
+    // Start an activity indicator here
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
     UIActivityIndicatorView *activityView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     activityView.center=self.view.center;
     [activityView startAnimating];
     [self.view addSubview:activityView];
-    
+
+    // async load planning
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        //Call your function or whatever work that needs to be done
-        //Code in this part is run on a background thread
         
         // Reload planning
         BOOL isDataLoaded = [self loadData];
         
         dispatch_async(dispatch_get_main_queue(), ^(void) {
-            
-            //Stop your activity indicator or anything else with the GUI
-            //Code here is run on the main thread
-            
+            // Update UI
             if (isDataLoaded)
-                [planningTableView reloadData];
-            
-            // move to top
-            //[planningTableView setContentOffset:CGPointZero animated:YES];
+                [self.planningTableView reloadData];
             
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             [activityView removeFromSuperview];
-            
         });
     });
 
@@ -128,17 +117,15 @@
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-   return jsonArray.count;
+   return self.jsonArray.count;
 }
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
     static NSString *cellIdentifier = @"Cell";
     
     PlanningCell *cell = (PlanningCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
-    NSDictionary *obj = [jsonArray objectAtIndex:indexPath.row];
+    NSDictionary *obj = [self.jsonArray objectAtIndex:indexPath.row];
     NSString *heure = [obj objectForKey:@"heure"];
     NSString *matiere = [obj objectForKey:@"matiere"];
     NSString *enseignant = [obj objectForKey:@"enseignant"];
@@ -146,8 +133,6 @@
     NSString *salle = [obj objectForKey:@"salle"];
     NSString *tdoptions = [obj objectForKey:@"tdoptions"];
 
-    //NSLog(@"%@ %@ %@ %@ Avec:%@ Salle:%@", heure, matiere, memo, tdoptions, enseignant, salle);
-    
     [cell.heureLabel setText:heure];
     [cell.titreLabel setText:matiere];
     [cell.salleLabel setText:salle];
@@ -163,7 +148,6 @@
         [cell.memoLabel setText:enseignant];
     
     return cell;
-
 }
 
 - (void)didReceiveMemoryWarning

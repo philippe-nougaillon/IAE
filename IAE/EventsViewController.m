@@ -11,11 +11,10 @@
 #import "EventDetailsViewController.h"
 #import "Reachability.h"
 
-@interface EventsViewController () {
-    
-    NSArray *jsonArray;
-    IBOutlet UITableView *eventsTableView;
-}
+@interface EventsViewController ()
+
+@property (strong, nonatomic) IBOutlet UITableView *eventsTableView;
+@property (nonatomic,strong)NSArray *jsonArray;
 
 @end
 
@@ -59,7 +58,6 @@
                                  ];
         NSURLResponse *response;
         NSError *error;
-        
         NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
         
         if (data == nil) {
@@ -76,9 +74,8 @@
         }
         
         NSError *errorDecoding;
-        jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
+        self.jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
         if (errorDecoding == nil) {
-            //NSLog(@"jsonArray= %@",jsonArray);
             return YES;
         } else {
             NSLog(@"errorDecoding= %@",errorDecoding);
@@ -100,22 +97,17 @@
     [activityView startAnimating];
     [self.view addSubview:activityView];
     
+    // Async load event content
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        //Call your function or whatever work that needs to be done
-        //Code in this part is run on a background thread
-        
-        // Reload planning
+        // Rload event content
         BOOL isDataLoaded = [self loadData];
         
         dispatch_async(dispatch_get_main_queue(), ^(void) {
-            
-            //Stop your activity indicator or anything else with the GUI
-            //Code here is run on the main thread
+            // UI refresh
             if (isDataLoaded) {
-                [eventsTableView reloadData];
+                [self.eventsTableView reloadData];
             }
-            
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             [activityView removeFromSuperview];
         });
@@ -146,7 +138,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return jsonArray.count;
+    return self.jsonArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -154,7 +146,7 @@
     static NSString *CellIdentifier = @"EventCell";
     EventsCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    NSDictionary *obj = [jsonArray objectAtIndex:indexPath.row];
+    NSDictionary *obj = [self.jsonArray objectAtIndex:indexPath.row];
     NSString *titre = [obj objectForKey:@"node_title"];
     NSString *soustitre = [obj objectForKey:@"subtitle"];
     NSString *dateEvent = [[obj objectForKey:@"When"] objectAtIndex:0];
@@ -175,8 +167,6 @@
 
     // Affichage cellule
     [cell.titleEvent setText:titre];
-    //[cell.dateEvent setText:[@"Le " stringByAppendingString:dateFR]];
-    
     [cell.dateEvent setText:dateFR];
     [cell.subTitleEvent setText:soustitre];
     
@@ -192,7 +182,7 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
         
         // which article to open ?
-        NSDictionary *obj = [jsonArray objectAtIndex:indexPath.row];
+        NSDictionary *obj = [self.jsonArray objectAtIndex:indexPath.row];
         NSString *nid = [obj objectForKey:@"nid"];
         
         // Get destination view

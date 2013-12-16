@@ -85,7 +85,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="planningTableView" destination="QIY-JO-Fvm" id="mkE-hu-Apq"/>
+                        <outlet property="planningTableView" destination="QIY-JO-Fvm" id="4fn-aF-Ay9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qh2-T1-AhA" sceneMemberID="firstResponder"/>
@@ -155,7 +155,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="articlesTableView" destination="FNH-T0-Te2" id="E5F-id-8DT"/>
+                        <outlet property="articlesTableView" destination="FNH-T0-Te2" id="dZW-u6-fhj"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pos-7H-L9k" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -189,7 +189,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Zoa-rI-6O4"/>
                     <connections>
-                        <outlet property="articleWebview" destination="Ijn-3n-QSw" id="E1i-vO-7qG"/>
+                        <outlet property="articleWebview" destination="Ijn-3n-QSw" id="7eK-Mj-F1R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="suA-zg-S3o" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -341,7 +341,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="eventsTableView" destination="vEF-QV-egd" id="zTA-Ny-hI0"/>
+                        <outlet property="eventsTableView" destination="vEF-QV-egd" id="wjw-9p-XoU"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nvo-jZ-M1c" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -397,9 +397,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="articleWebview" destination="Uwg-1m-5lH" id="lUG-U7-gq6"/>
-                        <outlet property="dateEvent" destination="05n-qB-NOP" id="T7R-vP-w82"/>
-                        <outlet property="labelTitle" destination="LvJ-L6-3ZZ" id="hVR-8X-oLY"/>
+                        <outlet property="articleWebview" destination="Uwg-1m-5lH" id="eck-h3-hUt"/>
+                        <outlet property="dateEvent" destination="05n-qB-NOP" id="3Wv-Tf-e6F"/>
+                        <outlet property="labelTitle" destination="LvJ-L6-3ZZ" id="woH-cm-lUG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8CT-nN-kWC" userLabel="First Responder" sceneMemberID="firstResponder"/>

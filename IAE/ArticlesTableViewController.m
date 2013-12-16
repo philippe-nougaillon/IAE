@@ -15,11 +15,9 @@
 #import "Article.h"
 
 
-@interface ArticlesTableViewController () {
+@interface ArticlesTableViewController ()
 
-    __weak IBOutlet UITableView *articlesTableView;
-
-}
+@property (strong, nonatomic) IBOutlet UITableView *articlesTableView;
 @property (nonatomic,strong)NSArray *fetchedRecordsArray;
 @property (nonatomic,strong)NSArray *jsonArray;
 
@@ -88,7 +86,6 @@
                 dispatch_async(dispatch_get_main_queue(), ^(void) {
                     // refresh tableview with local data
                     [self.tableView reloadData];
-                                        
                 });
             });
         } else {
@@ -245,7 +242,6 @@
     
     // save an item to database
     //
-    
     NSString *titre = [obj objectForKey:@"node_title"];
     NSString *nid = [obj objectForKey:@"nid"];
     
