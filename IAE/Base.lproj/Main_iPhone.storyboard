@@ -78,6 +78,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Planning des salles" id="F8R-5d-Ecy">
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="S83-dh-lxz">
+                            <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="refreshButtonPressed:" destination="CZ4-MO-1fc" id="mAY-VK-NgW"/>
                             </connections>
@@ -89,7 +90,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qh2-T1-AhA" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1179" y="-138"/>
+            <point key="canvasLocation" x="1179" y="1966"/>
         </scene>
         <!--Articles Table View Controller - Actualités-->
         <scene sceneID="bJp-GT-Frc">
@@ -147,6 +148,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Actualités" id="7dt-6I-3PL">
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="63Q-CH-fFp">
+                            <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="refreshButtonPressed:" destination="7RA-d9-CBO" id="yps-OH-YOg"/>
                             </connections>
@@ -179,6 +181,7 @@
                                 <rect key="frame" x="0.0" y="68" width="320" height="452"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
                             </webView>
                         </subviews>
@@ -252,7 +255,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3qq-4t-Ow8" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-309" y="1722"/>
+            <point key="canvasLocation" x="2671" y="1014"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Vex-rW-GRa">
@@ -264,6 +267,7 @@
                         <rect key="frame" x="0.0" y="431" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="wiH-4q-OLN" kind="relationship" relationship="viewControllers" id="rPB-xn-2X3"/>
@@ -274,7 +278,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FNP-y4-bzi" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-296" y="994"/>
+            <point key="canvasLocation" x="-324" y="1630"/>
         </scene>
         <!--Events View Controller - Agenda-->
         <scene sceneID="P8Y-HH-Trr">
@@ -330,6 +334,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Agenda" id="E2F-BF-qdW">
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="RLB-7e-Dfh">
+                            <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="refreshButtonPressed:" destination="alA-C0-E9v" id="y9s-LO-Nb2"/>
                             </connections>
@@ -352,9 +357,10 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" id="Uwg-1m-5lH">
-                                <rect key="frame" x="0.0" y="166" width="320" height="352"/>
+                                <rect key="frame" x="6" y="156" width="314" height="356"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
                             </webView>
                             <navigationBar contentMode="scaleToFill" id="Zvb-he-Jyd">
@@ -384,6 +390,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="VH0-bk-Fdp">
                         <barButtonItem key="rightBarButtonItem" image="date_to_calendar-small.png" style="plain" id="QBy-w2-fwl">
+                            <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="addEventButtonPressed:" destination="TFg-Yk-G37" id="ViE-o0-m99"/>
                             </connections>
@@ -416,7 +423,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="O90-5f-TDG">
-                                        <rect key="frame" x="0.0" y="-66" width="320" height="681"/>
+                                        <rect key="frame" x="0.0" y="-64" width="320" height="681"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iae-paris1-rue.png" id="8Tb-00-6UR">
@@ -465,7 +472,21 @@
                                                 <rect key="frame" x="20" y="443" width="300" height="82"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="IAE PARIS - Centre LA ROCHEFOUCAULD">
+                                                    <fragment content="IAE PARIS ">
+                                                        <attributes>
+                                                            <color key="NSColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <font key="NSFont" size="14" name="HelveticaNeue-Bold"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content="-">
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.0" green="0.0" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <font key="NSFont" size="14" name="HelveticaNeue-Bold"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content=" Centre LA ROCHEFOUCAULD">
                                                         <attributes>
                                                             <color key="NSColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" size="14" name="HelveticaNeue-Bold"/>
@@ -501,7 +522,7 @@
                                                 <rect key="frame" x="5" y="350" width="158" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                                 <state key="normal" title="01.53.55.28.00">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -513,7 +534,7 @@
                                                 <rect key="frame" x="5" y="526" width="158" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                                 <state key="normal" title="01.79.36.10.40">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -521,7 +542,54 @@
                                                     <action selector="phonCall2buttonPressed:" destination="ICp-Te-Hwn" eventType="touchUpInside" id="vZn-Ga-BC9"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="sxn-Nn-viZ">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rf3-4P-dtc">
+                                                <rect key="frame" x="165" y="350" width="149" height="40"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                                <state key="normal" title="iae@univ-paris1.fr"/>
+                                                <connections>
+                                                    <action selector="composeMailButtonPressed:" destination="ICp-Te-Hwn" eventType="touchUpInside" id="rDT-zh-Ejy"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5Nr-aD-ctq">
+                                                <rect key="frame" x="5" y="392" width="158" height="40"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                                <state key="normal" title="Plan">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="buttonPressed:" destination="ICp-Te-Hwn" eventType="touchUpInside" id="XYK-6c-g1p"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ycs-aW-2jh">
+                                                <rect key="frame" x="165" y="526" width="149" height="40"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                                <state key="normal" title="Plan">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="map2buttonPressed:" destination="ICp-Te-Hwn" eventType="touchUpInside" id="yl3-nC-uLT"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="IM0-At-bfZ">
+                                                <rect key="frame" x="165" y="392" width="149" height="40"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                                <state key="normal" title="Web">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="openWebButonPressed:" destination="ICp-Te-Hwn" eventType="touchUpInside" id="moO-ig-7fh"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="sxn-Nn-viZ">
                                                 <rect key="frame" x="14" y="595" width="66" height="66"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -533,7 +601,7 @@
                                                     <action selector="socialButtonPressed:" destination="ICp-Te-Hwn" eventType="touchUpInside" id="urW-Mb-0rR"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6Ta-1W-7y0">
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6Ta-1W-7y0">
                                                 <rect key="frame" x="83" y="595" width="66" height="66"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -544,7 +612,7 @@
                                                     <action selector="socialButtonPressed:" destination="ICp-Te-Hwn" eventType="touchUpInside" id="erp-oG-1ye"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8RS-FF-ie4">
+                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8RS-FF-ie4">
                                                 <rect key="frame" x="174" y="595" width="66" height="66"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -555,7 +623,7 @@
                                                     <action selector="socialButtonPressed:" destination="ICp-Te-Hwn" eventType="touchUpInside" id="XDH-ot-0Jp"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Idd-Cq-u5f">
+                                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Idd-Cq-u5f">
                                                 <rect key="frame" x="243" y="595" width="66" height="66"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -564,53 +632,6 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="socialButtonPressed:" destination="ICp-Te-Hwn" eventType="touchUpInside" id="Kmu-5n-feF"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rf3-4P-dtc">
-                                                <rect key="frame" x="165" y="350" width="150" height="40"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                                <state key="normal" title="iae@univ-paris1.fr"/>
-                                                <connections>
-                                                    <action selector="composeMailButtonPressed:" destination="ICp-Te-Hwn" eventType="touchUpInside" id="rDT-zh-Ejy"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5Nr-aD-ctq">
-                                                <rect key="frame" x="5" y="391" width="158" height="40"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
-                                                <state key="normal" title="Plan">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="buttonPressed:" destination="ICp-Te-Hwn" eventType="touchUpInside" id="XYK-6c-g1p"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ycs-aW-2jh">
-                                                <rect key="frame" x="165" y="526" width="150" height="40"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
-                                                <state key="normal" title="Plan">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="map2buttonPressed:" destination="ICp-Te-Hwn" eventType="touchUpInside" id="yl3-nC-uLT"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="IM0-At-bfZ">
-                                                <rect key="frame" x="165" y="391" width="150" height="40"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
-                                                <state key="normal" title="Web">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <color key="titleShadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="openWebButonPressed:" destination="ICp-Te-Hwn" eventType="touchUpInside" id="moO-ig-7fh"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -629,7 +650,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="73D-Cc-dHK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1179" y="1975"/>
+            <point key="canvasLocation" x="1179" y="2659"/>
         </scene>
         <!--Navigation Controller - Agenda-->
         <scene sceneID="1CE-PM-kdA">
@@ -668,7 +689,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QWf-Au-BNN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="653" y="-138"/>
+            <point key="canvasLocation" x="653" y="1966"/>
         </scene>
         <!--Navigation Controller - Infos-->
         <scene sceneID="diZ-XN-pvf">
@@ -687,7 +708,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZL1-L7-q3y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="653" y="1975"/>
+            <point key="canvasLocation" x="653" y="2659"/>
         </scene>
         <!--Navigation Controller - Actualités-->
         <scene sceneID="8qt-wU-wyl">

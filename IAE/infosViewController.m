@@ -72,16 +72,17 @@
 }
 - (IBAction)socialButtonPressed:(UIButton*)sender {
     
-    NSString *buttonLabel = sender.titleLabel.text;
+    UIButton *button = (UIButton*)sender;
+    NSInteger buttonTag = button.tag;
     NSURL *url;
     
-    if ([buttonLabel isEqualToString:@"linkedIn"])
+    if (buttonTag == 1)
         url = [NSURL URLWithString:@"http://www.linkedin.com/company/iaeparis/products"];
-    if ([buttonLabel isEqualToString:@"youtube"])
+    if (buttonTag == 2)
         url = [NSURL URLWithString:@"http://www.youtube.com/user/iaeparis"];
-    if ([buttonLabel isEqualToString:@"facebook"])
+    if (buttonTag == 3)
         url = [NSURL URLWithString:@"https://www.facebook.com/iaeparis"];
-    if ([buttonLabel isEqualToString:@"twitter"])
+    if (buttonTag == 4)
         url = [NSURL URLWithString:@"https://twitter.com/iaeparis"];
     
     [[UIApplication sharedApplication] openURL:url];
