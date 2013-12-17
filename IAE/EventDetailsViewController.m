@@ -21,6 +21,7 @@
 @implementation EventDetailsViewController
 
 @synthesize indexOfEvent = _indexOfEvent;
+@synthesize jsonArray = _jsonArray;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -63,7 +64,7 @@
         }
         
         NSError *errorDecoding;
-        self.jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
+        _jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
         if (errorDecoding == nil) {
             return YES;
         } else {
@@ -95,14 +96,14 @@
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             
             if (isDataLoaded) {
-                NSDictionary  *body = [self.jsonArray objectForKey:@"body"];
+                NSDictionary  *body = [_jsonArray objectForKey:@"body"];
                 NSArray  *und = [body objectForKey:@"und"];
                 
                 NSString *textArticle =[[und objectAtIndex:0] objectForKey:@"safe_value"];
                 [self.articleWebview loadHTMLString:textArticle baseURL:nil];
                 
                 // Get event full event date
-                body = [self.jsonArray objectForKey:@"field_when"];
+                body = [_jsonArray objectForKey:@"field_when"];
                 und = [body objectForKey:@"und"];
                 NSString *dateWhen = [[und objectAtIndex:0] objectForKey:@"value"];
                 

@@ -17,6 +17,7 @@
 @implementation ArticleDetailsViewController
 
 @synthesize indexOfArticle = _indexOfArticle;
+@synthesize jsonArray = _jsonArray;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -57,7 +58,7 @@
             return NO;
         }
         NSError *errorDecoding;
-        self.jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
+        _jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
         if (errorDecoding == nil) {
             //NSLog(@"jsonArray= %@",jsonArray);
             return YES;
@@ -93,7 +94,7 @@
         dispatch_async(dispatch_get_main_queue(), ^(void) {
              // update webview
              if (isDataloaded) {
-                NSDictionary  *body = [self.jsonArray objectForKey:@"body"];
+                NSDictionary  *body = [_jsonArray objectForKey:@"body"];
                 NSArray  *und = [body objectForKey:@"und"];
                 NSString *textArticle =[[und objectAtIndex:0] objectForKey:@"safe_value"];
                 [self.articleWebview loadHTMLString:textArticle baseURL:nil];

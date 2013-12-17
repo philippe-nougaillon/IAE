@@ -12,17 +12,18 @@
 #import "ArticlesTableViewController.h"
 #import "ArticlesCell.h"
 #import "ArticleDetailsViewController.h"
+#import "PlanningViewController.h"
 #import "Article.h"
 
 
 @interface ArticlesTableViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *articlesTableView;
 @property (nonatomic,strong)NSArray *fetchedRecordsArray;
-@property (nonatomic,strong)NSArray *jsonArray;
 @end
 
 
 @implementation ArticlesTableViewController
+@synthesize fetchedRecordsArray = _fetchedRecordsArray;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -44,8 +45,7 @@
     [[NSNotificationCenter defaultCenter]addObserver:self
                                             selector:@selector(refreshArticlesList)
                                                 name:UIApplicationDidBecomeActiveNotification
-                                              object:nil];
-
+                                              object:nil];    
 }
 
 -(void)loadData
@@ -79,7 +79,7 @@
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 
                 // get all items
-                self.fetchedRecordsArray = [self getAllArticles];
+                _fetchedRecordsArray = [self getAllArticles];
                 
                 dispatch_async(dispatch_get_main_queue(), ^(void) {
                     // refresh tableview with local data
@@ -89,7 +89,7 @@
         } else {
             // reload data from json and store items
             [self addAllRemoteArticlesToLocalDatabase];
-            self.fetchedRecordsArray = [self getAllArticles];
+            _fetchedRecordsArray = [self getAllArticles];
             [self.tableView reloadData];
         }
         // hide activity monitor
@@ -144,7 +144,7 @@
             
             if (refresh) {
                 // refresh tableview with local data
-                self.fetchedRecordsArray = [self getAllArticles];
+                _fetchedRecordsArray = [self getAllArticles];
                 [self.tableView reloadData];
                 NSLog(@"refreshArticlesList tableView reloadData");
             }
@@ -175,7 +175,7 @@
         NSString *remoteArticleNid = [obj objectForKey:@"nid"];
         
         // get last article in local storage
-        Article *localFirstArticle = [self.fetchedRecordsArray firstObject];
+        Article *localFirstArticle = [_fetchedRecordsArray firstObject];
         int localNid = [localFirstArticle.nid intValue];
         
         // add each new remote item
@@ -319,7 +319,7 @@
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.fetchedRecordsArray.count;
+    return _fetchedRecordsArray.count;
 }
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -330,7 +330,7 @@
     ArticlesCell *cell = (ArticlesCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
   
     // update cell with article content
-    Article *article = [self.fetchedRecordsArray objectAtIndex:indexPath.row];
+    Article *article = [_fetchedRecordsArray objectAtIndex:indexPath.row];
     [cell.titre setText:article.title];
     [cell.date setText:article.postDate];
     if ([article.read intValue] == 1)
@@ -356,7 +356,7 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
         
         // which article to open ?
-        Article *article = [self.fetchedRecordsArray objectAtIndex:indexPath.row];
+        Article *article = [_fetchedRecordsArray objectAtIndex:indexPath.row];
         
         //mark article as read
         article.read = [NSNumber numberWithInt:1];

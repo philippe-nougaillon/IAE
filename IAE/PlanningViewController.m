@@ -20,6 +20,8 @@
 @implementation PlanningViewController
 
 @synthesize theSearchBar = _theSearchBar;
+@synthesize jsonArray = _jsonArray;
+@synthesize originalPlanningArray = _originalPlanningArray;
 
 - (void)viewDidLoad
 {
@@ -38,7 +40,7 @@
 -(BOOL)loadData
 {
     // load Data from hyperplanning json flux
-
+    NSLog(@"load data from hyperplanning");
     Reachability* reachability = [Reachability reachabilityWithHostName:@"google.com"];
     NetworkStatus remoteHostStatus = [reachability currentReachabilityStatus];
     
@@ -63,10 +65,10 @@
             return NO;
         }
         NSError *errorDecoding;
-        self.jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
+        _jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
         if (errorDecoding == nil) {
             // Store original planning for future search
-            self.originalPlanningArray = self.jsonArray;
+            _originalPlanningArray = _jsonArray;
             return YES;
         } else {
             NSLog(@"errorDecoding= %@",errorDecoding);
@@ -83,8 +85,8 @@
     // Start an activity indicator here
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
-    UIActivityIndicatorView *activityView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    activityView.center=self.view.center;
+    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    activityView.center = self.view.center;
     [activityView startAnimating];
     [self.view addSubview:activityView];
 
@@ -115,15 +117,13 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchBarText {
 
-    NSLog(@"searchBar SearchButtonClicked text:%@", searchBarText);
-
+    //NSLog(@"searchBar SearchButtonClicked text:%@", searchBarText);
     [self filterArrayFromSearchBarText:searchBarText];
-
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
 
-    NSLog(@"searchBar SearchButton Clicked");
+    //NSLog(@"searchBar SearchButton Clicked");
     [self filterArrayFromSearchBarText:searchBar.text];
 
 }
@@ -132,15 +132,12 @@
 
     if (![searchBarText isEqualToString:@""]) {
         // filter planning array according to entered text
-        NSString *propertyName = @"memo";
-        NSString *propertyName2 = @"tdoptions";
-        NSString *propertyName3 = @"enseignant";
-        NSString *propertyName4 = @"matiere";
-        NSPredicate *predicte = [NSPredicate predicateWithFormat:@"(%K CONTAINS[cd] %@) OR (%K CONTAINS[cd] %@) OR (%K CONTAINS[cd] %@) OR (%K CONTAINS[cd] %@)", propertyName, searchBarText, propertyName2, searchBarText, propertyName3, searchBarText, propertyName4, searchBarText];
-        NSArray *filteredArray = [self.originalPlanningArray filteredArrayUsingPredicate:predicte];
-        self.jsonArray = filteredArray;
+        NSArray *propertyName = [[NSArray alloc] initWithObjects:@"memo", @"tdoptions", @"enseignant", @"matiere", @"heure", nil];
+        NSPredicate *predicte = [NSPredicate predicateWithFormat:@"(%K CONTAINS[cd] %@) OR (%K CONTAINS[cd] %@) OR (%K CONTAINS[cd] %@) OR (%K CONTAINS[cd] %@) OR (%K CONTAINS[cd] %@)", [propertyName objectAtIndex:0] , searchBarText, [propertyName objectAtIndex:1], searchBarText, [propertyName objectAtIndex:2], searchBarText, [propertyName objectAtIndex:3], searchBarText, [propertyName objectAtIndex:4], searchBarText];
+        NSArray *filteredArray = [_originalPlanningArray filteredArrayUsingPredicate:predicte];
+        _jsonArray = filteredArray;
     } else {
-        self.jsonArray = self.originalPlanningArray;
+        _jsonArray = _originalPlanningArray;
     }
     [self.planningTableView reloadData];
 
@@ -149,7 +146,7 @@
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     
     // restore original planning array
-    self.jsonArray = self.originalPlanningArray;
+    _jsonArray = _originalPlanningArray;
     [self.planningTableView reloadData];
 
     // hide keyboard
@@ -159,7 +156,7 @@
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
-    [_theSearchBar resignFirstResponder];
+
     [_theSearchBar setText:@""];
     NSLog(@"searchBar TextDidEndEditing");
 }
@@ -174,7 +171,7 @@
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-   return self.jsonArray.count;
+   return _jsonArray.count;
 }
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -182,7 +179,7 @@
     static NSString *cellIdentifier = @"Cell";
     
     PlanningCell *cell = (PlanningCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    NSDictionary *obj = [self.jsonArray objectAtIndex:indexPath.row];
+    NSDictionary *obj = [_jsonArray objectAtIndex:indexPath.row];
     NSString *heure = [obj objectForKey:@"heure"];
     NSString *matiere = [obj objectForKey:@"matiere"];
     NSString *enseignant = [obj objectForKey:@"enseignant"];

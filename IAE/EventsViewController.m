@@ -17,6 +17,7 @@
 @end
 
 @implementation EventsViewController
+@synthesize jsonArray = _jsonArray;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -72,7 +73,7 @@
         }
         
         NSError *errorDecoding;
-        self.jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
+        _jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
         if (errorDecoding == nil) {
             return YES;
         } else {
@@ -136,7 +137,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return self.jsonArray.count;
+    return _jsonArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -144,7 +145,7 @@
     static NSString *CellIdentifier = @"EventCell";
     EventsCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    NSDictionary *obj = [self.jsonArray objectAtIndex:indexPath.row];
+    NSDictionary *obj = [_jsonArray objectAtIndex:indexPath.row];
     NSString *titre = [obj objectForKey:@"node_title"];
     NSString *soustitre = [obj objectForKey:@"subtitle"];
     NSString *dateEvent = [[obj objectForKey:@"When"] objectAtIndex:0];
@@ -180,7 +181,7 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
         
         // which article to open ?
-        NSDictionary *obj = [self.jsonArray objectAtIndex:indexPath.row];
+        NSDictionary *obj = [_jsonArray objectAtIndex:indexPath.row];
         NSString *nid = [obj objectForKey:@"nid"];
         
         // Get destination view
