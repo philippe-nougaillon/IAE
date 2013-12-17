@@ -11,7 +11,8 @@
 #import "Reachability.h"
 
 @interface PlanningViewController ()
-@property (nonatomic,strong)NSArray *jsonArray;
+@property (nonatomic,strong) NSArray *jsonArray;
+@property (nonatomic,strong) NSArray *originalPlanningArray;
 @property (weak, nonatomic) IBOutlet UITableView *planningTableView;
 @end
 
@@ -61,7 +62,8 @@
         NSError *errorDecoding;
         self.jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
         if (errorDecoding == nil) {
-            //NSLog(@"jsonArray= %@",jsonArray);
+            // Store original planning for future search
+            self.originalPlanningArray = self.jsonArray;
             return YES;
         } else {
             NSLog(@"errorDecoding= %@",errorDecoding);
@@ -98,12 +100,49 @@
             [activityView removeFromSuperview];
         });
     });
-
 }
 
 - (IBAction)refreshButtonPressed:(id)sender {
 
     [self refreshListView];
+}
+
+
+#pragma mark - SearchBar
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchBarText {
+
+    NSLog(@"searchBarSearchButtonClicked text:%@", searchBarText);
+
+    if (![searchBarText isEqualToString:@""]) {
+        // filter planning array according to entered text
+        NSString *propertyName = @"memo";
+        NSString *propertyName2 = @"tdoptions";
+        NSString *propertyName3 = @"enseignant";
+        NSString *propertyName4 = @"matiere";
+        NSPredicate *predicte = [NSPredicate predicateWithFormat:@"(%K CONTAINS[cd] %@) OR (%K CONTAINS[cd] %@) OR (%K CONTAINS[cd] %@) OR (%K CONTAINS[cd] %@)", propertyName, searchBarText, propertyName2, searchBarText, propertyName3, searchBarText, propertyName4, searchBarText];
+        NSArray *filteredArray = [self.originalPlanningArray filteredArrayUsingPredicate:predicte];
+        self.jsonArray = filteredArray;
+    } else {
+        self.jsonArray = self.originalPlanningArray;
+    }
+    [self.planningTableView reloadData];
+
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    
+    // restore original planning array
+    self.jsonArray = self.originalPlanningArray;
+    [self.planningTableView reloadData];
+
+    // hide keyboard
+    [searchBar resignFirstResponder];
+
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    [searchBar resignFirstResponder];
 }
 
 
