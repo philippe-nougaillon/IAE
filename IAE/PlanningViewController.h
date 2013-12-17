@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PlanningViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchDisplayDelegate>
+@interface PlanningViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate>
 
 @end

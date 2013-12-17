@@ -14,9 +14,12 @@
 @property (nonatomic,strong) NSArray *jsonArray;
 @property (nonatomic,strong) NSArray *originalPlanningArray;
 @property (weak, nonatomic) IBOutlet UITableView *planningTableView;
+@property (weak, nonatomic) IBOutlet UISearchBar *theSearchBar;
 @end
 
 @implementation PlanningViewController
+
+@synthesize theSearchBar = _theSearchBar;
 
 - (void)viewDidLoad
 {
@@ -112,7 +115,20 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchBarText {
 
-    NSLog(@"searchBarSearchButtonClicked text:%@", searchBarText);
+    NSLog(@"searchBar SearchButtonClicked text:%@", searchBarText);
+
+    [self filterArrayFromSearchBarText:searchBarText];
+
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+
+    NSLog(@"searchBar SearchButton Clicked");
+    [self filterArrayFromSearchBarText:searchBar.text];
+
+}
+
+- (void)filterArrayFromSearchBarText:(NSString *)searchBarText {
 
     if (![searchBarText isEqualToString:@""]) {
         // filter planning array according to entered text
@@ -137,12 +153,15 @@
     [self.planningTableView reloadData];
 
     // hide keyboard
-    [searchBar resignFirstResponder];
+    [_theSearchBar resignFirstResponder];
+    NSLog(@"searchBar CancelButtonClicked");
 
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
-    [searchBar resignFirstResponder];
+    [_theSearchBar resignFirstResponder];
+    [_theSearchBar setText:@""];
+    NSLog(@"searchBar TextDidEndEditing");
 }
 
 
