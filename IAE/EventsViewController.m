@@ -53,8 +53,7 @@
     
         // load Events json flux
         NSURLRequest *request = [NSURLRequest requestWithURL:
-                                 [NSURL URLWithString:@"http://iae.philnoug.com/rest/events.json"]
-                                 ];
+                                 [NSURL URLWithString:[@PRODSERVER stringByAppendingString:@"rest/evenements"]]];
         NSURLResponse *response;
         NSError *error;
         NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
@@ -146,7 +145,7 @@
     EventsCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     NSDictionary *obj = [_jsonArray objectAtIndex:indexPath.row];
-    NSString *titre = [obj objectForKey:@"node_title"];
+    NSString *titre = [obj objectForKey:@"titre"];
     NSString *soustitre = [obj objectForKey:@"subtitle"];
     NSString *dateEvent = [[obj objectForKey:@"When"] objectAtIndex:0];
 

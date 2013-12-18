@@ -33,16 +33,15 @@
 }
 
 -(BOOL)loadData
-{
-    
+{    
     Reachability  *reachability = [Reachability reachabilityWithHostName:@"google.com"];
     NetworkStatus remoteHostStatus = [reachability currentReachabilityStatus];
     
     if(remoteHostStatus != NotReachable) {
     
         // load Data from hyperplanning json flux
-        NSString *url = [@"http://iae.philnoug.com/rest/node/" stringByAppendingString:_indexOfEvent];
-        url = [url stringByAppendingString:@".json"];
+        NSString *url = [@PRODSERVER stringByAppendingString:_indexOfEvent];
+        url = [url stringByAppendingString:_indexOfEvent];
         
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
         NSURLResponse *response;

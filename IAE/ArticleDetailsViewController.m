@@ -9,8 +9,6 @@
 #import "ArticleDetailsViewController.h"
 #import "Reachability.h"
 
-#define PRODSERVER "http://www.iae-paris.preprod.scoua.de/"
-
 @interface ArticleDetailsViewController ()
 @property (nonatomic,strong)NSDictionary *jsonArray;
 @property (weak, nonatomic) IBOutlet UIWebView *articleWebview;

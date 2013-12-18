@@ -15,8 +15,6 @@
 #import "PlanningViewController.h"
 #import "Article.h"
 
-#define PRODSERVER "http://www.iae-paris.preprod.scoua.de/"
-
 @interface ArticlesTableViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *articlesTableView;
 @property (nonatomic,strong)NSArray *fetchedRecordsArray;
