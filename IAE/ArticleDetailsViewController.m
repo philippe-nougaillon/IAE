@@ -9,6 +9,8 @@
 #import "ArticleDetailsViewController.h"
 #import "Reachability.h"
 
+#define PRODSERVER "http://www.iae-paris.preprod.scoua.de/"
+
 @interface ArticleDetailsViewController ()
 @property (nonatomic,strong)NSDictionary *jsonArray;
 @property (weak, nonatomic) IBOutlet UIWebView *articleWebview;
@@ -37,8 +39,8 @@
     if(remoteHostStatus != NotReachable) {
         
         // load Data from hyperplanning json flux
-        NSString *url = [@"http://iae.philnoug.com/rest/node/" stringByAppendingString:_indexOfArticle];
-        url = [url stringByAppendingString:@".json"];
+        NSString *url = [@PRODSERVER stringByAppendingString:@"rest/actualites/"];
+        url = [url stringByAppendingString:_indexOfArticle];
         
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
         NSURLResponse *response;

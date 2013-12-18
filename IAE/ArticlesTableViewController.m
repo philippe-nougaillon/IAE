@@ -15,6 +15,7 @@
 #import "PlanningViewController.h"
 #import "Article.h"
 
+#define PRODSERVER "http://www.iae-paris.preprod.scoua.de/"
 
 @interface ArticlesTableViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *articlesTableView;
@@ -114,7 +115,7 @@
     
     // read json remote source
     NSURLRequest *request = [NSURLRequest requestWithURL:
-                             [NSURL URLWithString:@"http://iae.philnoug.com/rest/articles.json"]];
+                             [NSURL URLWithString:[@PRODSERVER stringByAppendingString:@"rest/actualites"]]];
     NSURLResponse *response;
     NSError *error;
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
@@ -205,7 +206,7 @@
     
     // read json source
     NSURLRequest *request = [NSURLRequest requestWithURL:
-                             [NSURL URLWithString:@"http://iae.philnoug.com/rest/articles.json"]];
+                             [NSURL URLWithString:[@PRODSERVER stringByAppendingString:@"rest/actualites"]]];
     NSURLResponse *response;
     NSError *error;
     
@@ -240,11 +241,11 @@
     
     // save an item to database
     //
-    NSString *titre = [obj objectForKey:@"node_title"];
+    NSString *titre = [obj objectForKey:@"titre"];
     NSString *nid = [obj objectForKey:@"nid"];
     
     // date format
-    NSString *postDatetimeStamp = [obj objectForKey:@"node_created"];
+    NSString *postDatetimeStamp = [obj objectForKey:@"timestamp"];
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:[postDatetimeStamp doubleValue]];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setTimeStyle:NSDateFormatterFullStyle];
@@ -255,12 +256,12 @@
     
     // get image filename
     NSString *filePathToImage;
-    NSDictionary *imageArray = [obj objectForKey:@"Image"];
+    NSDictionary *imageArray = [obj objectForKey:@"vignette"];
     if (imageArray.count >0) {
-        NSString *imageFileName = [imageArray objectForKey:@"filename"];
+        NSString *imageFileName = [imageArray objectForKey:@"filepath"];
         
         // load image
-        NSURL *imageURL = [NSURL URLWithString:[@"http://iae.philnoug.com/sites/default/files/field/image/"         stringByAppendingString:imageFileName]];
+        NSURL *imageURL = [NSURL URLWithString:[@PRODSERVER stringByAppendingString:imageFileName]];
         NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
         
         // save image into app's document folder
