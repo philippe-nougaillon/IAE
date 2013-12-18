@@ -132,8 +132,8 @@
 
     if (![searchBarText isEqualToString:@""]) {
         // filter planning array according to entered text
-        NSArray *propertyName = [[NSArray alloc] initWithObjects:@"memo", @"tdoptions", @"enseignant", @"matiere", @"heure", nil];
-        NSPredicate *predicte = [NSPredicate predicateWithFormat:@"(%K CONTAINS[cd] %@) OR (%K CONTAINS[cd] %@) OR (%K CONTAINS[cd] %@) OR (%K CONTAINS[cd] %@) OR (%K CONTAINS[cd] %@)", [propertyName objectAtIndex:0] , searchBarText, [propertyName objectAtIndex:1], searchBarText, [propertyName objectAtIndex:2], searchBarText, [propertyName objectAtIndex:3], searchBarText, [propertyName objectAtIndex:4], searchBarText];
+        NSArray *propertyName = [[NSArray alloc] initWithObjects:@"memo", @"tdoptions", @"enseignant", @"matiere", @"heure", @"salle", nil];
+        NSPredicate *predicte = [NSPredicate predicateWithFormat:@"(%K CONTAINS[cd] %@) OR (%K CONTAINS[cd] %@) OR (%K CONTAINS[cd] %@) OR (%K CONTAINS[cd] %@) OR (%K CONTAINS[cd] %@) OR (%K CONTAINS[cd] %@)", [propertyName objectAtIndex:0] , searchBarText, [propertyName objectAtIndex:1], searchBarText, [propertyName objectAtIndex:2], searchBarText, [propertyName objectAtIndex:3], searchBarText, [propertyName objectAtIndex:4], searchBarText, [propertyName objectAtIndex:5], searchBarText];
         NSArray *filteredArray = [_originalPlanningArray filteredArrayUsingPredicate:predicte];
         _jsonArray = filteredArray;
     } else {
@@ -148,17 +148,14 @@
     // restore original planning array
     _jsonArray = _originalPlanningArray;
     [self.planningTableView reloadData];
+    
+    // clear search entry
+    [_theSearchBar setText:@""];
 
     // hide keyboard
     [_theSearchBar resignFirstResponder];
     NSLog(@"searchBar CancelButtonClicked");
 
-}
-
-- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
-
-    [_theSearchBar setText:@""];
-    NSLog(@"searchBar TextDidEndEditing");
 }
 
 
