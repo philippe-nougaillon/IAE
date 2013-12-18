@@ -7,7 +7,16 @@
         <attribute name="read" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="Event" representedClassName="Event" syncable="YES">
+        <attribute name="addedToCalendar" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="nid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="read" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="subtitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="when" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Article" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Event" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

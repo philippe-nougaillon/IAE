@@ -100,7 +100,7 @@
     return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
 }
 
--(BOOL)isDatabaseExist {
+-(BOOL)isDatabaseExist:(NSString*)entityName {
     
     NSURL *storeUrl = [NSURL fileURLWithPath: [[self applicationDocumentsDirectory]
                                                stringByAppendingPathComponent: @"IAE.sqlite"]];
@@ -113,7 +113,7 @@
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         
         //Setting Entity to be Queried
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Article"
+        NSEntityDescription *entity = [NSEntityDescription entityForName:entityName
                                                   inManagedObjectContext:self.managedObjectContext];
         [fetchRequest setEntity:entity];
         NSError *error = nil;

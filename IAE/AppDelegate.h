@@ -16,6 +16,6 @@
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
--(BOOL)isDatabaseExist;
+-(BOOL)isDatabaseExist:(NSString*)entityName;
 
 @end
