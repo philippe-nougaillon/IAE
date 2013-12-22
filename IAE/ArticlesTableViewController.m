@@ -17,7 +17,7 @@
 
 @interface ArticlesTableViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *articlesTableView;
-@property (nonatomic,strong)NSArray *fetchedRecordsArray;
+@property (nonatomic,strong) NSArray *fetchedRecordsArray;
 @end
 
 
@@ -254,21 +254,23 @@
     
     // get image filename
     NSString *filePathToImage;
-    NSDictionary *imageArray = [obj objectForKey:@"vignette"];
-    if (imageArray.count >0) {
-        NSString *imageFileName = [imageArray objectForKey:@"filepath"];
-        
-        // load image
-        NSURL *imageURL = [NSURL URLWithString:[@PRODSERVER stringByAppendingString:imageFileName]];
-        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-        
-        // save image into app's document folder
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsDirectory = [paths objectAtIndex:0];
-        filePathToImage = [NSString stringWithFormat:@"%@/%@", documentsDirectory, imageFileName];
-        [imageData writeToFile:filePathToImage atomically:NO];
+    if (![[obj objectForKey:@"vignette"] isEqual:[NSNull null]]) {
+        NSDictionary *imageArray = [obj objectForKey:@"vignette"];
+        if (imageArray != NULL) {
+            NSString *imageFileName = [imageArray objectForKey:@"filepath"];
+            
+            // load image
+            NSURL *imageURL = [NSURL URLWithString:[@PRODSERVER stringByAppendingString:imageFileName]];
+            NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+            
+            // save image into app's document folder
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *documentsDirectory = [paths objectAtIndex:0];
+            filePathToImage = [NSString stringWithFormat:@"%@/%@", documentsDirectory, imageFileName];
+            [imageData writeToFile:filePathToImage atomically:NO];
+        }
     }
-
+    
     // Add Entry to Article Database
     Article *newEntry = [NSEntityDescription insertNewObjectForEntityForName:@"Article"
                                                       inManagedObjectContext:self.managedObjectContext];

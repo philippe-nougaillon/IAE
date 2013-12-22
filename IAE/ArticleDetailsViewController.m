@@ -10,7 +10,7 @@
 #import "Reachability.h"
 
 @interface ArticleDetailsViewController ()
-@property (nonatomic,strong)NSDictionary *jsonArray;
+@property (nonatomic,strong) NSArray *jsonArray;
 @property (weak, nonatomic) IBOutlet UIWebView *articleWebview;
 @end
 
@@ -81,7 +81,7 @@
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 
     UIActivityIndicatorView *activityView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    activityView.center=self.view.center;
+    activityView.center = self.view.center;
     [activityView startAnimating];
     [self.view addSubview:activityView];
 
@@ -94,9 +94,12 @@
         dispatch_async(dispatch_get_main_queue(), ^(void) {
              // update webview
              if (isDataloaded) {
-                NSDictionary  *body = [_jsonArray objectForKey:@"body"];
-                NSArray  *und = [body objectForKey:@"und"];
-                NSString *textArticle =[[und objectAtIndex:0] objectForKey:@"safe_value"];
+                //NSDictionary  *body = [_jsonArray objectForKey:@"contenu"];
+                //NSArray  *und = [body objectForKey:@"und"];
+                //NSString *textArticle =[[und objectAtIndex:0] objectForKey:@"safe_value"];
+                 
+                NSDictionary *obj = [_jsonArray objectAtIndex:0];
+                NSString *textArticle = [obj objectForKey:@"contenu"];
                 [self.articleWebview loadHTMLString:textArticle baseURL:nil];
             }
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
