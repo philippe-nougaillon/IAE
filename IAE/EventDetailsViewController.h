@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface EventDetailsViewController : UIViewController
+
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+
 @property (weak,nonatomic) NSString *indexOfEvent;
 @property (weak,nonatomic) NSString *eventTitre;
 @property (weak,nonatomic) NSString *eventDate;

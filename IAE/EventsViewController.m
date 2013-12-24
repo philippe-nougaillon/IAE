@@ -308,14 +308,7 @@
     
     // save an item to database
     //
-    
-    //NSDictionary *obj = [_jsonArray objectAtIndex:indexPath.row];
-    //NSString *titre = [obj objectForKey:@"titre"];
-    //NSString *soustitre = [obj objectForKey:@"chapo"];
-    //NSString *dateEvent = [[obj objectForKey:@"when"] objectAtIndex:0];
-    //NSLog(@"store data from json items");
-
-    
+        
     NSString *titre = [obj objectForKey:@"titre"];
     NSString *nid = [obj objectForKey:@"nid"];
     NSString *soustitre = [obj objectForKey:@"chapo"];
@@ -406,10 +399,16 @@
     [cell.titleEvent setText:event.title];
     [cell.subTitleEvent setText:event.subtitle];
     [cell.dateEvent setText:event.when];
+
+    // change title color if item already marked as read
     if ([event.read intValue] == 1)
         [cell.titleEvent setTextColor:[UIColor grayColor]];
     else
         [cell.titleEvent setTextColor:blueIAE];
+
+    // show calendar if event was added to user calendar
+    if ([event.addedToCalendar intValue] == 1)
+        [cell.eventIsIntoCalendar setHidden:NO];
     
     return cell;
 }

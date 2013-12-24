@@ -12,5 +12,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleEvent;
 @property (weak, nonatomic) IBOutlet UILabel *dateEvent;
 @property (weak, nonatomic) IBOutlet UILabel *subTitleEvent;
-
+@property (weak, nonatomic) IBOutlet UIImageView *eventIsIntoCalendar;
 @end

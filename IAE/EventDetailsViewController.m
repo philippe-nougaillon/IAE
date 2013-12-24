@@ -9,6 +9,8 @@
 #import "EventDetailsViewController.h"
 #import "Reachability.h"
 #import "EventKit/EventKit.h"
+#import "Event.h"
+#import "AppDelegate.h"
 
 @interface EventDetailsViewController ()
 @property (nonatomic,strong)NSArray *jsonArray;
@@ -16,12 +18,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelTitle;
 @property (weak, nonatomic) IBOutlet UIWebView *articleWebview;
 @property (weak, nonatomic) IBOutlet UILabel *dateEvent;
+@property (nonatomic,strong) NSArray *fetchedRecordsArray;
 @end
 
 @implementation EventDetailsViewController
 
 @synthesize indexOfEvent = _indexOfEvent;
 @synthesize jsonArray = _jsonArray;
+@synthesize fetchedRecordsArray = _fetchedRecordsArray;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -81,7 +85,8 @@
 	// Do any additional setup after loading the view.
  
     [self.labelTitle setText:self.eventTitre];
- 
+    [self.dateEvent setText:self.eventDate];
+
     // load event details
     //
     //Start an activity indicator here
@@ -98,17 +103,7 @@
                 // get event details
                 NSDictionary *obj = [_jsonArray objectAtIndex:0];
                 NSString *textArticle = [obj objectForKey:@"contenu"];
-                
-                // Get event full event date
-                NSString *dateWhen = [[obj objectForKey:@"when"] objectAtIndex:0];
-                
-                // convert date
-                NSDateFormatter *dateFormatterUS = [[NSDateFormatter alloc] init];
-                [dateFormatterUS setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-
-                self.eventDateUS = [dateFormatterUS dateFromString:dateWhen];
                 [self.articleWebview loadHTMLString:textArticle baseURL:nil];
-                [self.dateEvent setText:self.eventDate];
             }
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     
@@ -123,6 +118,7 @@
     //
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     
+        // add to calendar
         EKEventStore *store = [[EKEventStore alloc] init];
         [store requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
             if (!granted) { return; }
@@ -134,6 +130,9 @@
             NSError *err = nil;
             [store saveEvent:event span:EKSpanThisEvent commit:YES error:&err];
             //NSString *savedEventId = event.eventIdentifier;  //this is so you can access this event later
+
+            // mark event as added to calendar
+            [self markEventAsAddedToCalendar:self.indexOfEvent];
         }];
         
          dispatch_async(dispatch_get_main_queue(), ^(void) {
@@ -144,6 +143,50 @@
              [alertView1 show];
          });
     });
+    
+}
+
+-(void)markEventAsAddedToCalendar:(NSString*)indexOfEvent {
+
+    [self getAllEvents];
+
+    // which event to open ?
+    Event *event = [_fetchedRecordsArray objectAtIndex:0];
+    
+    //mark event as added to calendar
+    event.addedToCalendar = [NSNumber numberWithInt:1];
+    
+    // update the database
+    NSError *error;
+    if (![self.managedObjectContext save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
+    
+}
+
+-(void)getAllEvents
+{
+    
+    // setup database context
+    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+    self.managedObjectContext = appDelegate.managedObjectContext;
+    
+    // initializing NSFetchRequest
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    //Setting Entity to be Queried
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event"
+                                              inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    // filter for event nid
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"nid == %@", self.indexOfEvent];
+    [fetchRequest setPredicate:predicate];
+    
+    // Query on managedObjectContext With Generated fetchRequest
+    NSError* error;
+    _fetchedRecordsArray = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
 }
 
