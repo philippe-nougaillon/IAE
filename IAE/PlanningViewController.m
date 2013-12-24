@@ -152,6 +152,9 @@
     // clear search entry
     [_theSearchBar setText:@""];
 
+    // clean search entry
+    [_theSearchBar setText:@""];
+    
     // hide keyboard
     [_theSearchBar resignFirstResponder];
     NSLog(@"searchBar CancelButtonClicked");

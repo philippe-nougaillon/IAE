@@ -72,7 +72,7 @@
         self.managedObjectContext = appDelegate.managedObjectContext;
         
         // check if database exist
-        if (appDelegate.isDatabaseExist) {
+        if ([appDelegate isDatabaseExist:@"Article" ]) {
             NSLog(@"loadata database exist");
 
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

@@ -27,6 +27,7 @@
 		4A1F0D181827BD0200027A8B /* ArticlesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1F0D171827BD0200027A8B /* ArticlesCell.m */; };
 		4A20BCC5182BC6BF00E5EF8C /* iae-paris1-rue.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A20BCC4182BC6BF00E5EF8C /* iae-paris1-rue.png */; };
 		4A3681B0182D2AA500310672 /* ArticlesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3681AF182D2AA500310672 /* ArticlesTableViewController.m */; };
+		4A39AC6518620F8400E5ECB9 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A39AC6418620F8400E5ECB9 /* Event.m */; };
 		4A45BADD183A0F4600F75772 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A45BADC183A0F4600F75772 /* SystemConfiguration.framework */; };
 		4A45BAE0183A10C600F75772 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A45BADF183A10C600F75772 /* Reachability.m */; };
 		4A45BAE2183A40DF00F75772 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A45BAE1183A40DF00F75772 /* EventKit.framework */; };
@@ -91,6 +92,8 @@
 		4A20BCC4182BC6BF00E5EF8C /* iae-paris1-rue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iae-paris1-rue.png"; sourceTree = "<group>"; };
 		4A3681AE182D2AA500310672 /* ArticlesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticlesTableViewController.h; sourceTree = "<group>"; };
 		4A3681AF182D2AA500310672 /* ArticlesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticlesTableViewController.m; sourceTree = "<group>"; };
+		4A39AC6318620F8400E5ECB9 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		4A39AC6418620F8400E5ECB9 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		4A45BADC183A0F4600F75772 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		4A45BADE183A10C600F75772 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		4A45BADF183A10C600F75772 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -281,6 +284,8 @@
 		4A4BCE81185F17E200BEB577 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4A39AC6318620F8400E5ECB9 /* Event.h */,
+				4A39AC6418620F8400E5ECB9 /* Event.m */,
 				4AAE222D18587D95003A3227 /* Model.xcdatamodeld */,
 				4AAE223018587EBF003A3227 /* Article.h */,
 				4AAE223118587EBF003A3227 /* Article.m */,
@@ -405,6 +410,7 @@
 				4A3681B0182D2AA500310672 /* ArticlesTableViewController.m in Sources */,
 				4A045C9017FC299900E2E2BA /* PlanningCell.m in Sources */,
 				4A045C7017FC036300E2E2BA /* TwitterViewController.m in Sources */,
+				4A39AC6518620F8400E5ECB9 /* Event.m in Sources */,
 				4AF8D0ED18293A3100437A49 /* EventsCell.m in Sources */,
 				4A045C6417FC036300E2E2BA /* AppDelegate.m in Sources */,
 				4AAE223218587EBF003A3227 /* Article.m in Sources */,
