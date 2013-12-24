@@ -271,11 +271,9 @@
 
 -(void)addAllRemoteEventsToLocalDatabase {
     
-    NSLog(@"store data from json items");
-    
     // read json source
     NSURLRequest *request = [NSURLRequest requestWithURL:
-                             [NSURL URLWithString:@"http://iae.philnoug.com/rest/events.json"]];
+                             [NSURL URLWithString:[@PRODSERVER stringByAppendingString:@"rest/evenements"]]];
     NSURLResponse *response;
     NSError *error;
     
@@ -295,11 +293,34 @@
     NSError *errorDecoding;
     jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
     
-    NSDictionary *obj = [_jsonArray objectAtIndex:indexPath.row];
+    // for each array item
+    for (int index=0; index < jsonArray.count; index++) {
+        
+        //get Article title and date
+        NSDictionary *obj = [jsonArray objectAtIndex:index];
+        
+        // save Item to database
+        [self addEventToLocalDatabase:obj];
+    }
+}
+
+-(void)addEventToLocalDatabase:(NSDictionary*)obj {
+    
+    // save an item to database
+    //
+    
+    //NSDictionary *obj = [_jsonArray objectAtIndex:indexPath.row];
+    //NSString *titre = [obj objectForKey:@"titre"];
+    //NSString *soustitre = [obj objectForKey:@"chapo"];
+    //NSString *dateEvent = [[obj objectForKey:@"when"] objectAtIndex:0];
+    //NSLog(@"store data from json items");
+
+    
     NSString *titre = [obj objectForKey:@"titre"];
+    NSString *nid = [obj objectForKey:@"nid"];
     NSString *soustitre = [obj objectForKey:@"chapo"];
     NSString *dateEvent = [[obj objectForKey:@"when"] objectAtIndex:0];
-
+    
     // conversion de string en date format US
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
