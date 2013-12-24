@@ -146,8 +146,8 @@
     
     NSDictionary *obj = [_jsonArray objectAtIndex:indexPath.row];
     NSString *titre = [obj objectForKey:@"titre"];
-    NSString *soustitre = [obj objectForKey:@"subtitle"];
-    NSString *dateEvent = [[obj objectForKey:@"When"] objectAtIndex:0];
+    NSString *soustitre = [obj objectForKey:@"chapo"];
+    NSString *dateEvent = [[obj objectForKey:@"when"] objectAtIndex:0];
 
     // conversion de string en date format US
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];

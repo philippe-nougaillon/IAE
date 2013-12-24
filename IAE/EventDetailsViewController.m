@@ -11,7 +11,7 @@
 #import "EventKit/EventKit.h"
 
 @interface EventDetailsViewController ()
-@property (nonatomic,strong)NSDictionary *jsonArray;
+@property (nonatomic,strong)NSArray *jsonArray;
 @property (nonatomic,strong)NSDate *eventDateUS;
 @property (weak, nonatomic) IBOutlet UILabel *labelTitle;
 @property (weak, nonatomic) IBOutlet UIWebView *articleWebview;
@@ -40,7 +40,7 @@
     if(remoteHostStatus != NotReachable) {
     
         // load Data from hyperplanning json flux
-        NSString *url = [@PRODSERVER stringByAppendingString:_indexOfEvent];
+        NSString *url = [@PRODSERVER stringByAppendingString:@"rest/evenements/"];
         url = [url stringByAppendingString:_indexOfEvent];
         
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
@@ -95,22 +95,19 @@
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             
             if (isDataLoaded) {
-                NSDictionary  *body = [_jsonArray objectForKey:@"body"];
-                NSArray  *und = [body objectForKey:@"und"];
-                
-                NSString *textArticle =[[und objectAtIndex:0] objectForKey:@"safe_value"];
-                [self.articleWebview loadHTMLString:textArticle baseURL:nil];
+                // get event details
+                NSDictionary *obj = [_jsonArray objectAtIndex:0];
+                NSString *textArticle = [obj objectForKey:@"contenu"];
                 
                 // Get event full event date
-                body = [_jsonArray objectForKey:@"field_when"];
-                und = [body objectForKey:@"und"];
-                NSString *dateWhen = [[und objectAtIndex:0] objectForKey:@"value"];
+                NSString *dateWhen = [[obj objectForKey:@"when"] objectAtIndex:0];
                 
                 // convert date
                 NSDateFormatter *dateFormatterUS = [[NSDateFormatter alloc] init];
                 [dateFormatterUS setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+
                 self.eventDateUS = [dateFormatterUS dateFromString:dateWhen];
-                
+                [self.articleWebview loadHTMLString:textArticle baseURL:nil];
                 [self.dateEvent setText:self.eventDate];
             }
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
