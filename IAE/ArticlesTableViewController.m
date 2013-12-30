@@ -40,11 +40,17 @@
     // get localdata or remote if first launch
     [self loadData];
 
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+
     // register to refresh UI when ApplicationDidBecomeActive
     [[NSNotificationCenter defaultCenter]addObserver:self
                                             selector:@selector(refreshArticlesList)
                                                 name:UIApplicationDidBecomeActiveNotification
-                                              object:nil];    
+                                              object:nil];
+
 }
 
 -(void)loadData
@@ -130,10 +136,12 @@
 }
 
 -(void)refreshArticlesList {
+ 
+    // Check if remote data are more recent
+    //
     
     NSLog(@"refreshArticlesList");
 
-    // Check if remote data are more recent
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         // Check if remote data are more recent

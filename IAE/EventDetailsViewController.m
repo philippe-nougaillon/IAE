@@ -136,8 +136,6 @@
             [store saveEvent:event span:EKSpanThisEvent commit:YES error:&err];
             //NSString *savedEventId = event.eventIdentifier;  //this is so you can access this event later
 
-            // mark event as added to calendar
-            [self markEventAsAddedToCalendar:self.indexOfEvent];
         }];
         
          dispatch_async(dispatch_get_main_queue(), ^(void) {
@@ -146,17 +144,22 @@
              UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:self.eventTitre message:msg delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
              alertView1.alertViewStyle = UIAlertViewStyleDefault;
              [alertView1 show];
+             // hide button
              [self.buttonAddToCalendar setEnabled:NO];
+             // mark event as added to calendar and store it
+             [self markEventAsAddedToCalendar:self.indexOfEvent];
          });
     });
     
 }
 
 -(void)markEventAsAddedToCalendar:(NSString*)indexOfEvent {
+    
+    // mark event as added to calendar and store it
+    //
 
+    // find event to open and mark it
     [self getAllEvents];
-
-    // which event to open ?
     Event *event = [_fetchedRecordsArray objectAtIndex:0];
     
     //mark event as added to calendar
