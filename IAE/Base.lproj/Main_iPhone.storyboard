@@ -331,11 +331,19 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         </imageView>
+                                        <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ajouté à votre calendrier" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="het-rP-sEb">
+                                            <rect key="frame" x="77" y="11" width="181" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-UltraLightItalic" family="Helvetica Neue" pointSize="12"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="dateEvent" destination="CvL-Hr-ULk" id="Jyf-LE-kID"/>
                                     <outlet property="eventIsIntoCalendar" destination="9mK-5W-yLb" id="H40-wC-UiD"/>
+                                    <outlet property="labelEventAddedToCalendar" destination="het-rP-sEb" id="G7a-Kq-SAm"/>
                                     <outlet property="subTitleEvent" destination="jXn-WL-UgC" id="ntI-su-z3j"/>
                                     <outlet property="titleEvent" destination="AVP-O8-be5" id="tgu-X3-bmr"/>
                                     <segue destination="TFg-Yk-G37" kind="push" identifier="openEventDetails" id="zzi-m9-pxb"/>
@@ -413,6 +421,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="articleWebview" destination="Uwg-1m-5lH" id="eck-h3-hUt"/>
+                        <outlet property="buttonAddToCalendar" destination="QBy-w2-fwl" id="wtr-WR-j1C"/>
                         <outlet property="dateEvent" destination="05n-qB-NOP" id="3Wv-Tf-e6F"/>
                         <outlet property="labelTitle" destination="LvJ-L6-3ZZ" id="woH-cm-lUG"/>
                     </connections>

@@ -257,10 +257,11 @@
     if (![[obj objectForKey:@"vignette"] isEqual:[NSNull null]]) {
         NSDictionary *imageArray = [obj objectForKey:@"vignette"];
         if (imageArray != NULL) {
-            NSString *imageFileName = [imageArray objectForKey:@"filepath"];
+            NSString *imageFileName = [imageArray objectForKey:@"filename"];
             
             // load image
-            NSURL *imageURL = [NSURL URLWithString:[@PRODSERVER stringByAppendingString:imageFileName]];
+            NSString *imagePath = [@PRODSERVER stringByAppendingString:[@"sites/default/files/" stringByAppendingString:imageFileName]];
+            NSURL *imageURL = [[NSURL alloc] initWithString:imagePath];
             NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
             
             // save image into app's document folder

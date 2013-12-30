@@ -38,7 +38,7 @@
     // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear = NO;
     
-    //[self refreshButtonPressed:nil];
+    [self refreshButtonPressed:nil];
     
     // register to refresh UI when ApplicationDidBecomeActive
     [[NSNotificationCenter defaultCenter]addObserver:self
@@ -49,6 +49,7 @@
     [self loadEventsData];
     
 }
+
 
 -(BOOL)loadData
 {
@@ -96,8 +97,8 @@
     //Start an activity indicator here
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
-    UIActivityIndicatorView *activityView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    activityView.center=self.view.center;
+    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    activityView.center = self.view.center;
     [activityView startAnimating];
     [self.view addSubview:activityView];
     
@@ -407,8 +408,10 @@
         [cell.titleEvent setTextColor:blueIAE];
 
     // show calendar if event was added to user calendar
-    if ([event.addedToCalendar intValue] == 1)
+    if ([event.addedToCalendar intValue] == 1) {
         [cell.eventIsIntoCalendar setHidden:NO];
+        [cell.labelEventAddedToCalendar setHidden:NO];
+    }
     
     return cell;
 }
@@ -441,6 +444,7 @@
         vc.indexOfEvent = event.nid;
         vc.eventTitre = event.title;
         vc.eventDate = event.when;
+        vc.eventAddedToCalendar = event.addedToCalendar;
     }
 }
 

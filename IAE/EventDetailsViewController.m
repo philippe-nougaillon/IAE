@@ -13,12 +13,13 @@
 #import "AppDelegate.h"
 
 @interface EventDetailsViewController ()
-@property (nonatomic,strong)NSArray *jsonArray;
-@property (nonatomic,strong)NSDate *eventDateUS;
+@property (nonatomic,strong) NSArray *jsonArray;
+@property (nonatomic,strong) NSDate *eventDateUS;
 @property (weak, nonatomic) IBOutlet UILabel *labelTitle;
 @property (weak, nonatomic) IBOutlet UIWebView *articleWebview;
 @property (weak, nonatomic) IBOutlet UILabel *dateEvent;
 @property (nonatomic,strong) NSArray *fetchedRecordsArray;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *buttonAddToCalendar;
 @end
 
 @implementation EventDetailsViewController
@@ -86,7 +87,11 @@
  
     [self.labelTitle setText:self.eventTitre];
     [self.dateEvent setText:self.eventDate];
-
+    if ([self.eventAddedToCalendar isEqualToNumber:@1])
+        [self.buttonAddToCalendar setEnabled:NO];
+    else
+        [self.buttonAddToCalendar setEnabled:YES];
+    
     // load event details
     //
     //Start an activity indicator here
@@ -141,6 +146,7 @@
              UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:self.eventTitre message:msg delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
              alertView1.alertViewStyle = UIAlertViewStyleDefault;
              [alertView1 show];
+             [self.buttonAddToCalendar setEnabled:NO];
          });
     });
     
