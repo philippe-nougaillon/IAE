@@ -283,6 +283,7 @@
                         <segue destination="hRr-bz-aKP" kind="relationship" relationship="viewControllers" id="TWB-hi-5Qe"/>
                         <segue destination="TiZ-Zn-qWE" kind="relationship" relationship="viewControllers" id="BtQ-v6-xrO"/>
                         <segue destination="lGt-LB-osd" kind="relationship" relationship="viewControllers" id="fKz-qv-qhs"/>
+                        <segue destination="d9c-m6-hjk" kind="relationship" relationship="viewControllers" id="GPV-T0-ZIs"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FNP-y4-bzi" sceneMemberID="firstResponder"/>
@@ -429,6 +430,102 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8CT-nN-kWC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1644" y="1263"/>
+        </scene>
+        <!--Formations View Controller - Formations-->
+        <scene sceneID="67Q-3b-MpM">
+            <objects>
+                <tableViewController id="YXT-gC-2Oa" customClass="FormationsViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="22" sectionFooterHeight="22" id="iVt-k2-9ma">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="RHz-fn-it8" detailTextLabel="h3b-F4-GJg" imageView="s1x-bt-jBE" rowHeight="66" style="IBUITableViewCellStyleSubtitle" id="Yj9-5G-fNs">
+                                <rect key="frame" x="0.0" y="86" width="320" height="66"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Yj9-5G-fNs" id="R6o-wM-lFP">
+                                    <rect key="frame" x="0.0" y="0.0" width="273" height="65"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RHz-fn-it8">
+                                            <rect key="frame" x="67" y="17" width="31" height="20"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="h3b-F4-GJg">
+                                            <rect key="frame" x="67" y="37" width="27" height="12"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Logo_IAE_Paris" id="s1x-bt-jBE">
+                                            <rect key="frame" x="15" y="0.0" width="37" height="65"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </imageView>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="10y-Ag-4q1" kind="push" identifier="openFormationDetails" trigger="accessoryAction" id="dkG-aI-dHs"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="YXT-gC-2Oa" id="UIc-aC-xzL"/>
+                            <outlet property="delegate" destination="YXT-gC-2Oa" id="yaE-eo-aom"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Formations" id="8LW-bg-VYs"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u7Q-s1-kDv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1175" y="2633"/>
+        </scene>
+        <!--Formation Details View Controller-->
+        <scene sceneID="Qv1-cU-rlh">
+            <objects>
+                <viewController id="10y-Ag-4q1" customClass="FormationDetailsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2Tf-li-W5g">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleAspectFit" scalesPageToFit="YES" id="nKn-Gb-alr">
+                                <rect key="frame" x="0.0" y="64" width="320" height="456"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="10y-Ag-4q1" id="kZh-ay-QCy"/>
+                                </connections>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="G4b-mm-Bcz"/>
+                    <connections>
+                        <outlet property="myWebView" destination="nKn-Gb-alr" id="vGi-YU-ZA5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JO4-gK-Sj1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1617" y="2639"/>
+        </scene>
+        <!--Navigation Controller - Formations-->
+        <scene sceneID="Kpk-gj-f50">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="d9c-m6-hjk" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Formations" image="agenda.png" id="x82-Sk-aXL"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1Op-ZE-XGo">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="YXT-gC-2Oa" kind="relationship" relationship="rootViewController" id="ojI-AF-eov"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V7G-jM-b4H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="643" y="2633"/>
         </scene>
         <!--Infos View Controller - Infos-->
         <scene sceneID="b3f-O5-ZZV">
@@ -675,13 +772,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="73D-Cc-dHK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1179" y="2659"/>
+            <point key="canvasLocation" x="1179" y="3331"/>
         </scene>
         <!--Navigation Controller - Agenda-->
         <scene sceneID="1CE-PM-kdA">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hRr-bz-aKP" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Agenda" image="agenda.png" id="Cfa-8D-kfD"/>
+                    <tabBarItem key="tabBarItem" title="Agenda" image="date_to_calendar-small.png" id="Cfa-8D-kfD"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="06Z-Zd-u2d"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="773-Ah-ndY">
@@ -733,7 +830,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZL1-L7-q3y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="653" y="2659"/>
+            <point key="canvasLocation" x="653" y="3331"/>
         </scene>
         <!--Navigation Controller - Actualités-->
         <scene sceneID="8qt-wU-wyl">
@@ -756,6 +853,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Logo_IAE_Paris" width="640" height="1136"/>
         <image name="actualites2.png" width="28" height="30"/>
         <image name="agenda.png" width="26" height="30"/>
         <image name="date_to_calendar-small.png" width="30" height="30"/>
