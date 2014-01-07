@@ -12,10 +12,6 @@
 
 @interface FormationsViewController ()
 
-@property NSArray* formations_initiales;
-@property NSArray* formations_continues;
-@property NSArray* formations_apprentissage;
-
 @property NSArray* sections;
 @property NSArray* headers;
 
@@ -23,9 +19,6 @@
 
 @implementation FormationsViewController
 
-@synthesize formations_initiales = _formations_initiales;
-@synthesize formations_continues = _formations_continues;
-@synthesize formations_apprentissage = _formations_apprentissage;
 @synthesize sections = _sections;
 @synthesize headers = _headers;
 
@@ -47,49 +40,32 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    // load Formations from JSON file
+    NSString* fileLocation = @"Formations.json";
+    NSString* filePath = [[NSBundle mainBundle] pathForResource:[fileLocation stringByDeletingPathExtension] ofType:[fileLocation pathExtension]];
+    NSData* data = [NSData dataWithContentsOfFile:filePath];
+    
+    NSError* error = nil;
+    NSDictionary* result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+    
+    NSArray* formations_apprentissage = [result objectForKey:@"apprentissages"];
+    NSLog(@"%@", formations_apprentissage);
 
-    Formation* fa1 = [[Formation alloc] init];
-    fa1.title = @"Licence DISTRISUP";
-    fa1.subtitle = @"Commerce et Distribution";
-    fa1.link = @"http://www.iae-paris.com/formations/formation-initiale/licence-commerce-distribution-distrisup-apprentissage";
-    fa1.pdf = @"http://www.iae-paris.com/sites/default/files/Brochure%20de%20presentation%20Licence%20DISTRISUP.pdf";
+    NSArray* formations_initiales = [result objectForKey:@"initiales"];
+    NSLog(@"%@", formations_initiales);
     
-    Formation* fa2 = [[Formation alloc] init];
-    fa2.title = @"Master MAE";
-    fa2.subtitle = @"Administration des Entreprises - Gestion des dynamiques organisationnelles";
-    
-    Formation* fa3 = [[Formation alloc] init];
-    fa3.title = @"Master Contrôle-Audit";
-    fa3.subtitle = @"Audit - Contrôle de gestion";
- 
-    Formation* fa4 = [[Formation alloc] init];
-    fa4.title = @"Master Finance";
-    fa4.subtitle = @"Finance";
-    
-    Formation* fa5 = [[Formation alloc] init];
-    fa5.title = @"Master Management";
-    fa5.subtitle = @"Audit, Contrôle de gestion, Finance, Management, Gestion, Marketing, RH - RSE";
+    NSArray* formations_continues = [result objectForKey:@"continues"];
+    NSLog(@"%@", formations_continues);
 
-    Formation* fa6 = [[Formation alloc] init];
-    fa6.title = @"Master RH - RSE";
-    fa6.subtitle = @"Ressources Humaines & Responsabilité Sociale de l'Entreprise";
-    
-    _formations_apprentissage = [NSArray arrayWithObjects:fa1, fa2, fa3, fa4, fa5, fa6, nil];
-    
-    
-    Formation* fi1 = [[Formation alloc] init];
-    fi1.title = @"Formation initiale 1";
-    
-    _formations_initiales = [NSArray arrayWithObjects:fi1, nil];
+    NSArray* formations_mba = [result objectForKey:@"MBA"];
+    NSLog(@"%@", formations_mba);
 
-    Formation* fc1 = [[Formation alloc] init];
-    fc1.title = @"Formation continue 1";
+    NSArray* formations_inter = [result objectForKey:@"Inter-entreprises"];
+    NSLog(@"%@", formations_inter);
 
-    _formations_continues = [NSArray arrayWithObjects:fc1, nil];
-    
-    _sections = [NSArray arrayWithObjects:_formations_apprentissage,_formations_initiales, _formations_continues, nil];
-
-    _headers = [NSArray arrayWithObjects:@"Apprentissage",@"Formations initiales", @"Formations continues", nil];
+    _sections = [NSArray arrayWithObjects:formations_apprentissage, formations_initiales, formations_continues, formations_mba, formations_inter, nil];
+    _headers = [NSArray arrayWithObjects:@"Apprentissage",@"Formations initiales", @"Formations continues", @"MBA", @"Formations inter-entreprises", nil];
     
 }
 
@@ -124,10 +100,10 @@ titleForHeaderInSection:(NSInteger)section
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    Formation* f = (Formation*)[[_sections objectAtIndex:indexPath.section]
+    NSDictionary* obj = (NSDictionary*)[[_sections objectAtIndex:indexPath.section]
                                       objectAtIndex:indexPath.row];
-    cell.textLabel.text = f.title;
-    cell.detailTextLabel.text = f.subtitle;
+    cell.textLabel.text = [obj objectForKey:@"title"];
+    cell.detailTextLabel.text = [obj objectForKey:@"subtitle"];
     
     return cell;
 }
@@ -171,7 +147,6 @@ titleForHeaderInSection:(NSInteger)section
 }
 */
 
-
 #pragma mark - Navigation
 
 // In a story board-based application, you will often want to do a little preparation before navigation
@@ -184,16 +159,17 @@ titleForHeaderInSection:(NSInteger)section
         NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
         
         // which formation link to open ?
-        Formation* f = (Formation*)[[_sections objectAtIndex:indexPath.section]
-                                    objectAtIndex:indexPath.row];
-        
+        NSDictionary* obj = (NSDictionary*)[[_sections objectAtIndex:indexPath.section]
+                                            objectAtIndex:indexPath.row];
         
         // Get destination view
         FormationDetailsViewController *vc = [segue destinationViewController];
         
         // Pass the information to your destination view
-        vc.link = f.link;
-        vc.navigationItem.title = f.title;
+        vc.link = [obj objectForKey:@"link"];
+        vc.pdf = [obj objectForKey:@"pdf"];
+        
+        vc.navigationItem.title = [obj objectForKey:@"title"];
     }
 }
 

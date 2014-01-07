@@ -166,7 +166,7 @@
     //
     BOOL refreshLocalData = NO;
     
-    Reachability *reachability = [Reachability reachabilityWithHostName:@"google.com"];
+    Reachability* reachability = [Reachability reachabilityWithHostName:@"google.com"];
     NetworkStatus remoteHostStatus = [reachability currentReachabilityStatus];
     
     // check if network is up
@@ -249,16 +249,21 @@
     //
     NSString *titre = [obj objectForKey:@"titre"];
     NSString *nid = [obj objectForKey:@"nid"];
+    NSString *dateEvent = [[obj objectForKey:@"when"] objectAtIndex:0];
     
-    // date format
-    NSString *postDatetimeStamp = [obj objectForKey:@"timestamp"];
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:[postDatetimeStamp doubleValue]];
+    // conversion de string en date format US
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setTimeStyle:NSDateFormatterFullStyle];
-    [dateFormatter setDateStyle:NSDateFormatterFullStyle];
-    [dateFormatter setLocale:[NSLocale currentLocale]];
-    [dateFormatter setDateFormat:@"dd MMM yyyy HH:mm:ss"];
-    NSString *dateFinal = [dateFormatter stringFromDate:date];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *dateUS = [dateFormatter dateFromString:dateEvent];
+    
+    // conversion date US en string FR
+    NSDateFormatter *dateFormatterFR = [[NSDateFormatter alloc] init];
+    [dateFormatterFR setTimeStyle:NSDateFormatterFullStyle];
+    [dateFormatterFR setDateStyle:NSDateFormatterFullStyle];
+    [dateFormatterFR setLocale:[NSLocale currentLocale]];
+    //[dateFormatterFR setDateFormat:@"dd MMM yyyy HH:mm"];
+    [dateFormatterFR setDateFormat:@"dd MMM yyyy"];
+    NSString *dateFR = [dateFormatterFR stringFromDate:dateUS];
     
     // get image filename
     NSString *filePathToImage;
@@ -287,7 +292,7 @@
     newEntry.title = titre;
     newEntry.nid = nid;
     newEntry.image = filePathToImage;
-    newEntry.postDate = dateFinal;
+    newEntry.postDate = dateFR;
     newEntry.read =[NSNumber numberWithInt:0];
     
     NSError *error;

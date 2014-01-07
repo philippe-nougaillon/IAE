@@ -478,12 +478,13 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Formations" id="8LW-bg-VYs"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u7Q-s1-kDv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1175" y="2633"/>
         </scene>
-        <!--Formation Details View Controller-->
+        <!--Formation Details View Controller - Title-->
         <scene sceneID="Qv1-cU-rlh">
             <objects>
                 <viewController id="10y-Ag-4q1" customClass="FormationDetailsViewController" sceneMemberID="viewController">
@@ -492,7 +493,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <webView contentMode="scaleAspectFit" scalesPageToFit="YES" id="nKn-Gb-alr">
-                                <rect key="frame" x="0.0" y="64" width="320" height="456"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="454"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
@@ -502,14 +503,21 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="G4b-mm-Bcz"/>
+                    <navigationItem key="navigationItem" title="Title" id="jjw-9F-UUr">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="rve-9x-GUL">
+                            <connections>
+                                <action selector="openWebSite:" destination="10y-Ag-4q1" id="2hY-u4-DzB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="myWebView" destination="nKn-Gb-alr" id="vGi-YU-ZA5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JO4-gK-Sj1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1617" y="2639"/>
+            <point key="canvasLocation" x="1628" y="2633"/>
         </scene>
         <!--Navigation Controller - Formations-->
         <scene sceneID="Kpk-gj-f50">

@@ -10,6 +10,7 @@
 
 @interface FormationDetailsViewController : UIViewController
 
-@property NSString* link;
+@property (weak,nonatomic) NSString* link;
+@property (weak,nonatomic) NSString* pdf;
 
 @end
