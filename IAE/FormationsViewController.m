@@ -37,9 +37,6 @@
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     // load Formations from JSON file
     NSString* fileLocation = @"Formations.json";
@@ -49,6 +46,7 @@
     NSError* error = nil;
     NSDictionary* result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
     
+    // load each section's content
     NSArray* formations_apprentissage = [result objectForKey:@"apprentissages"];
     NSLog(@"%@", formations_apprentissage);
 
@@ -64,6 +62,7 @@
     NSArray* formations_inter = [result objectForKey:@"Inter-entreprises"];
     NSLog(@"%@", formations_inter);
 
+    // gather each section into one section and header array
     _sections = [NSArray arrayWithObjects:formations_apprentissage, formations_initiales, formations_continues, formations_mba, formations_inter, nil];
     _headers = [NSArray arrayWithObjects:@"Apprentissage",@"Formations initiales", @"Formations continues", @"MBA", @"Formations inter-entreprises", nil];
     
@@ -86,6 +85,7 @@
 - (NSString *)tableView:(UITableView *)tableView
 titleForHeaderInSection:(NSInteger)section
 {
+    // return the section title
     return [_headers objectAtIndex:section];
 }
 
@@ -148,6 +148,35 @@ titleForHeaderInSection:(NSInteger)section
 */
 
 #pragma mark - Navigation
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    // test pdf link then segeue or open url
+    //
+
+    BOOL shouldSegue = YES;
+    
+    if ([identifier isEqualToString:@"openFormationDetails"]) {
+        
+        // get the index of select item
+        UITableViewCell* cell = (UITableViewCell*)sender;
+        NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
+        
+        // which formation link to open ?
+        NSDictionary* obj = (NSDictionary*)[[_sections objectAtIndex:indexPath.section]
+                                            objectAtIndex:indexPath.row];
+        
+        NSString* pdf = [obj objectForKey:@"pdf"];
+        if ([pdf isEqualToString:@""]) {
+            // open webpage
+            NSString* url = [@"http://www.iae-paris.com/formations/" stringByAppendingString:[obj objectForKey:@"link"]];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+            shouldSegue = NO;
+        }
+    }
+    return shouldSegue;
+
+}
 
 // In a story board-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

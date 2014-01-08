@@ -41,7 +41,8 @@
     
     NSString* url = [@"http://www.iae-paris.com/formations/" stringByAppendingString:self.link];
     
-      [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+
 }
 
 - (void)didReceiveMemoryWarning
