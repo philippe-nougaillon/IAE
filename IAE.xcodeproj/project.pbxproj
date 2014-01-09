@@ -28,6 +28,7 @@
 		4A20BCC5182BC6BF00E5EF8C /* iae-paris1-rue.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A20BCC4182BC6BF00E5EF8C /* iae-paris1-rue.png */; };
 		4A3681B0182D2AA500310672 /* ArticlesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3681AF182D2AA500310672 /* ArticlesTableViewController.m */; };
 		4A39AC6518620F8400E5ECB9 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A39AC6418620F8400E5ECB9 /* Event.m */; };
+		4A3FD67D187EDCEF00A5C9BE /* calendar-date-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A3FD67C187EDCEF00A5C9BE /* calendar-date-bg.png */; };
 		4A45BADD183A0F4600F75772 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A45BADC183A0F4600F75772 /* SystemConfiguration.framework */; };
 		4A45BAE0183A10C600F75772 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A45BADF183A10C600F75772 /* Reachability.m */; };
 		4A45BAE2183A40DF00F75772 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A45BAE1183A40DF00F75772 /* EventKit.framework */; };
@@ -99,6 +100,7 @@
 		4A3681AF182D2AA500310672 /* ArticlesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticlesTableViewController.m; sourceTree = "<group>"; };
 		4A39AC6318620F8400E5ECB9 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
 		4A39AC6418620F8400E5ECB9 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
+		4A3FD67C187EDCEF00A5C9BE /* calendar-date-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar-date-bg.png"; sourceTree = "<group>"; };
 		4A45BADC183A0F4600F75772 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		4A45BADE183A10C600F75772 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		4A45BADF183A10C600F75772 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 		4A483687182CEC83009E7970 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4A3FD67C187EDCEF00A5C9BE /* calendar-date-bg.png */,
 				844FD4CE187C443F00C0991A /* FileType-Pdf-icon-3.png */,
 				4A4BCE82185F188300BEB577 /* date_to_calendar-small.png */,
 				4A4BCE79185F0BFA00BEB577 /* social-icon-fb.png */,
@@ -397,6 +400,7 @@
 				844FD4CF187C443F00C0991A /* FileType-Pdf-icon-3.png in Resources */,
 				4A045C6A17FC036300E2E2BA /* Main_iPad.storyboard in Resources */,
 				4A20BCC5182BC6BF00E5EF8C /* iae-paris1-rue.png in Resources */,
+				4A3FD67D187EDCEF00A5C9BE /* calendar-date-bg.png in Resources */,
 				4A4BCE80185F0BFA00BEB577 /* social-icon-yt.png in Resources */,
 				4A48368F182CEE98009E7970 /* agenda.png in Resources */,
 				4A045C7217FC036400E2E2BA /* Images.xcassets in Resources */,

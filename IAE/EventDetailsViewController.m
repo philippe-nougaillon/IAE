@@ -15,10 +15,10 @@
 @interface EventDetailsViewController ()
 @property (nonatomic,strong) NSArray *jsonArray;
 @property (nonatomic,strong) NSDate *eventDateUS;
+@property (nonatomic,strong) NSArray *fetchedRecordsArray;
 @property (weak, nonatomic) IBOutlet UILabel *labelTitle;
 @property (weak, nonatomic) IBOutlet UIWebView *articleWebview;
 @property (weak, nonatomic) IBOutlet UILabel *dateEvent;
-@property (nonatomic,strong) NSArray *fetchedRecordsArray;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *buttonAddToCalendar;
 @end
 
@@ -97,6 +97,12 @@
     //Start an activity indicator here
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
+    UIActivityIndicatorView *activityView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    activityView.center = self.view.center;
+    [activityView startAnimating];
+    [self.view addSubview:activityView];
+
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         // Reload event detail
@@ -111,6 +117,7 @@
                 [self.articleWebview loadHTMLString:textArticle baseURL:nil];
             }
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            [activityView removeFromSuperview];
     
         });
     });

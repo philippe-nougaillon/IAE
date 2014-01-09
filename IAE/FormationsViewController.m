@@ -47,9 +47,6 @@
     NSDictionary* result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
     
     // load each section's content
-    NSArray* formations_apprentissage = [result objectForKey:@"apprentissages"];
-    NSLog(@"%@", formations_apprentissage);
-
     NSArray* formations_initiales = [result objectForKey:@"initiales"];
     NSLog(@"%@", formations_initiales);
     
@@ -59,12 +56,15 @@
     NSArray* formations_mba = [result objectForKey:@"MBA"];
     NSLog(@"%@", formations_mba);
 
+    NSArray* formations_apprentissage = [result objectForKey:@"apprentissages"];
+    NSLog(@"%@", formations_apprentissage);
+    
     NSArray* formations_inter = [result objectForKey:@"Inter-entreprises"];
     NSLog(@"%@", formations_inter);
 
     // gather each section into one section and header array
-    _sections = [NSArray arrayWithObjects:formations_apprentissage, formations_initiales, formations_continues, formations_mba, formations_inter, nil];
-    _headers = [NSArray arrayWithObjects:@"Apprentissage",@"Formations initiales", @"Formations continues", @"MBA", @"Formations inter-entreprises", nil];
+    _sections = [NSArray arrayWithObjects:formations_initiales, formations_continues, formations_mba, formations_apprentissage, formations_inter, nil];
+    _headers = [NSArray arrayWithObjects:@"Formations initiales", @"Formations continues", @"MBA", @"Apprentissage", @"Formations inter-entreprises", nil];
     
 }
 

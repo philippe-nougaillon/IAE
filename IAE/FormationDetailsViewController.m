@@ -10,6 +10,7 @@
 
 @interface FormationDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UIWebView *myWebView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *myProgressView;
 
 @end
 
@@ -31,6 +32,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    [self.myProgressView startAnimating];
     NSString* pdf = [@"http://www.iae-paris.com/sites/default/files/" stringByAppendingString:self.pdf];
     
     [self.myWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:pdf]]];
@@ -42,6 +44,14 @@
     NSString* url = [@"http://www.iae-paris.com/formations/" stringByAppendingString:self.link];
     
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+
+    // stop progress indicator
+    [self.myProgressView stopAnimating];
+    [self.myProgressView setHidden:YES];
 
 }
 

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FormationDetailsViewController : UIViewController
+@interface FormationDetailsViewController : UIViewController <UIWebViewDelegate>
 
 @property (weak,nonatomic) NSString* link;
 @property (weak,nonatomic) NSString* pdf;
