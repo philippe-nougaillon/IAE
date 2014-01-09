@@ -60,10 +60,6 @@
             else
                 NSLog(@"Echec de la connection");
             
-            //UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"Oups..." message:@"Echec de la connection" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-            //alertView1.alertViewStyle = UIAlertViewStyleDefault;
-            //[alertView1 show];
-            
             return NO;
         }
         
@@ -92,17 +88,18 @@
     else
         [self.buttonAddToCalendar setEnabled:YES];
     
-    // load event details
-    //
     //Start an activity indicator here
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
-    UIActivityIndicatorView *activityView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    UIActivityIndicatorView *activityView =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     activityView.center = self.view.center;
     [activityView startAnimating];
     [self.view addSubview:activityView];
-
     
+    
+    // load event details
+    //
+
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         // Reload event detail

@@ -44,13 +44,11 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-
     // register to refresh UI when ApplicationDidBecomeActive
     [[NSNotificationCenter defaultCenter]addObserver:self
                                             selector:@selector(refreshArticlesList)
                                                 name:UIApplicationDidBecomeActiveNotification
                                               object:nil];
-
 }
 
 -(void)loadData
@@ -141,20 +139,32 @@
     //
     
     NSLog(@"refreshArticlesList");
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    activityView.center = self.view.center;
+    [activityView startAnimating];
+    [self.view addSubview:activityView];
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         // Check if remote data are more recent
         BOOL refresh = [self refreshLocalData];
-        
         dispatch_async(dispatch_get_main_queue(), ^(void) {
-            
             if (refresh) {
                 // refresh tableview with local data
                 _fetchedRecordsArray = [self getAllArticles];
                 [self.tableView reloadData];
                 NSLog(@"refreshArticlesList tableView reloadData");
             }
+            [activityView removeFromSuperview];
+            
+            // register to refresh UI when ApplicationDidBecomeActive
+            [[NSNotificationCenter defaultCenter]addObserver:self
+                                                    selector:@selector(refreshArticlesList)
+                                                        name:UIApplicationDidBecomeActiveNotification
+                                                      object:nil];
         });
     });
 }
