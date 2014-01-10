@@ -147,7 +147,7 @@
     
     // hide keyboard
     [_theSearchBar resignFirstResponder];
-    NSLog(@"searchBar CancelButtonClicked");
+    //NSLog(@"searchBar CancelButtonClicked");
 }
 
 #pragma mark - Tableview Datasource

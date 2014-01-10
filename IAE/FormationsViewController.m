@@ -48,19 +48,19 @@
     
     // load each section's content
     NSArray* formations_initiales = [result objectForKey:@"initiales"];
-    NSLog(@"%@", formations_initiales);
+    //NSLog(@"%@", formations_initiales);
     
     NSArray* formations_continues = [result objectForKey:@"continues"];
-    NSLog(@"%@", formations_continues);
+    //NSLog(@"%@", formations_continues);
 
     NSArray* formations_mba = [result objectForKey:@"MBA"];
-    NSLog(@"%@", formations_mba);
+    //NSLog(@"%@", formations_mba);
 
     NSArray* formations_apprentissage = [result objectForKey:@"apprentissages"];
-    NSLog(@"%@", formations_apprentissage);
+    //NSLog(@"%@", formations_apprentissage);
     
     NSArray* formations_inter = [result objectForKey:@"Inter-entreprises"];
-    NSLog(@"%@", formations_inter);
+    //NSLog(@"%@", formations_inter);
 
     // gather each section into one section and header array
     _sections = [NSArray arrayWithObjects:formations_initiales, formations_continues, formations_mba, formations_apprentissage, formations_inter, nil];
