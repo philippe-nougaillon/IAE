@@ -14,6 +14,7 @@
 #import "ArticleDetailsViewController.h"
 #import "PlanningViewController.h"
 #import "Article.h"
+#import "NSArray+arrayWithContentsOfJSONFile.h"
 
 @interface ArticlesTableViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *articlesTableView;
@@ -113,26 +114,6 @@
 
 }
 
--(NSArray*)getRemoteArticles {
-    
-    // read json remote source
-    NSURLRequest *request = [NSURLRequest requestWithURL:
-                             [NSURL URLWithString:[@PRODSERVER stringByAppendingString:@"rest/actualites"]]];
-    NSURLResponse *response;
-    NSError *error;
-    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    
-    if (error == nil) {
-        NSArray *jsonArray;
-        NSError *errorDecoding;
-        jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
-        return jsonArray;
-    }
-    else
-        return nil;
-    
-}
-
 -(void)refreshArticlesList {
  
     // Check if remote data are more recent
@@ -185,7 +166,7 @@
         NSLog(@"refresh Local Data");
         
         // read json remote source
-        NSArray *jsonArray = [self getRemoteArticles];
+        NSArray *jsonArray = [NSArray arrayWithContentsOfFile:[@PRODSERVER stringByAppendingString:@"rest/actualites"]];
         
         //get first article nid
         NSDictionary *obj = [jsonArray firstObject];
@@ -220,28 +201,9 @@
     
     NSLog(@"store data from json items");
     
-    // read json source
-    NSURLRequest *request = [NSURLRequest requestWithURL:
-                             [NSURL URLWithString:[@PRODSERVER stringByAppendingString:@"rest/actualites"]]];
-    NSURLResponse *response;
-    NSError *error;
-    
-    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    if (data == nil) {
-        if (error != nil)
-            NSLog(@"Echec connection (%@)", [error localizedDescription]);
-        else
-            NSLog(@"Echec de la connection");
+    // read json remote source
+    NSArray *jsonArray = [NSArray arrayWithContentsOfJSONFile:[@PRODSERVER stringByAppendingString:@"rest/actualites"]];
         
-        UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"Echec de la connection" message:@"Il semble que vous n'avez pas accès à internet." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-        alertView1.alertViewStyle = UIAlertViewStyleDefault;
-        [alertView1 show];
-    }
-    
-    NSArray *jsonArray;
-    NSError *errorDecoding;
-    jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
-    
     // for each array item
     for (int index=0; index < jsonArray.count; index++) {
         

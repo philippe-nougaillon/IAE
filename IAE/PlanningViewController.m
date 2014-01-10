@@ -9,6 +9,7 @@
 #import "PlanningViewController.h"
 #import "PlanningCell.h"
 #import "Reachability.h"
+#import "NSArray+arrayWithContentsOfJSONFile.h"
 
 @interface PlanningViewController ()
 @property (nonatomic,strong) NSArray *jsonArray;
@@ -45,33 +46,13 @@
     NetworkStatus remoteHostStatus = [reachability currentReachabilityStatus];
     
     if(remoteHostStatus != NotReachable) {
-    
-        NSURLRequest *request = [NSURLRequest requestWithURL:
-                                 [NSURL URLWithString:@"https://entiae.univ-paris1.fr/hyperjson/index.php"]];
-        NSURLResponse *response;
-        NSError *error;
-        NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-        
-        if (data == nil) {
-            if (error != nil)
-                NSLog(@"Echec connection (%@)", [error localizedDescription]);
-            else
-                NSLog(@"Echec de la connection");
-            
-            //UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"Oups..." message:@"Echec de la connection" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-            //alertView1.alertViewStyle = UIAlertViewStyleDefault;
-            //[alertView1 show];
-            
-            return NO;
-        }
-        NSError *errorDecoding;
-        _jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
-        if (errorDecoding == nil) {
+      
+        _jsonArray = [NSArray arrayWithContentsOfJSONFile:@"https://entiae.univ-paris1.fr/hyperjson/index.php"];
+        if (_jsonArray != nil) {
             // Store original planning for future search
             _originalPlanningArray = _jsonArray;
             return YES;
         } else {
-            NSLog(@"errorDecoding= %@",errorDecoding);
             return NO;
         }
     } else {
@@ -112,7 +93,6 @@
                                                     selector:@selector(refreshListView)
                                                         name:UIApplicationDidBecomeActiveNotification
                                                       object:nil];
-
         });
     });
 }
@@ -168,9 +148,7 @@
     // hide keyboard
     [_theSearchBar resignFirstResponder];
     NSLog(@"searchBar CancelButtonClicked");
-
 }
-
 
 #pragma mark - Tableview Datasource
 

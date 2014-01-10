@@ -8,6 +8,7 @@
 
 #import "ArticleDetailsViewController.h"
 #import "Reachability.h"
+#import "NSArray+arrayWithContentsOfJSONFile.h"
 
 @interface ArticleDetailsViewController ()
 @property (nonatomic,strong) NSArray *jsonArray;
@@ -37,31 +38,9 @@
     if(remoteHostStatus != NotReachable) {
         
         // load Data from hyperplanning json flux
-        NSString *url = [@PRODSERVER stringByAppendingString:@"rest/actualites/"];
-        url = [url stringByAppendingString:_indexOfArticle];
-        
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-        NSURLResponse *response;
-        NSError *error;
-        
-        NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-        if (data == nil) {
-            if (error != nil)
-                NSLog(@"Echec connection (%@)", [error localizedDescription]);
-            else
-                NSLog(@"Echec de la connection");
-            
-            return NO;
-        }
-        NSError *errorDecoding;
-        _jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
-        if (errorDecoding == nil) {
-            //NSLog(@"jsonArray= %@",jsonArray);
-            return YES;
-        } else {
-            NSLog(@"errorDecoding= %@",errorDecoding);
-            return NO;
-        }
+        NSString *url = [[@PRODSERVER stringByAppendingString:@"rest/actualites/"] stringByAppendingString:_indexOfArticle];
+        _jsonArray = [NSArray arrayWithContentsOfJSONFile:url];
+        return (_jsonArray != nil);
     } else {
         NSLog(@"NOT Connected !");
         return NO;
@@ -90,10 +69,6 @@
         dispatch_async(dispatch_get_main_queue(), ^(void) {
              // update webview
              if (isDataloaded) {
-                //NSDictionary  *body = [_jsonArray objectForKey:@"contenu"];
-                //NSArray  *und = [body objectForKey:@"und"];
-                //NSString *textArticle =[[und objectAtIndex:0] objectForKey:@"safe_value"];
-                 
                 NSDictionary *obj = [_jsonArray objectAtIndex:0];
                 NSString *textArticle = [obj objectForKey:@"contenu"];
                 [self.articleWebview loadHTMLString:textArticle baseURL:nil];

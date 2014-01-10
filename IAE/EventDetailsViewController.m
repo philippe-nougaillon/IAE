@@ -11,6 +11,7 @@
 #import "EventKit/EventKit.h"
 #import "Event.h"
 #import "AppDelegate.h"
+#import "NSArray+arrayWithContentsOfJSONFile.h"
 
 @interface EventDetailsViewController ()
 @property (nonatomic,strong) NSArray *jsonArray;
@@ -48,30 +49,11 @@
         NSString *url = [@PRODSERVER stringByAppendingString:@"rest/evenements/"];
         url = [url stringByAppendingString:_indexOfEvent];
         
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-        NSURLResponse *response;
-        NSError *error;
-        
-        NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-        
-        if (data == nil) {
-            if (error != nil)
-                NSLog(@"Echec connection (%@)", [error localizedDescription]);
-            else
-                NSLog(@"Echec de la connection");
-            
-            return NO;
-        }
-        
-        NSError *errorDecoding;
-        _jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
-        if (errorDecoding == nil) {
-            return YES;
-        } else {
-            NSLog(@"errorDecoding= %@",errorDecoding);
-            return NO;
-        }
+        // load Data from hyperplanning json flux
+        _jsonArray = [NSArray arrayWithContentsOfJSONFile:url];
+        return (_jsonArray != nil);
     } else {
+        NSLog(@"NOT Connected !");
         return NO;
     }
 }
