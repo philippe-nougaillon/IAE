@@ -15,6 +15,7 @@
 #import "PlanningViewController.h"
 #import "Article.h"
 #import "NSArray+arrayWithContentsOfJSONFile.h"
+#import "NSString+stringWithDateUSContent.h"
 
 @interface ArticlesTableViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *articlesTableView;
@@ -222,21 +223,8 @@
     NSString *titre = [obj objectForKey:@"titre"];
     NSString *nid = [obj objectForKey:@"nid"];
     NSString *dateEvent = [[obj objectForKey:@"when"] objectAtIndex:0];
-    
-    // conversion de string en date format US
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate *dateUS = [dateFormatter dateFromString:dateEvent];
-    
-    // conversion date US en string FR
-    NSDateFormatter *dateFormatterFR = [[NSDateFormatter alloc] init];
-    [dateFormatterFR setTimeStyle:NSDateFormatterFullStyle];
-    [dateFormatterFR setDateStyle:NSDateFormatterFullStyle];
-    [dateFormatterFR setLocale:[NSLocale currentLocale]];
-    //[dateFormatterFR setDateFormat:@"dd MMM yyyy HH:mm"];
-    [dateFormatterFR setDateFormat:@"dd MMM yyyy"];
-    NSString *dateFR = [dateFormatterFR stringFromDate:dateUS];
-    
+    NSString *dateFR = [NSString stringDateWithDateUSContent:dateEvent];
+   
     // get image filename
     NSString *filePathToImage;
     if (![[obj objectForKey:@"vignette"] isEqual:[NSNull null]]) {

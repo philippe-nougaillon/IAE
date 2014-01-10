@@ -25,6 +25,7 @@
 		4A045C8517FC036400E2E2BA /* IAETests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A045C8417FC036400E2E2BA /* IAETests.m */; };
 		4A045C9017FC299900E2E2BA /* PlanningCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A045C8F17FC299900E2E2BA /* PlanningCell.m */; };
 		4A127C3C187FFE2300BB6708 /* NSArray+arrayWithContentsOfJSONFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A127C3B187FFE2300BB6708 /* NSArray+arrayWithContentsOfJSONFile.m */; };
+		4A127C3F18801DB000BB6708 /* NSString+stringWithDateUSContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A127C3E18801DB000BB6708 /* NSString+stringWithDateUSContent.m */; };
 		4A1F0D181827BD0200027A8B /* ArticlesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1F0D171827BD0200027A8B /* ArticlesCell.m */; };
 		4A20BCC5182BC6BF00E5EF8C /* iae-paris1-rue.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A20BCC4182BC6BF00E5EF8C /* iae-paris1-rue.png */; };
 		4A3681B0182D2AA500310672 /* ArticlesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3681AF182D2AA500310672 /* ArticlesTableViewController.m */; };
@@ -96,6 +97,8 @@
 		4A045C8F17FC299900E2E2BA /* PlanningCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanningCell.m; sourceTree = "<group>"; };
 		4A127C3A187FFE2300BB6708 /* NSArray+arrayWithContentsOfJSONFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+arrayWithContentsOfJSONFile.h"; path = "../NSArray+arrayWithContentsOfJSONFile.h"; sourceTree = "<group>"; };
 		4A127C3B187FFE2300BB6708 /* NSArray+arrayWithContentsOfJSONFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+arrayWithContentsOfJSONFile.m"; path = "../NSArray+arrayWithContentsOfJSONFile.m"; sourceTree = "<group>"; };
+		4A127C3D18801DB000BB6708 /* NSString+stringWithDateUSContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+stringWithDateUSContent.h"; sourceTree = "<group>"; };
+		4A127C3E18801DB000BB6708 /* NSString+stringWithDateUSContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+stringWithDateUSContent.m"; sourceTree = "<group>"; };
 		4A1F0D161827BD0200027A8B /* ArticlesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticlesCell.h; sourceTree = "<group>"; };
 		4A1F0D171827BD0200027A8B /* ArticlesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticlesCell.m; sourceTree = "<group>"; };
 		4A20BCC4182BC6BF00E5EF8C /* iae-paris1-rue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iae-paris1-rue.png"; sourceTree = "<group>"; };
@@ -240,6 +243,8 @@
 				4A045C5A17FC036300E2E2BA /* Supporting Files */,
 				4A127C3A187FFE2300BB6708 /* NSArray+arrayWithContentsOfJSONFile.h */,
 				4A127C3B187FFE2300BB6708 /* NSArray+arrayWithContentsOfJSONFile.m */,
+				4A127C3D18801DB000BB6708 /* NSString+stringWithDateUSContent.h */,
+				4A127C3E18801DB000BB6708 /* NSString+stringWithDateUSContent.m */,
 			);
 			path = IAE;
 			sourceTree = "<group>";
@@ -448,6 +453,7 @@
 				4A045C6417FC036300E2E2BA /* AppDelegate.m in Sources */,
 				845EA397187B0670007E5F84 /* FormationDetailsViewController.m in Sources */,
 				4AAE223218587EBF003A3227 /* Article.m in Sources */,
+				4A127C3F18801DB000BB6708 /* NSString+stringWithDateUSContent.m in Sources */,
 				4AC744C1182A55E00087E45F /* EventDetailsViewController.m in Sources */,
 				4AE478C518044B0A00C8CD7E /* twitterCell.m in Sources */,
 				4A045C6D17FC036300E2E2BA /* PlanningViewController.m in Sources */,

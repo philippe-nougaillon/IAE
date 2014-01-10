@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import "Event.h"
 #import "NSArray+arrayWithContentsOfJSONFile.h"
+#import "NSString+stringWithDateUSContent.h"
 
 @interface EventsViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *eventsTableView;
@@ -57,7 +58,6 @@
     NetworkStatus remoteHostStatus = [reachability currentReachabilityStatus];
     
     if(remoteHostStatus != NotReachable) {
-        // load Data from hyperplanning json flux
         _jsonArray = [NSArray arrayWithContentsOfJSONFile:[@PRODSERVER stringByAppendingString:@"rest/evenements"]];
         return (_jsonArray != nil);
     } else {
@@ -155,25 +155,6 @@
     }
 }
 
--(NSArray*)getRemoteEvents {
-    
-    // read json remote source
-    NSURLRequest *request = [NSURLRequest requestWithURL:
-                             [NSURL URLWithString:@"http://iae.philnoug.com/rest/events.json"]];
-    NSURLResponse *response;
-    NSError *error;
-    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    
-    if (error == nil) {
-        NSArray *jsonArray;
-        NSError *errorDecoding;
-        jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
-        return jsonArray;
-    }
-    else
-        return nil;
-    
-}
 
 -(void)refreshEventsList {
     
@@ -213,7 +194,7 @@
         NSLog(@"refresh Local Data");
         
         // read json remote source
-        NSArray *jsonArray = [self getRemoteEvents];
+        NSArray *jsonArray = [NSArray arrayWithContentsOfJSONFile:[@PRODSERVER stringByAppendingString:@"rest/evenements"]];
         
         //get first article nid
         NSDictionary *obj = [jsonArray firstObject];
@@ -288,25 +269,11 @@
     NSString *nid = [obj objectForKey:@"nid"];
     NSString *soustitre = [obj objectForKey:@"chapo"];
     NSString *dateEvent = [[obj objectForKey:@"when"] objectAtIndex:0];
-    
-    // conversion de string en date format US
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate *dateUS = [dateFormatter dateFromString:dateEvent];
-    
-    // conversion date US en string FR
-    NSDateFormatter *dateFormatterFR = [[NSDateFormatter alloc] init];
-    [dateFormatterFR setTimeStyle:NSDateFormatterFullStyle];
-    [dateFormatterFR setDateStyle:NSDateFormatterFullStyle];
-    [dateFormatterFR setLocale:[NSLocale currentLocale]];
-    //[dateFormatterFR setDateFormat:@"dd MMM yyyy HH:mm"];
-    [dateFormatterFR setDateFormat:@"dd MMM"];
-    NSString *dateFR = [dateFormatterFR stringFromDate:dateUS];
+    NSString *dateFR = [NSString stringDateSmallWithDateUSContent:dateEvent];
     
     // Add Entry to Article Database
     Event *newEntry = [NSEntityDescription insertNewObjectForEntityForName:@"Event"
                                                       inManagedObjectContext:self.managedObjectContext];
-    
     newEntry.title = titre;
     newEntry.nid = nid;
     newEntry.subtitle = soustitre;
