@@ -82,6 +82,9 @@
 
 -(void)refreshListView{
 
+    // remove all notification observer for this view
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
     // Start an activity indicator here
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
@@ -103,6 +106,13 @@
             
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             [activityView removeFromSuperview];
+            
+            // register to refresh UI when ApplicationDidBecomeActive
+            [[NSNotificationCenter defaultCenter]addObserver:self
+                                                    selector:@selector(refreshListView)
+                                                        name:UIApplicationDidBecomeActiveNotification
+                                                      object:nil];
+
         });
     });
 }

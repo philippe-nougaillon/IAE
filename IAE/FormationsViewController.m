@@ -177,6 +177,10 @@ titleForHeaderInSection:(NSInteger)section
     return shouldSegue;
 
 }
+- (IBAction)fermerButtonPressed:(id)sender {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 // In a story board-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
