@@ -158,24 +158,36 @@
 
 -(void)refreshEventsList {
     
-    NSLog(@"refreshArticlesList");
+    Reachability *reachability = [Reachability reachabilityWithHostName:@"google.com"];
+    NetworkStatus remoteHostStatus = [reachability currentReachabilityStatus];
     
-    // Check if remote data are more recent
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    // check if network is up
+    if(remoteHostStatus != NotReachable) {
+        NSLog(@"refreshArticlesList");
         
         // Check if remote data are more recent
-        BOOL refresh = [self refreshLocalData];
-        
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
-            if (refresh) {
-                // refresh tableview with local data
-                _fetchedRecordsArray = [self getAllEvents];
-                [self.tableView reloadData];
-                NSLog(@"refreshEventsList tableView reloadData");
-            }
+            // Check if remote data are more recent
+            BOOL refresh = [self refreshLocalData];
+            
+            dispatch_async(dispatch_get_main_queue(), ^(void) {
+                
+                if (refresh) {
+                    // refresh tableview with local data
+                    _fetchedRecordsArray = [self getAllEvents];
+                    [self.tableView reloadData];
+                    NSLog(@"refreshEventsList tableView reloadData");
+                }
+            });
         });
-    });
+        
+    } else {
+        NSLog(@"NOT Connected !");
+        UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"" message:@"Pas de connection" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+        alertView1.alertViewStyle = UIAlertViewStyleDefault;
+        [alertView1 show];
+    }
 }
 
 -(BOOL)refreshLocalData {
@@ -227,28 +239,11 @@
 
 -(void)addAllRemoteEventsToLocalDatabase {
     
-    // read json source
-    NSURLRequest *request = [NSURLRequest requestWithURL:
-                             [NSURL URLWithString:[@PRODSERVER stringByAppendingString:@"rest/evenements"]]];
-    NSURLResponse *response;
-    NSError *error;
+    NSLog(@"store events data from json items");
     
-    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    if (data == nil) {
-        if (error != nil)
-            NSLog(@"Echec connection (%@)", [error localizedDescription]);
-        else
-            NSLog(@"Echec de la connection");
+    // read json remote source
+    NSArray *jsonArray = [NSArray arrayWithContentsOfJSONFile:[@PRODSERVER stringByAppendingString:@"rest/evenements"]];
         
-        UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"Echec de la connection" message:@"Il semble que vous n'avez pas accès à internet." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-        alertView1.alertViewStyle = UIAlertViewStyleDefault;
-        [alertView1 show];
-    }
-    
-    NSArray *jsonArray;
-    NSError *errorDecoding;
-    jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorDecoding];
-    
     // for each array item
     for (int index=0; index < jsonArray.count; index++) {
         

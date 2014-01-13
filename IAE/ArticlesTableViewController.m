@@ -200,7 +200,7 @@
 
 -(void)addAllRemoteArticlesToLocalDatabase {
     
-    NSLog(@"store data from json items");
+    NSLog(@"store articles data from json items");
     
     // read json remote source
     NSArray *jsonArray = [NSArray arrayWithContentsOfJSONFile:[@PRODSERVER stringByAppendingString:@"rest/actualites"]];

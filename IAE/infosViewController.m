@@ -29,7 +29,7 @@
 	// Do any additional setup after loading the view.
     
     // change scrollview height in order to show all content
-    [self.myScrollView setContentSize:CGSizeMake(320, 750)];
+    [self.myScrollView setContentSize:CGSizeMake(320, 640)];
     
  }
 
