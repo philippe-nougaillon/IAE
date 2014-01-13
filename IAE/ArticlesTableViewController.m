@@ -198,6 +198,8 @@
             [self addArticleToLocalDatabase:obj];
             
             refreshLocalData = YES;
+            self.navigationController.tabBarItem.badgeValue = @"1";
+            
         }
     }
     return refreshLocalData;

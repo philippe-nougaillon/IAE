@@ -7,6 +7,7 @@
 //
 
 #import "infosViewController.h"
+#import "ArticlesTableViewController.h"
 
 @interface infosViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
@@ -30,6 +31,14 @@
     
     // change scrollview height in order to show all content
     [self.myScrollView setContentSize:CGSizeMake(320, 640)];
+    
+    // get all Articles
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        ArticlesTableViewController* vc = [[ArticlesTableViewController alloc] init];
+        [vc loadData];
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+        });
+    });
     
  }
 

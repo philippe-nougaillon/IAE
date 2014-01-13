@@ -11,5 +11,5 @@
 @interface ArticlesTableViewController : UITableViewController
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-
+-(void)loadData;
 @end
