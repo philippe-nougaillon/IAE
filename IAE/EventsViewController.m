@@ -39,65 +39,21 @@
 
     // Uncomment the following line to preserve selection between presentations.
     //self.clearsSelectionOnViewWillAppear = NO;
-    
-    [self refreshButtonPressed:nil];
-    
-    // register to refresh UI when ApplicationDidBecomeActive
-    [[NSNotificationCenter defaultCenter]addObserver:self
-                                            selector:@selector(refreshListView)
-                                                name:UIApplicationDidBecomeActiveNotification
-                                              object:nil];
-    
+
+    NSLog(@"[Events]viewDidLoad");
     [self loadEventsData];
     
 }
 
--(BOOL)loadData
+- (void)viewDidAppear:(BOOL)animated
 {
-    Reachability* reachability = [Reachability reachabilityWithHostName:@"google.com"];
-    NetworkStatus remoteHostStatus = [reachability currentReachabilityStatus];
-    
-    if(remoteHostStatus != NotReachable) {
-        _jsonArray = [NSArray arrayWithContentsOfJSONFile:[@PRODSERVER stringByAppendingString:@"rest/evenements"]];
-        return (_jsonArray != nil);
-    } else {
-        NSLog(@"NOT Connected !");
-        return NO;
-    }
-}
+    NSLog(@"[Events]viewDidAppear");
 
--(void)refreshListView {
-
-    //Start an activity indicator here
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    
-    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    activityView.center = self.view.center;
-    [activityView startAnimating];
-    [self.view addSubview:activityView];
-    
-    // Async load event content
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        // Rload event content
-        BOOL isDataLoaded = [self loadData];
-        
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            // UI refresh
-            if (isDataLoaded) {
-                [self.eventsTableView reloadData];
-            }
-            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-            [activityView removeFromSuperview];
-        });
-    });
-
-}
-
-- (IBAction)refreshButtonPressed:(id)sender {
-    
-    [self refreshListView];
-
+    // register to refresh UI when ApplicationDidBecomeActive
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(refreshEventsListView)
+                                                name:UIApplicationDidBecomeActiveNotification
+                                              object:nil];
 }
 
 -(void)loadEventsData
@@ -111,7 +67,7 @@
     // check if network is up
     if(remoteHostStatus != NotReachable) {
         
-        NSLog(@"Load Events Data");
+        NSLog(@"[Events]LoadEventsData");
         //Start an activity indicator here
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         
@@ -126,7 +82,7 @@
         
         // check if database exist
         if ([appDelegate isDatabaseExist:@"Event" ]) {
-            NSLog(@"Events database exist");
+            NSLog(@"[Events]LoadEventsData->Database exist");
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 
@@ -140,6 +96,7 @@
             });
         } else {
             // reload data from json and store items
+            NSLog(@"[Events]LoadEventsData->Database don't exist");
             [self addAllRemoteEventsToLocalDatabase];
             _fetchedRecordsArray = [self getAllEvents];
             [self.tableView reloadData];
@@ -148,46 +105,91 @@
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         [activityView removeFromSuperview];
     } else {
-        NSLog(@"NOT Connected !");
+        NSLog(@"[Events]LoadEventsData->NOT Connected !");
         UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"" message:@"Pas de connection" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
         alertView1.alertViewStyle = UIAlertViewStyleDefault;
         [alertView1 show];
     }
 }
 
+- (IBAction)refreshButtonPressed:(id)sender {
+    
+    [self refreshEventsListView];
+    
+}
 
--(void)refreshEventsList {
+-(void)refreshEventsListView {
+
     
     Reachability *reachability = [Reachability reachabilityWithHostName:@"google.com"];
     NetworkStatus remoteHostStatus = [reachability currentReachabilityStatus];
     
     // check if network is up
     if(remoteHostStatus != NotReachable) {
-        NSLog(@"refreshArticlesList");
+
+        NSLog(@"[Events]refreshEventsListView");
         
-        // Check if remote data are more recent
+        // remove notification
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+        
+        //Start an activity indicator here
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        
+        UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        activityView.center = self.view.center;
+        [activityView startAnimating];
+        [self.view addSubview:activityView];
+        
+        // Async load event content
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
-            // Check if remote data are more recent
-            BOOL refresh = [self refreshLocalData];
+            // Reload event content
+            _jsonArray = [NSArray arrayWithContentsOfJSONFile:[@PRODSERVER stringByAppendingString:@"rest/evenements"]];
             
             dispatch_async(dispatch_get_main_queue(), ^(void) {
+                // UI refresh
+                [self.eventsTableView reloadData];
+                // stop activity indicator
+                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                [activityView removeFromSuperview];
+                // register to refresh UI when ApplicationDidBecomeActive
+                [[NSNotificationCenter defaultCenter]addObserver:self
+                                                        selector:@selector(refreshEventsListView)
+                                                            name:UIApplicationDidBecomeActiveNotification
+                                                          object:nil];
                 
-                if (refresh) {
-                    // refresh tableview with local data
-                    _fetchedRecordsArray = [self getAllEvents];
-                    [self.tableView reloadData];
-                    NSLog(@"refreshEventsList tableView reloadData");
-                }
             });
         });
-        
     } else {
-        NSLog(@"NOT Connected !");
-        UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"" message:@"Pas de connection" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-        alertView1.alertViewStyle = UIAlertViewStyleDefault;
-        [alertView1 show];
+        NSLog(@"[Events]refreshEventsListView->No connection");
+    
     }
+}
+
+
+
+
+-(void)refreshEventsList {
+    
+    NSLog(@"[Events]refreshArticlesList");
+    
+    // Check if remote data are more recent
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        // Check if remote data are more recent
+        BOOL refresh = [self refreshLocalData];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            
+            if (refresh) {
+                // refresh tableview with local data
+                _fetchedRecordsArray = [self getAllEvents];
+                [self.tableView reloadData];
+                NSLog(@"[Events]refreshEventsList->tableView reloadData");
+            }
+        });
+    });
+    
 }
 
 -(BOOL)refreshLocalData {
@@ -197,49 +199,43 @@
     //
     BOOL refreshLocalData = NO;
     
-    Reachability* reachability = [Reachability reachabilityWithHostName:@"google.com"];
-    NetworkStatus remoteHostStatus = [reachability currentReachabilityStatus];
+    NSLog(@"[Events]refreshLocalData");
     
-    // check if network is up
-    if(remoteHostStatus != NotReachable) {
+    // read json remote source
+    NSArray *jsonArray = [NSArray arrayWithContentsOfJSONFile:[@PRODSERVER stringByAppendingString:@"rest/evenements"]];
+    
+    //get first article nid
+    NSDictionary *obj = [jsonArray firstObject];
+    NSString *remoteEventNid = [obj objectForKey:@"nid"];
+    
+    // get last article in local storage
+    Event *localFirstEvent = [_fetchedRecordsArray firstObject];
+    int localNid = [localFirstEvent.nid intValue];
+    
+    // add each new remote item
+    for (int index=0; index < jsonArray.count; index++) {
         
-        NSLog(@"refresh Local Data");
+        //get Article title and date
+        NSDictionary *obj = [jsonArray objectAtIndex:index];
+        int remoteNid = [[obj objectForKey:@"nid"] intValue];
         
-        // read json remote source
-        NSArray *jsonArray = [NSArray arrayWithContentsOfJSONFile:[@PRODSERVER stringByAppendingString:@"rest/evenements"]];
-        
-        //get first article nid
-        NSDictionary *obj = [jsonArray firstObject];
-        NSString *remoteEventNid = [obj objectForKey:@"nid"];
-        
-        // get last article in local storage
-        Event *localFirstEvent = [_fetchedRecordsArray firstObject];
-        int localNid = [localFirstEvent.nid intValue];
-        
-        // add each new remote item
-        for (int index=0; index < jsonArray.count; index++) {
+        // if remote item id is lower then last item id, add it
+        if (remoteNid > localNid) {
+            NSLog(@"[Events]refreshLocalData-> adding item id:%@", remoteEventNid);
             
-            //get Article title and date
-            NSDictionary *obj = [jsonArray objectAtIndex:index];
-            int remoteNid = [[obj objectForKey:@"nid"] intValue];
+            // save Item to database
+            [self addEventToLocalDatabase:obj];
             
-            // if remote item id is lower then last item id, add it
-            if (remoteNid > localNid) {
-                NSLog(@"adding item id:%@", remoteEventNid);
-                
-                // save Item to database
-                [self addEventToLocalDatabase:obj];
-                
-                refreshLocalData = YES;
-            }
+            refreshLocalData = YES;
         }
     }
     return refreshLocalData;
+
 }
 
 -(void)addAllRemoteEventsToLocalDatabase {
     
-    NSLog(@"store events data from json items");
+    NSLog(@"[Events]refreshLocalData-> store events data from json items");
     
     // read json remote source
     NSArray *jsonArray = [NSArray arrayWithContentsOfJSONFile:[@PRODSERVER stringByAppendingString:@"rest/evenements"]];
@@ -259,6 +255,7 @@
     
     // save an item to database
     //
+    NSLog(@"[Events]addEventToLocalDatabase");
         
     NSString *titre = [obj objectForKey:@"titre"];
     NSString *nid = [obj objectForKey:@"nid"];
@@ -277,12 +274,15 @@
     
     NSError *error;
     if (![self.managedObjectContext save:&error]) {
-        NSLog(@"Whoops, couldn't new item save: %@", [error localizedDescription]);
+        NSLog(@"[Events]addEventToLocalDatabase->Whoops, couldn't new item save: %@", [error localizedDescription]);
     }
 }
 
 -(NSArray*)getAllEvents
 {
+    
+    NSLog(@"[Events]getAllEvents");
+    
     // initializing NSFetchRequest
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     

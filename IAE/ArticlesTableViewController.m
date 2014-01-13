@@ -64,7 +64,7 @@
     // check if network is up
     if(remoteHostStatus != NotReachable) {
 
-        NSLog(@"loadata");
+        NSLog(@"[Articles]loadData->Connection ok, first load of Articles");
         //Start an activity indicator here
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         
@@ -79,19 +79,17 @@
         
         // check if database exist
         if ([appDelegate isDatabaseExist:@"Article" ]) {
-            NSLog(@"loadata database exist");
-
+            NSLog(@"[Articles]loadData->database exist");
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                
                 // get all items
                 _fetchedRecordsArray = [self getAllArticles];
-                
                 dispatch_async(dispatch_get_main_queue(), ^(void) {
                     // refresh tableview with local data
                     [self.tableView reloadData];
                 });
             });
         } else {
+            NSLog(@"[Articles]loadData->database NOT exist");
             // reload data from json and store items
             [self addAllRemoteArticlesToLocalDatabase];
             _fetchedRecordsArray = [self getAllArticles];
@@ -101,7 +99,7 @@
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         [activityView removeFromSuperview];
     } else {
-        NSLog(@"NOT Connected !");
+        NSLog(@"[Articles]loadData->Connection not OK");
         UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"" message:@"Pas de connection" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
         alertView1.alertViewStyle = UIAlertViewStyleDefault;
         [alertView1 show];
@@ -120,35 +118,49 @@
     // Check if remote data are more recent
     //
     
-    NSLog(@"refreshArticlesList");
+    Reachability *reachability = [Reachability reachabilityWithHostName:@"google.com"];
+    NetworkStatus remoteHostStatus = [reachability currentReachabilityStatus];
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    activityView.center = self.view.center;
-    [activityView startAnimating];
-    [self.view addSubview:activityView];
+    // check if network is up
+    if(remoteHostStatus != NotReachable) {
 
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSLog(@"[Articles]refreshArticlesList");
         
-        // Check if remote data are more recent
-        BOOL refresh = [self refreshLocalData];
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            if (refresh) {
-                // refresh tableview with local data
-                _fetchedRecordsArray = [self getAllArticles];
-                [self.tableView reloadData];
-                NSLog(@"refreshArticlesList tableView reloadData");
-            }
-            [activityView removeFromSuperview];
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+        
+        //Start an activity indicator here
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        
+        UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        activityView.center = self.view.center;
+        [activityView startAnimating];
+        [self.view addSubview:activityView];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
-            // register to refresh UI when ApplicationDidBecomeActive
-            [[NSNotificationCenter defaultCenter]addObserver:self
-                                                    selector:@selector(refreshArticlesList)
-                                                        name:UIApplicationDidBecomeActiveNotification
-                                                      object:nil];
+            // Check if remote data are more recent
+            BOOL refresh = [self refreshLocalData];
+            
+            dispatch_async(dispatch_get_main_queue(), ^(void) {
+                if (refresh) {
+                    // refresh tableview with local data
+                    _fetchedRecordsArray = [self getAllArticles];
+                    [self.tableView reloadData];
+                    NSLog(@"[Articles]refreshArticlesList->tableView reloadData");
+                }
+                [activityView removeFromSuperview];
+                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                
+                // register to refresh UI when ApplicationDidBecomeActive
+                [[NSNotificationCenter defaultCenter]addObserver:self
+                                                        selector:@selector(refreshArticlesList)
+                                                            name:UIApplicationDidBecomeActiveNotification
+                                                          object:nil];
+            });
         });
-    });
+    } else {
+        NSLog(@"[Articles]refreshArticlesList->No connection");
+    }
 }
 
 -(BOOL)refreshLocalData {
@@ -158,41 +170,34 @@
     //
     BOOL refreshLocalData = NO;
     
-    Reachability* reachability = [Reachability reachabilityWithHostName:@"google.com"];
-    NetworkStatus remoteHostStatus = [reachability currentReachabilityStatus];
+    NSLog(@"[Articles]refreshLocalData");
     
-    // check if network is up
-    if(remoteHostStatus != NotReachable) {
- 
-        NSLog(@"refresh Local Data");
+    // read json remote source
+    NSArray *jsonArray = [NSArray arrayWithContentsOfFile:[@PRODSERVER stringByAppendingString:@"rest/actualites"]];
+    
+    //get first article nid
+    NSDictionary *obj = [jsonArray firstObject];
+    NSString *remoteArticleNid = [obj objectForKey:@"nid"];
+    
+    // get last article in local storage
+    Article *localFirstArticle = [_fetchedRecordsArray firstObject];
+    int localNid = [localFirstArticle.nid intValue];
+    
+    // add each new remote item
+    for (int index=0; index < jsonArray.count; index++) {
         
-        // read json remote source
-        NSArray *jsonArray = [NSArray arrayWithContentsOfFile:[@PRODSERVER stringByAppendingString:@"rest/actualites"]];
+        //get Article title and date
+        NSDictionary *obj = [jsonArray objectAtIndex:index];
+        int remoteNid = [[obj objectForKey:@"nid"] intValue];
         
-        //get first article nid
-        NSDictionary *obj = [jsonArray firstObject];
-        NSString *remoteArticleNid = [obj objectForKey:@"nid"];
-        
-        // get last article in local storage
-        Article *localFirstArticle = [_fetchedRecordsArray firstObject];
-        int localNid = [localFirstArticle.nid intValue];
-        
-        // add each new remote item
-        for (int index=0; index < jsonArray.count; index++) {
+        // if remote item id is lower then last item id, add it
+        if (remoteNid > localNid) {
+            NSLog(@"[Articles]adding item id:%@", remoteArticleNid);
             
-            //get Article title and date
-            NSDictionary *obj = [jsonArray objectAtIndex:index];
-            int remoteNid = [[obj objectForKey:@"nid"] intValue];
+            // save Item to database
+            [self addArticleToLocalDatabase:obj];
             
-            // if remote item id is lower then last item id, add it
-            if (remoteNid > localNid) {
-                NSLog(@"adding item id:%@", remoteArticleNid);
-                
-                // save Item to database
-                [self addArticleToLocalDatabase:obj];
-                
-                refreshLocalData = YES;
-            }
+            refreshLocalData = YES;
         }
     }
     return refreshLocalData;
@@ -200,7 +205,7 @@
 
 -(void)addAllRemoteArticlesToLocalDatabase {
     
-    NSLog(@"store articles data from json items");
+    NSLog(@"[Articles]addAllRemoteArticlesToLocalDatabase");
     
     // read json remote source
     NSArray *jsonArray = [NSArray arrayWithContentsOfJSONFile:[@PRODSERVER stringByAppendingString:@"rest/actualites"]];
@@ -217,6 +222,9 @@
 }
 
 -(void)addArticleToLocalDatabase:(NSDictionary*)obj {
+   
+    
+    NSLog(@"[Articles]addArticleToLocalDatabase");
     
     // save an item to database
     //
@@ -257,12 +265,15 @@
     
     NSError *error;
     if (![self.managedObjectContext save:&error]) {
-        NSLog(@"Whoops, couldn't new item save: %@", [error localizedDescription]);
+        NSLog(@"[Articles]addArticleToLocalDatabase->Whoops, couldn't new item save: %@", [error localizedDescription]);
     }
 }
 
 -(NSArray*)getAllArticles
 {
+    
+    NSLog(@"[Articles]getAllArticles-> from Local Database");
+    
     // initializing NSFetchRequest
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     

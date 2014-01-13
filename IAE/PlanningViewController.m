@@ -28,73 +28,65 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
-    [self refreshButtonPressed:nil];
-    
+
+    [self refreshListView];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+
     // register to refresh UI when ApplicationDidBecomeActive
     [[NSNotificationCenter defaultCenter]addObserver:self
                                             selector:@selector(refreshListView)
                                                 name:UIApplicationDidBecomeActiveNotification
                                               object:nil];
+
 }
 
--(BOOL)loadData
-{
+-(void)refreshListView{
+    
     // load Data from hyperplanning json flux
-    NSLog(@"load data from hyperplanning");
     Reachability* reachability = [Reachability reachabilityWithHostName:@"google.com"];
     NetworkStatus remoteHostStatus = [reachability currentReachabilityStatus];
     
     if(remoteHostStatus != NotReachable) {
-      
-        _jsonArray = [NSArray arrayWithContentsOfJSONFile:@"https://entiae.univ-paris1.fr/hyperjson/index.php"];
-        if (_jsonArray != nil) {
-            // Store original planning for future search
+
+        NSLog(@"[Planning]refreshListView->Connection OK");
+
+        // remove all notification observer for this view
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+        
+        // Start an activity indicator here
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        
+        UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        activityView.center = self.view.center;
+        [activityView startAnimating];
+        [self.view addSubview:activityView];
+        
+        // async load planning
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            // Reload planning
+            _jsonArray = [NSArray arrayWithContentsOfJSONFile:@"https://entiae.univ-paris1.fr/hyperjson/index.php"];
             _originalPlanningArray = _jsonArray;
-            return YES;
-        } else {
-            return NO;
-        }
-    } else {
-        NSLog(@"Not connected");
-        return NO;
-    }
-}
-
--(void)refreshListView{
-
-    // remove all notification observer for this view
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    // Start an activity indicator here
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    
-    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    activityView.center = self.view.center;
-    [activityView startAnimating];
-    [self.view addSubview:activityView];
-
-    // async load planning
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        // Reload planning
-        BOOL isDataLoaded = [self loadData];
-        
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            // Update UI
-            if (isDataLoaded)
+            
+            dispatch_async(dispatch_get_main_queue(), ^(void) {
+                // Update UI
                 [self.planningTableView reloadData];
-            
-            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-            [activityView removeFromSuperview];
-            
-            // register to refresh UI when ApplicationDidBecomeActive
-            [[NSNotificationCenter defaultCenter]addObserver:self
-                                                    selector:@selector(refreshListView)
-                                                        name:UIApplicationDidBecomeActiveNotification
-                                                      object:nil];
+                
+                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                [activityView removeFromSuperview];
+                
+                // register to refresh UI when ApplicationDidBecomeActive
+                [[NSNotificationCenter defaultCenter]addObserver:self
+                                                        selector:@selector(refreshListView)
+                                                            name:UIApplicationDidBecomeActiveNotification
+                                                          object:nil];
+            });
         });
-    });
+        
+    }
 }
 
 - (IBAction)refreshButtonPressed:(id)sender {

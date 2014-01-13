@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface PlanningViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate>
--(BOOL)loadData;
+
 @end
