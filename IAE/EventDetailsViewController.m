@@ -7,7 +7,6 @@
 //
 
 #import "EventDetailsViewController.h"
-#import "Reachability.h"
 #import "EventKit/EventKit.h"
 #import "Event.h"
 #import "AppDelegate.h"

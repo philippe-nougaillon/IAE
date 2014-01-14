@@ -6,20 +6,18 @@
 //  Copyright (c) 2013 Philippe Nougaillon. All rights reserved.
 //
 
-#import "Reachability.h"
 #import "AppDelegate.h"
 
 #import "ArticlesTableViewController.h"
 #import "ArticlesCell.h"
 #import "ArticleDetailsViewController.h"
-#import "PlanningViewController.h"
 #import "Article.h"
 #import "NSArray+arrayWithContentsOfJSONFile.h"
 #import "NSString+stringWithDateUSContent.h"
 
 @interface ArticlesTableViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *articlesTableView;
-@property (nonatomic,strong) NSArray *fetchedRecordsArray;
+@property (strong, nonatomic) NSArray *fetchedRecordsArray;
 @end
 
 
@@ -57,51 +55,54 @@
 {
     // load data from local items or stored items
     //
+    NSLog(@"[Articles]loadData");
+
+    // setup database context
+    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+    self.managedObjectContext = appDelegate.managedObjectContext;
     
-    Reachability *reachability = [Reachability reachabilityWithHostName:@"google.com"];
-    NetworkStatus remoteHostStatus = [reachability currentReachabilityStatus];
-
-    // check if network is up
-    if(remoteHostStatus != NotReachable) {
-
-        NSLog(@"[Articles]loadData->Connection ok, first load of Articles");
+    if ([appDelegate isDatabaseExist:@"Article" ]) {
+        
+        NSLog(@"[Articles]loadData->database exist, loading records");
+        _fetchedRecordsArray = [self getAllArticles];
+        [self.tableView reloadData];
+        
+    } else {
+        NSLog(@"[Articles]loadData->database NOT exist");
+        
         //Start an activity indicator here
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         
-        // setup database context
-        AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
-        self.managedObjectContext = appDelegate.managedObjectContext;
+        UIActivityIndicatorView *activityView =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        activityView.center = self.view.center;
+        [activityView startAnimating];
+        [self.view addSubview:activityView];
         
-        // check if database exist
-        if ([appDelegate isDatabaseExist:@"Article" ]) {
-            NSLog(@"[Articles]loadData->database exist");
+        // check if network is up
+        Reachability* reachability = [Reachability reachabilityWithHostName:@"google.com"];
+        NetworkStatus remoteHostStatus = [reachability currentReachabilityStatus];
+        
+        if(remoteHostStatus != NotReachable) {
+        
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                // get all items
-                _fetchedRecordsArray = [self getAllArticles];
+                // reload data from json and store items
+                
+                _fetchedRecordsArray = [self addAllRemoteArticlesToLocalDatabase];
+            
                 dispatch_async(dispatch_get_main_queue(), ^(void) {
                     // refresh tableview with local data
                     [self.tableView reloadData];
+                    // hide activity monitor
+                    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                    [activityView removeFromSuperview];
                 });
             });
         } else {
-            NSLog(@"[Articles]loadData->database NOT exist");
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                // reload data from json and store items
-                [self addAllRemoteArticlesToLocalDatabase];
-                _fetchedRecordsArray = [self getAllArticles];
-                dispatch_async(dispatch_get_main_queue(), ^(void) {
-                    // refresh tableview with local data
-                    [self.tableView reloadData];
-                });
-            });
+            NSLog(@"[Articles]loadData->Connection not OK");
+            UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"" message:@"Pas de connection" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+            alertView1.alertViewStyle = UIAlertViewStyleDefault;
+            [alertView1 show];
         }
-        // hide activity monitor
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    } else {
-        NSLog(@"[Articles]loadData->Connection not OK");
-        UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"" message:@"Pas de connection" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-        alertView1.alertViewStyle = UIAlertViewStyleDefault;
-        [alertView1 show];
     }
 }
 
@@ -166,7 +167,7 @@
     NSLog(@"[Articles]refreshLocalData");
     
     // read json remote source
-    NSArray *jsonArray = [NSArray arrayWithContentsOfFile:[@PRODSERVER stringByAppendingString:@"rest/actualites"]];
+    NSArray *jsonArray = [NSArray arrayWithContentsOfJSONFile:[@PRODSERVER stringByAppendingString:@"rest/actualites"]];
     
     //get first article nid
     NSDictionary *obj = [jsonArray firstObject];
@@ -191,20 +192,22 @@
             [self addArticleToLocalDatabase:obj];
             
             refreshLocalData = YES;
-            self.navigationController.tabBarItem.badgeValue = @"1";
-            
+            //self.navigationController.tabBarItem.badgeValue = @"1";
         }
     }
+    NSLog(@"[Articles]refreshLocalData->%i", refreshLocalData);
     return refreshLocalData;
 }
 
--(void)addAllRemoteArticlesToLocalDatabase {
+-(NSArray*)addAllRemoteArticlesToLocalDatabase {
     
     NSLog(@"[Articles]addAllRemoteArticlesToLocalDatabase");
     
+    
     // read json remote source
-    NSArray *jsonArray = [NSArray arrayWithContentsOfJSONFile:[@PRODSERVER stringByAppendingString:@"rest/actualites"]];
-        
+    NSArray* jsonArray = [NSArray arrayWithContentsOfJSONFile:[@PRODSERVER stringByAppendingString:@"rest/actualites"]];
+    NSMutableArray* temp = [NSMutableArray arrayWithCapacity:jsonArray.count];
+    
     // for each array item
     for (int index=0; index < jsonArray.count; index++) {
         
@@ -212,11 +215,16 @@
         NSDictionary *obj = [jsonArray objectAtIndex:index];
         
         // save Item to database
-        [self addArticleToLocalDatabase:obj];
+        Article* article = [self addArticleToLocalDatabase:obj];
+        
+        // add Item to temp array
+        [temp addObject:article];
     }
+    
+    return temp;
 }
 
--(void)addArticleToLocalDatabase:(NSDictionary*)obj {
+-(Article*)addArticleToLocalDatabase:(NSDictionary*)obj {
    
     
     NSLog(@"[Articles]addArticleToLocalDatabase");
@@ -261,6 +269,8 @@
     if (![self.managedObjectContext save:&error]) {
         NSLog(@"[Articles]addArticleToLocalDatabase->Whoops, couldn't new item save: %@", [error localizedDescription]);
     }
+    
+    return newEntry;
 }
 
 -(NSArray*)getAllArticles

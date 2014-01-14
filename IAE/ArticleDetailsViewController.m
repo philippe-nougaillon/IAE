@@ -7,7 +7,6 @@
 //
 
 #import "ArticleDetailsViewController.h"
-#import "Reachability.h"
 #import "NSArray+arrayWithContentsOfJSONFile.h"
 
 @interface ArticleDetailsViewController ()

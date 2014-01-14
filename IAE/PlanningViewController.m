@@ -8,7 +8,6 @@
 
 #import "PlanningViewController.h"
 #import "PlanningCell.h"
-#import "Reachability.h"
 #import "NSArray+arrayWithContentsOfJSONFile.h"
 
 @interface PlanningViewController ()
@@ -59,6 +58,12 @@
         // Start an activity indicator here
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         
+        UIActivityIndicatorView *activityView =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        activityView.center = self.view.center;
+        [activityView startAnimating];
+        [self.view addSubview:activityView];
+        
+        
         // async load planning
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
@@ -71,6 +76,7 @@
                 [self.planningTableView reloadData];
                 
                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                [activityView removeFromSuperview];
                 
                 // register to refresh UI when ApplicationDidBecomeActive
                 [[NSNotificationCenter defaultCenter]addObserver:self

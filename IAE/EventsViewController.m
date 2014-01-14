@@ -9,7 +9,6 @@
 #import "EventsViewController.h"
 #import "EventsCell.h"
 #import "EventDetailsViewController.h"
-#import "Reachability.h"
 #import "AppDelegate.h"
 #import "Event.h"
 #import "NSArray+arrayWithContentsOfJSONFile.h"
@@ -61,51 +60,61 @@
     // load data from local items or stored items
     //
     
-    Reachability *reachability = [Reachability reachabilityWithHostName:@"google.com"];
-    NetworkStatus remoteHostStatus = [reachability currentReachabilityStatus];
+    NSLog(@"[Events]LoadEventsData");
     
-    // check if network is up
-    if(remoteHostStatus != NotReachable) {
+    // setup database context
+    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+    self.managedObjectContext = appDelegate.managedObjectContext;
+    
+    // check if database exist
+    if ([appDelegate isDatabaseExist:@"Event"]) {
         
-        NSLog(@"[Events]LoadEventsData");
+        NSLog(@"[Events]LoadEventsData->Database exist");
+        
+        // refresh tableview with local data
+        _fetchedRecordsArray = [self getAllEvents];
+        [self.tableView reloadData];
+        
+    } else {
+        
         //Start an activity indicator here
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         
-        // setup database context
-        AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
-        self.managedObjectContext = appDelegate.managedObjectContext;
+        UIActivityIndicatorView *activityView =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        activityView.center = self.view.center;
+        [activityView startAnimating];
+        [self.view addSubview:activityView];
         
-        // check if database exist
-        if ([appDelegate isDatabaseExist:@"Event" ]) {
-            NSLog(@"[Events]LoadEventsData->Database exist");
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                // get all items
-                _fetchedRecordsArray = [self getAllEvents];
-                dispatch_async(dispatch_get_main_queue(), ^(void) {
-                    // refresh tableview with local data
-                    [self.tableView reloadData];
-                });
-            });
-        } else {
+        Reachability *reachability = [Reachability reachabilityWithHostName:@"google.com"];
+        NetworkStatus remoteHostStatus = [reachability currentReachabilityStatus];
+        
+        // check if network is up
+        if(remoteHostStatus != NotReachable) {
+            
             // reload data from json and store items
             NSLog(@"[Events]LoadEventsData->Database don't exist");
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                
                 // get all items
-                [self addAllRemoteEventsToLocalDatabase];
-                _fetchedRecordsArray = [self getAllEvents];
+                _fetchedRecordsArray = [self addAllRemoteEventsToLocalDatabase];
+
                 dispatch_async(dispatch_get_main_queue(), ^(void) {
                     // refresh tableview with local data
                     [self.tableView reloadData];
+                    // hide activity monitor
+                    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                    [activityView removeFromSuperview];
+
                 });
             });
+        } else {
+            NSLog(@"[Events]LoadEventsData->NOT Connected !");
+            UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"" message:@"Pas de connection" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+            alertView1.alertViewStyle = UIAlertViewStyleDefault;
+            [alertView1 show];
         }
         // hide activity monitor
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    } else {
-        NSLog(@"[Events]LoadEventsData->NOT Connected !");
-        UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"" message:@"Pas de connection" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-        alertView1.alertViewStyle = UIAlertViewStyleDefault;
-        [alertView1 show];
     }
 }
 
@@ -218,12 +227,13 @@
 
 }
 
--(void)addAllRemoteEventsToLocalDatabase {
+-(NSArray*)addAllRemoteEventsToLocalDatabase {
     
     NSLog(@"[Events]refreshLocalData-> store events data from json items");
     
     // read json remote source
     NSArray *jsonArray = [NSArray arrayWithContentsOfJSONFile:[@PRODSERVER stringByAppendingString:@"rest/evenements"]];
+    NSMutableArray* temp = [NSMutableArray arrayWithCapacity:jsonArray.count];
         
     // for each array item
     for (int index=0; index < jsonArray.count; index++) {
@@ -232,11 +242,14 @@
         NSDictionary *obj = [jsonArray objectAtIndex:index];
         
         // save Item to database
-        [self addEventToLocalDatabase:obj];
+        Event* myEvent =[self addEventToLocalDatabase:obj];
+        [temp addObject:myEvent];
     }
+    
+    return temp;
 }
 
--(void)addEventToLocalDatabase:(NSDictionary*)obj {
+-(Event*)addEventToLocalDatabase:(NSDictionary*)obj {
     
     // save an item to database
     //
@@ -261,6 +274,8 @@
     if (![self.managedObjectContext save:&error]) {
         NSLog(@"[Events]addEventToLocalDatabase->Whoops, couldn't new item save: %@", [error localizedDescription]);
     }
+    
+    return newEntry;
 }
 
 -(NSArray*)getAllEvents
