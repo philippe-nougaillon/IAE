@@ -71,11 +71,6 @@
         //Start an activity indicator here
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         
-        UIActivityIndicatorView *activityView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        activityView.center=self.view.center;
-        [activityView startAnimating];
-        [self.view addSubview:activityView];
-        
         // setup database context
         AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
         self.managedObjectContext = appDelegate.managedObjectContext;
@@ -83,12 +78,9 @@
         // check if database exist
         if ([appDelegate isDatabaseExist:@"Event" ]) {
             NSLog(@"[Events]LoadEventsData->Database exist");
-            
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                
                 // get all items
                 _fetchedRecordsArray = [self getAllEvents];
-                
                 dispatch_async(dispatch_get_main_queue(), ^(void) {
                     // refresh tableview with local data
                     [self.tableView reloadData];
@@ -97,13 +89,18 @@
         } else {
             // reload data from json and store items
             NSLog(@"[Events]LoadEventsData->Database don't exist");
-            [self addAllRemoteEventsToLocalDatabase];
-            _fetchedRecordsArray = [self getAllEvents];
-            [self.tableView reloadData];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                // get all items
+                [self addAllRemoteEventsToLocalDatabase];
+                _fetchedRecordsArray = [self getAllEvents];
+                dispatch_async(dispatch_get_main_queue(), ^(void) {
+                    // refresh tableview with local data
+                    [self.tableView reloadData];
+                });
+            });
         }
         // hide activity monitor
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        [activityView removeFromSuperview];
     } else {
         NSLog(@"[Events]LoadEventsData->NOT Connected !");
         UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"" message:@"Pas de connection" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
@@ -119,7 +116,6 @@
 }
 
 -(void)refreshEventsListView {
-
     
     Reachability *reachability = [Reachability reachabilityWithHostName:@"google.com"];
     NetworkStatus remoteHostStatus = [reachability currentReachabilityStatus];
@@ -135,11 +131,6 @@
         //Start an activity indicator here
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         
-        UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        activityView.center = self.view.center;
-        [activityView startAnimating];
-        [self.view addSubview:activityView];
-        
         // Async load event content
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
@@ -151,23 +142,17 @@
                 [self.eventsTableView reloadData];
                 // stop activity indicator
                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-                [activityView removeFromSuperview];
                 // register to refresh UI when ApplicationDidBecomeActive
                 [[NSNotificationCenter defaultCenter]addObserver:self
                                                         selector:@selector(refreshEventsListView)
                                                             name:UIApplicationDidBecomeActiveNotification
                                                           object:nil];
-                
             });
         });
     } else {
         NSLog(@"[Events]refreshEventsListView->No connection");
-    
     }
 }
-
-
-
 
 -(void)refreshEventsList {
     
@@ -280,7 +265,6 @@
 
 -(NSArray*)getAllEvents
 {
-    
     NSLog(@"[Events]getAllEvents");
     
     // initializing NSFetchRequest
@@ -295,10 +279,10 @@
                                         initWithKey:@"when" ascending:NO];
     
     [fetchRequest setSortDescriptors:@[sortDescriptor]];
-    NSError* error;
     
     // Query on managedObjectContext With Generated fetchRequest
-    NSArray *fetchedRecords = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    NSError* error;
+    NSArray* fetchedRecords = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     // Returning Fetched Records
     return fetchedRecords;
@@ -327,8 +311,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"EventCell";
-    UIColor *blueIAE = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:128/255.0 alpha:1];
-
     EventsCell *cell = (EventsCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // update cell with article content
@@ -341,7 +323,7 @@
     if ([event.read intValue] == 1)
         [cell.titleEvent setTextColor:[UIColor grayColor]];
     else
-        [cell.titleEvent setTextColor:blueIAE];
+        [cell.titleEvent setTextColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:128/255.0 alpha:1]];
 
     // show calendar if event was added to user calendar
     if ([event.addedToCalendar intValue] == 1) {

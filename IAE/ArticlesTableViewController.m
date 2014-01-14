@@ -68,11 +68,6 @@
         //Start an activity indicator here
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         
-        UIActivityIndicatorView *activityView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        activityView.center=self.view.center;
-        [activityView startAnimating];
-        [self.view addSubview:activityView];
-       
         // setup database context
         AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
         self.managedObjectContext = appDelegate.managedObjectContext;
@@ -90,14 +85,18 @@
             });
         } else {
             NSLog(@"[Articles]loadData->database NOT exist");
-            // reload data from json and store items
-            [self addAllRemoteArticlesToLocalDatabase];
-            _fetchedRecordsArray = [self getAllArticles];
-            [self.tableView reloadData];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                // reload data from json and store items
+                [self addAllRemoteArticlesToLocalDatabase];
+                _fetchedRecordsArray = [self getAllArticles];
+                dispatch_async(dispatch_get_main_queue(), ^(void) {
+                    // refresh tableview with local data
+                    [self.tableView reloadData];
+                });
+            });
         }
         // hide activity monitor
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        [activityView removeFromSuperview];
     } else {
         NSLog(@"[Articles]loadData->Connection not OK");
         UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"" message:@"Pas de connection" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
@@ -131,11 +130,6 @@
         //Start an activity indicator here
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         
-        UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        activityView.center = self.view.center;
-        [activityView startAnimating];
-        [self.view addSubview:activityView];
-        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
             // Check if remote data are more recent
@@ -148,7 +142,6 @@
                     [self.tableView reloadData];
                     NSLog(@"[Articles]refreshArticlesList->tableView reloadData");
                 }
-                [activityView removeFromSuperview];
                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                 
                 // register to refresh UI when ApplicationDidBecomeActive
@@ -258,7 +251,6 @@
     // Add Entry to Article Database
     Article *newEntry = [NSEntityDescription insertNewObjectForEntityForName:@"Article"
                                                       inManagedObjectContext:self.managedObjectContext];
-    
     newEntry.title = titre;
     newEntry.nid = nid;
     newEntry.image = filePathToImage;
@@ -313,21 +305,20 @@
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"ArticleCell";
-    UIColor *blueIAE = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:128/255.0 alpha:1];
-
     ArticlesCell *cell = (ArticlesCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
   
     // update cell with article content
     Article *article = [_fetchedRecordsArray objectAtIndex:indexPath.row];
     [cell.titre setText:article.title];
     [cell.date setText:article.postDate];
-    if ([article.read intValue] == 1)
-        [cell.titre setTextColor:[UIColor grayColor]];
-    else
-        [cell.titre setTextColor:blueIAE];
-    
     UIImage *articleCellImage = [UIImage imageWithContentsOfFile:article.image];
     cell.image.image = articleCellImage;
+    if ([article.read intValue] == 1) {
+        [cell.titre setTextColor:[UIColor grayColor]];
+        cell.image.alpha = 0.8;
+    } else {
+        [cell.titre setTextColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:128/255.0 alpha:1]];
+    }
     
     return cell;
 }
