@@ -53,6 +53,7 @@
 		4AE478C518044B0A00C8CD7E /* twitterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE478C418044B0A00C8CD7E /* twitterCell.m */; };
 		4AF8D0ED18293A3100437A49 /* EventsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF8D0EC18293A3100437A49 /* EventsCell.m */; };
 		4AF8D0F018293B1300437A49 /* EventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF8D0EF18293B1300437A49 /* EventsViewController.m */; };
+		4AFB5BDF18868E440083781C /* IAE-Logo_640x960.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AFB5BDE18868E440083781C /* IAE-Logo_640x960.png */; };
 		844FD4C6187C06FA00C0991A /* Formations.json in Resources */ = {isa = PBXBuildFile; fileRef = 844FD4C5187C06FA00C0991A /* Formations.json */; };
 		844FD4CF187C443F00C0991A /* FileType-Pdf-icon-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 844FD4CE187C443F00C0991A /* FileType-Pdf-icon-3.png */; };
 		845EA391187AE3DB007E5F84 /* Formation.m in Sources */ = {isa = PBXBuildFile; fileRef = 845EA390187AE3DB007E5F84 /* Formation.m */; };
@@ -137,6 +138,7 @@
 		4AF8D0EC18293A3100437A49 /* EventsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsCell.m; sourceTree = "<group>"; };
 		4AF8D0EE18293B1300437A49 /* EventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsViewController.h; sourceTree = "<group>"; };
 		4AF8D0EF18293B1300437A49 /* EventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsViewController.m; sourceTree = "<group>"; };
+		4AFB5BDE18868E440083781C /* IAE-Logo_640x960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IAE-Logo_640x960.png"; sourceTree = "<group>"; };
 		844FD4C5187C06FA00C0991A /* Formations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Formations.json; sourceTree = "<group>"; };
 		844FD4CE187C443F00C0991A /* FileType-Pdf-icon-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FileType-Pdf-icon-3.png"; sourceTree = "<group>"; };
 		845EA38F187AE3DB007E5F84 /* Formation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Formation.h; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 		4A483687182CEC83009E7970 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4AFB5BDE18868E440083781C /* IAE-Logo_640x960.png */,
 				4A3FD67C187EDCEF00A5C9BE /* calendar-date-bg.png */,
 				844FD4CE187C443F00C0991A /* FileType-Pdf-icon-3.png */,
 				4A4BCE82185F188300BEB577 /* date_to_calendar-small.png */,
@@ -410,6 +413,7 @@
 				844FD4CF187C443F00C0991A /* FileType-Pdf-icon-3.png in Resources */,
 				4A045C6A17FC036300E2E2BA /* Main_iPad.storyboard in Resources */,
 				4A20BCC5182BC6BF00E5EF8C /* iae-paris1-rue.png in Resources */,
+				4AFB5BDF18868E440083781C /* IAE-Logo_640x960.png in Resources */,
 				4A3FD67D187EDCEF00A5C9BE /* calendar-date-bg.png in Resources */,
 				4A4BCE80185F0BFA00BEB577 /* social-icon-yt.png in Resources */,
 				4A48368F182CEE98009E7970 /* agenda.png in Resources */,
@@ -604,6 +608,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IAE/IAE-Prefix.pch";
 				INFOPLIST_FILE = "IAE/IAE-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -621,6 +626,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IAE/IAE-Prefix.pch";
 				INFOPLIST_FILE = "IAE/IAE-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

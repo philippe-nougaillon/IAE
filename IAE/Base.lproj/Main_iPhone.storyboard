@@ -85,7 +85,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Planning des salles" id="F8R-5d-Ecy">
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="S83-dh-lxz">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="refresh" id="S83-dh-lxz">
                             <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="refreshButtonPressed:" destination="CZ4-MO-1fc" id="mAY-VK-NgW"/>
@@ -156,7 +156,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Actualités" id="7dt-6I-3PL">
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="63Q-CH-fFp">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="refresh" id="63Q-CH-fFp">
                             <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="refreshButtonPressed:" destination="7RA-d9-CBO" id="yps-OH-YOg"/>
@@ -361,7 +361,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Agenda" id="E2F-BF-qdW">
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="RLB-7e-Dfh">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="refresh" id="RLB-7e-Dfh">
                             <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="refreshButtonPressed:" destination="alA-C0-E9v" id="y9s-LO-Nb2"/>
@@ -428,7 +428,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="VH0-bk-Fdp">
-                        <barButtonItem key="rightBarButtonItem" image="date_to_calendar-small.png" style="plain" id="QBy-w2-fwl">
+                        <barButtonItem key="rightBarButtonItem" image="date_to_calendar-small.png" style="done" id="QBy-w2-fwl">
                             <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="addEventButtonPressed:" destination="TFg-Yk-G37" id="ViE-o0-m99"/>
@@ -493,7 +493,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Formations" id="8LW-bg-VYs">
-                        <barButtonItem key="rightBarButtonItem" title="Fermer" style="plain" id="fwN-W1-SCw">
+                        <barButtonItem key="rightBarButtonItem" title="Fermer" style="done" id="fwN-W1-SCw">
                             <connections>
                                 <action selector="fermerButtonPressed:" destination="YXT-gC-2Oa" id="KVd-KB-UBO"/>
                             </connections>
@@ -529,7 +529,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="jjw-9F-UUr">
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="rve-9x-GUL">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="action" id="rve-9x-GUL">
                             <connections>
                                 <action selector="openWebSite:" destination="10y-Ag-4q1" id="2hY-u4-DzB"/>
                             </connections>
