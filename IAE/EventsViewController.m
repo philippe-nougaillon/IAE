@@ -39,18 +39,18 @@
     // Uncomment the following line to preserve selection between presentations.
     //self.clearsSelectionOnViewWillAppear = NO;
 
-    NSLog(@"[Events]viewDidLoad");
+    //NSLog(@"[Events]viewDidLoad");
     [self loadEventsData];
     
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    NSLog(@"[Events]viewDidAppear");
+    //NSLog(@"[Events]viewDidAppear");
 
     // register to refresh UI when ApplicationDidBecomeActive
     [[NSNotificationCenter defaultCenter]addObserver:self
-                                            selector:@selector(refreshEventsListView)
+                                            selector:@selector(refreshEventsList)
                                                 name:UIApplicationDidBecomeActiveNotification
                                               object:nil];
 }
@@ -60,7 +60,7 @@
     // load data from local items or stored items
     //
     
-    NSLog(@"[Events]LoadEventsData");
+    //NSLog(@"[Events]LoadEventsData");
     
     // setup database context
     AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
@@ -69,7 +69,7 @@
     // check if database exist
     if ([appDelegate isDatabaseExist:@"Event"]) {
         
-        NSLog(@"[Events]LoadEventsData->Database exist");
+        //NSLog(@"[Events]LoadEventsData->Database exist");
         
         // refresh tableview with local data
         _fetchedRecordsArray = [self getAllEvents];
@@ -92,7 +92,7 @@
         if(remoteHostStatus != NotReachable) {
             
             // reload data from json and store items
-            NSLog(@"[Events]LoadEventsData->Database don't exist");
+            //NSLog(@"[Events]LoadEventsData->Database don't exist");
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 
                 // get all items
@@ -108,7 +108,7 @@
                 });
             });
         } else {
-            NSLog(@"[Events]LoadEventsData->NOT Connected !");
+            //NSLog(@"[Events]LoadEventsData->NOT Connected !");
             UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"" message:@"Pas de connection" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
             alertView1.alertViewStyle = UIAlertViewStyleDefault;
             [alertView1 show];
@@ -120,19 +120,20 @@
 
 - (IBAction)refreshButtonPressed:(id)sender {
     
-    [self refreshEventsListView];
+    [self refreshEventsList];
     
 }
 
--(void)refreshEventsListView {
+-(void)refreshEventsList {
+
     
     Reachability *reachability = [Reachability reachabilityWithHostName:@"google.com"];
     NetworkStatus remoteHostStatus = [reachability currentReachabilityStatus];
     
     // check if network is up
     if(remoteHostStatus != NotReachable) {
-
-        NSLog(@"[Events]refreshEventsListView");
+        
+        //NSLog(@"[Events]refreshEventsListView");
         
         // remove notification
         [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -140,49 +141,33 @@
         //Start an activity indicator here
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         
-        // Async load event content
+        //NSLog(@"[Events]refreshArticlesList");
+        
+        // Check if remote data are more recent
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
-            // Reload event content
-            _jsonArray = [NSArray arrayWithContentsOfJSONFile:[@PRODSERVER stringByAppendingString:@"rest/evenements"]];
+            // Check if remote data are more recent
+            BOOL refresh = [self refreshLocalData];
             
             dispatch_async(dispatch_get_main_queue(), ^(void) {
-                // UI refresh
-                [self.eventsTableView reloadData];
+                
+                if (refresh) {
+                    // refresh tableview with local data
+                    _fetchedRecordsArray = [self getAllEvents];
+                    [self.tableView reloadData];
+                    //NSLog(@"[Events]refreshEventsList->tableView reloadData");
+                    
+                }
                 // stop activity indicator
                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                 // register to refresh UI when ApplicationDidBecomeActive
                 [[NSNotificationCenter defaultCenter]addObserver:self
-                                                        selector:@selector(refreshEventsListView)
+                                                        selector:@selector(refreshEventsList)
                                                             name:UIApplicationDidBecomeActiveNotification
                                                           object:nil];
             });
         });
-    } else {
-        NSLog(@"[Events]refreshEventsListView->No connection");
     }
-}
-
--(void)refreshEventsList {
-    
-    NSLog(@"[Events]refreshArticlesList");
-    
-    // Check if remote data are more recent
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        // Check if remote data are more recent
-        BOOL refresh = [self refreshLocalData];
-        
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            
-            if (refresh) {
-                // refresh tableview with local data
-                _fetchedRecordsArray = [self getAllEvents];
-                [self.tableView reloadData];
-                NSLog(@"[Events]refreshEventsList->tableView reloadData");
-            }
-        });
-    });
     
 }
 
@@ -193,34 +178,38 @@
     //
     BOOL refreshLocalData = NO;
     
-    NSLog(@"[Events]refreshLocalData");
+    //NSLog(@"[Events]refreshLocalData");
     
     // read json remote source
     NSArray *jsonArray = [NSArray arrayWithContentsOfJSONFile:[@PRODSERVER stringByAppendingString:@"rest/evenements"]];
     
     //get first article nid
     NSDictionary *obj = [jsonArray firstObject];
-    NSString *remoteEventNid = [obj objectForKey:@"nid"];
+    int remoteEventNid = [[obj objectForKey:@"nid"] intValue];
     
     // get last article in local storage
     Event *localFirstEvent = [_fetchedRecordsArray firstObject];
     int localNid = [localFirstEvent.nid intValue];
     
-    // add each new remote item
-    for (int index=0; index < jsonArray.count; index++) {
-        
-        //get Article title and date
-        NSDictionary *obj = [jsonArray objectAtIndex:index];
-        int remoteNid = [[obj objectForKey:@"nid"] intValue];
-        
-        // if remote item id is lower then last item id, add it
-        if (remoteNid > localNid) {
-            NSLog(@"[Events]refreshLocalData-> adding item id:%@", remoteEventNid);
+    // if remote is greater than local id
+    if (remoteEventNid > localNid) {
+    
+        // add each new remote item
+        for (int index=0; index < jsonArray.count; index++) {
             
-            // save Item to database
-            [self addEventToLocalDatabase:obj];
+            //get Article title and date
+            NSDictionary *obj = [jsonArray objectAtIndex:index];
+            int remoteNid = [[obj objectForKey:@"nid"] intValue];
             
-            refreshLocalData = YES;
+            // if remote item id is lower then last item id, add it
+            if (remoteNid > localNid) {
+                //NSLog(@"[Events]refreshLocalData-> adding item id:%@", remoteEventNid);
+                
+                // save Item to database
+                [self addEventToLocalDatabase:obj];
+                
+                refreshLocalData = YES;
+            }
         }
     }
     return refreshLocalData;
@@ -229,7 +218,7 @@
 
 -(NSArray*)addAllRemoteEventsToLocalDatabase {
     
-    NSLog(@"[Events]refreshLocalData-> store events data from json items");
+    //NSLog(@"[Events]refreshLocalData-> store events data from json items");
     
     // read json remote source
     NSArray *jsonArray = [NSArray arrayWithContentsOfJSONFile:[@PRODSERVER stringByAppendingString:@"rest/evenements"]];
@@ -253,7 +242,7 @@
     
     // save an item to database
     //
-    NSLog(@"[Events]addEventToLocalDatabase");
+    //NSLog(@"[Events]addEventToLocalDatabase");
         
     NSString *titre = [obj objectForKey:@"titre"];
     NSString *nid = [obj objectForKey:@"nid"];
@@ -272,7 +261,7 @@
     
     NSError *error;
     if (![self.managedObjectContext save:&error]) {
-        NSLog(@"[Events]addEventToLocalDatabase->Whoops, couldn't new item save: %@", [error localizedDescription]);
+        //NSLog(@"[Events]addEventToLocalDatabase->Whoops, couldn't new item save: %@", [error localizedDescription]);
     }
     
     return newEntry;
@@ -280,7 +269,7 @@
 
 -(NSArray*)getAllEvents
 {
-    NSLog(@"[Events]getAllEvents");
+    //NSLog(@"[Events]getAllEvents");
     
     // initializing NSFetchRequest
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -367,7 +356,7 @@
         // update the database
         NSError *error;
         if (![self.managedObjectContext save:&error]) {
-            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+            //NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
         }
         
         // Get destination view

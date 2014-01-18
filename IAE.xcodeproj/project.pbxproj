@@ -16,7 +16,6 @@
 		4A045C6717FC036300E2E2BA /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A045C6517FC036300E2E2BA /* Main_iPhone.storyboard */; };
 		4A045C6A17FC036300E2E2BA /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A045C6817FC036300E2E2BA /* Main_iPad.storyboard */; };
 		4A045C6D17FC036300E2E2BA /* PlanningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A045C6C17FC036300E2E2BA /* PlanningViewController.m */; };
-		4A045C7017FC036300E2E2BA /* TwitterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A045C6F17FC036300E2E2BA /* TwitterViewController.m */; };
 		4A045C7217FC036400E2E2BA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A045C7117FC036400E2E2BA /* Images.xcassets */; };
 		4A045C7917FC036400E2E2BA /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A045C7817FC036400E2E2BA /* XCTest.framework */; };
 		4A045C7A17FC036400E2E2BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A045C5317FC036300E2E2BA /* Foundation.framework */; };
@@ -27,7 +26,6 @@
 		4A127C3C187FFE2300BB6708 /* NSArray+arrayWithContentsOfJSONFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A127C3B187FFE2300BB6708 /* NSArray+arrayWithContentsOfJSONFile.m */; };
 		4A127C3F18801DB000BB6708 /* NSString+stringWithDateUSContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A127C3E18801DB000BB6708 /* NSString+stringWithDateUSContent.m */; };
 		4A1F0D181827BD0200027A8B /* ArticlesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1F0D171827BD0200027A8B /* ArticlesCell.m */; };
-		4A20BCC5182BC6BF00E5EF8C /* iae-paris1-rue.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A20BCC4182BC6BF00E5EF8C /* iae-paris1-rue.png */; };
 		4A3681B0182D2AA500310672 /* ArticlesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3681AF182D2AA500310672 /* ArticlesTableViewController.m */; };
 		4A39AC6518620F8400E5ECB9 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A39AC6418620F8400E5ECB9 /* Event.m */; };
 		4A3FD67D187EDCEF00A5C9BE /* calendar-date-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A3FD67C187EDCEF00A5C9BE /* calendar-date-bg.png */; };
@@ -48,14 +46,11 @@
 		4AAE223218587EBF003A3227 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAE223118587EBF003A3227 /* Article.m */; };
 		4AC744C1182A55E00087E45F /* EventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC744C0182A55E00087E45F /* EventDetailsViewController.m */; };
 		4AD246891827ECEE00ACDF4E /* ArticleDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD246881827ECEE00ACDF4E /* ArticleDetailsViewController.m */; };
-		4AE478C018043B2400C8CD7E /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE478BF18043B2400C8CD7E /* Social.framework */; };
-		4AE478C218043B3100C8CD7E /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE478C118043B3100C8CD7E /* Accounts.framework */; };
 		4AE478C518044B0A00C8CD7E /* twitterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE478C418044B0A00C8CD7E /* twitterCell.m */; };
 		4AF8D0ED18293A3100437A49 /* EventsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF8D0EC18293A3100437A49 /* EventsCell.m */; };
 		4AF8D0F018293B1300437A49 /* EventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF8D0EF18293B1300437A49 /* EventsViewController.m */; };
 		4AFB5BDF18868E440083781C /* IAE-Logo_640x960.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AFB5BDE18868E440083781C /* IAE-Logo_640x960.png */; };
 		844FD4C6187C06FA00C0991A /* Formations.json in Resources */ = {isa = PBXBuildFile; fileRef = 844FD4C5187C06FA00C0991A /* Formations.json */; };
-		844FD4CF187C443F00C0991A /* FileType-Pdf-icon-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 844FD4CE187C443F00C0991A /* FileType-Pdf-icon-3.png */; };
 		845EA391187AE3DB007E5F84 /* Formation.m in Sources */ = {isa = PBXBuildFile; fileRef = 845EA390187AE3DB007E5F84 /* Formation.m */; };
 		845EA394187AE74D007E5F84 /* FormationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 845EA393187AE74D007E5F84 /* FormationsViewController.m */; };
 		845EA397187B0670007E5F84 /* FormationDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 845EA396187B0670007E5F84 /* FormationDetailsViewController.m */; };
@@ -86,8 +81,6 @@
 		4A045C6917FC036300E2E2BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		4A045C6B17FC036300E2E2BA /* PlanningViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlanningViewController.h; sourceTree = "<group>"; };
 		4A045C6C17FC036300E2E2BA /* PlanningViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlanningViewController.m; sourceTree = "<group>"; };
-		4A045C6E17FC036300E2E2BA /* TwitterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwitterViewController.h; sourceTree = "<group>"; };
-		4A045C6F17FC036300E2E2BA /* TwitterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwitterViewController.m; sourceTree = "<group>"; };
 		4A045C7117FC036400E2E2BA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4A045C7717FC036400E2E2BA /* IAETests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IAETests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A045C7817FC036400E2E2BA /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -102,7 +95,6 @@
 		4A127C3E18801DB000BB6708 /* NSString+stringWithDateUSContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+stringWithDateUSContent.m"; sourceTree = "<group>"; };
 		4A1F0D161827BD0200027A8B /* ArticlesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticlesCell.h; sourceTree = "<group>"; };
 		4A1F0D171827BD0200027A8B /* ArticlesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticlesCell.m; sourceTree = "<group>"; };
-		4A20BCC4182BC6BF00E5EF8C /* iae-paris1-rue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iae-paris1-rue.png"; sourceTree = "<group>"; };
 		4A3681AE182D2AA500310672 /* ArticlesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticlesTableViewController.h; sourceTree = "<group>"; };
 		4A3681AF182D2AA500310672 /* ArticlesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticlesTableViewController.m; sourceTree = "<group>"; };
 		4A39AC6318620F8400E5ECB9 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
@@ -140,7 +132,6 @@
 		4AF8D0EF18293B1300437A49 /* EventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsViewController.m; sourceTree = "<group>"; };
 		4AFB5BDE18868E440083781C /* IAE-Logo_640x960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IAE-Logo_640x960.png"; sourceTree = "<group>"; };
 		844FD4C5187C06FA00C0991A /* Formations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Formations.json; sourceTree = "<group>"; };
-		844FD4CE187C443F00C0991A /* FileType-Pdf-icon-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FileType-Pdf-icon-3.png"; sourceTree = "<group>"; };
 		845EA38F187AE3DB007E5F84 /* Formation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Formation.h; sourceTree = "<group>"; };
 		845EA390187AE3DB007E5F84 /* Formation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Formation.m; sourceTree = "<group>"; };
 		845EA392187AE74D007E5F84 /* FormationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormationsViewController.h; sourceTree = "<group>"; };
@@ -156,8 +147,6 @@
 			files = (
 				4A45BAE2183A40DF00F75772 /* EventKit.framework in Frameworks */,
 				4A45BADD183A0F4600F75772 /* SystemConfiguration.framework in Frameworks */,
-				4AE478C218043B3100C8CD7E /* Accounts.framework in Frameworks */,
-				4AE478C018043B2400C8CD7E /* Social.framework in Frameworks */,
 				4A045C5617FC036300E2E2BA /* CoreGraphics.framework in Frameworks */,
 				4A045C5817FC036300E2E2BA /* UIKit.framework in Frameworks */,
 				4A045C5417FC036300E2E2BA /* Foundation.framework in Frameworks */,
@@ -239,8 +228,6 @@
 				845EA393187AE74D007E5F84 /* FormationsViewController.m */,
 				845EA395187B0670007E5F84 /* FormationDetailsViewController.h */,
 				845EA396187B0670007E5F84 /* FormationDetailsViewController.m */,
-				4A045C6E17FC036300E2E2BA /* TwitterViewController.h */,
-				4A045C6F17FC036300E2E2BA /* TwitterViewController.m */,
 				4A045C7117FC036400E2E2BA /* Images.xcassets */,
 				4A045C5A17FC036300E2E2BA /* Supporting Files */,
 				4A127C3A187FFE2300BB6708 /* NSArray+arrayWithContentsOfJSONFile.h */,
@@ -300,7 +287,6 @@
 			children = (
 				4AFB5BDE18868E440083781C /* IAE-Logo_640x960.png */,
 				4A3FD67C187EDCEF00A5C9BE /* calendar-date-bg.png */,
-				844FD4CE187C443F00C0991A /* FileType-Pdf-icon-3.png */,
 				4A4BCE82185F188300BEB577 /* date_to_calendar-small.png */,
 				4A4BCE79185F0BFA00BEB577 /* social-icon-fb.png */,
 				4A4BCE7A185F0BFA00BEB577 /* social-icon-in.png */,
@@ -310,7 +296,6 @@
 				4A483690182CEEEA009E7970 /* actualites2.png */,
 				4A48368E182CEE98009E7970 /* agenda.png */,
 				4A48368A182CED4D009E7970 /* planning.png */,
-				4A20BCC4182BC6BF00E5EF8C /* iae-paris1-rue.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -410,9 +395,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A483691182CEEEA009E7970 /* actualites2.png in Resources */,
-				844FD4CF187C443F00C0991A /* FileType-Pdf-icon-3.png in Resources */,
 				4A045C6A17FC036300E2E2BA /* Main_iPad.storyboard in Resources */,
-				4A20BCC5182BC6BF00E5EF8C /* iae-paris1-rue.png in Resources */,
 				4AFB5BDF18868E440083781C /* IAE-Logo_640x960.png in Resources */,
 				4A3FD67D187EDCEF00A5C9BE /* calendar-date-bg.png in Resources */,
 				4A4BCE80185F0BFA00BEB577 /* social-icon-yt.png in Resources */,
@@ -451,7 +434,6 @@
 				4A3681B0182D2AA500310672 /* ArticlesTableViewController.m in Sources */,
 				4A045C9017FC299900E2E2BA /* PlanningCell.m in Sources */,
 				845EA394187AE74D007E5F84 /* FormationsViewController.m in Sources */,
-				4A045C7017FC036300E2E2BA /* TwitterViewController.m in Sources */,
 				4A39AC6518620F8400E5ECB9 /* Event.m in Sources */,
 				4AF8D0ED18293A3100437A49 /* EventsCell.m in Sources */,
 				4A045C6417FC036300E2E2BA /* AppDelegate.m in Sources */,

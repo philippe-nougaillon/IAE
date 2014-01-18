@@ -41,7 +41,7 @@
         _jsonArray = [NSArray arrayWithContentsOfJSONFile:url];
         return (_jsonArray != nil);
     } else {
-        NSLog(@"NOT Connected !");
+        //NSLog(@"NOT Connected !");
         return NO;
     }
 }

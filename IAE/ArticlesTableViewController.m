@@ -54,7 +54,7 @@
 {
     // load data from local items or stored items
     //
-    NSLog(@"[Articles]loadData");
+    //NSLog(@"[Articles]loadData");
 
     // setup database context
     AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
@@ -62,12 +62,12 @@
     
     if ([appDelegate isDatabaseExist:@"Article" ]) {
         
-        NSLog(@"[Articles]loadData->database exist, loading records");
+        //NSLog(@"[Articles]loadData->database exist, loading records");
         _fetchedRecordsArray = [self getAllArticles];
         [self.tableView reloadData];
         
     } else {
-        NSLog(@"[Articles]loadData->database NOT exist");
+        //NSLog(@"[Articles]loadData->database NOT exist");
         
         //Start an activity indicator here
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
@@ -97,7 +97,7 @@
                 });
             });
         } else {
-            NSLog(@"[Articles]loadData->Connection not OK");
+            //NSLog(@"[Articles]loadData->Connection not OK");
             UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"" message:@"Pas de connection" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
             alertView1.alertViewStyle = UIAlertViewStyleDefault;
             [alertView1 show];
@@ -123,7 +123,7 @@
     // check if network is up
     if(remoteHostStatus != NotReachable) {
 
-        NSLog(@"[Articles]refreshArticlesList");
+        //NSLog(@"[Articles]refreshArticlesList");
         
         [[NSNotificationCenter defaultCenter] removeObserver:self];
         
@@ -140,7 +140,7 @@
                     // refresh tableview with local data
                     _fetchedRecordsArray = [self getAllArticles];
                     [self.tableView reloadData];
-                    NSLog(@"[Articles]refreshArticlesList->tableView reloadData");
+                    //NSLog(@"[Articles]refreshArticlesList->tableView reloadData");
                 }
                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                 
@@ -152,7 +152,7 @@
             });
         });
     } else {
-        NSLog(@"[Articles]refreshArticlesList->No connection");
+        //NSLog(@"[Articles]refreshArticlesList->No connection");
     }
 }
 
@@ -163,44 +163,48 @@
     //
     BOOL refreshLocalData = NO;
     
-    NSLog(@"[Articles]refreshLocalData");
+    //NSLog(@"[Articles]refreshLocalData");
     
     // read json remote source
     NSArray *jsonArray = [NSArray arrayWithContentsOfJSONFile:[@PRODSERVER stringByAppendingString:@"rest/actualites"]];
     
     //get first article nid
     NSDictionary *obj = [jsonArray firstObject];
-    NSString *remoteArticleNid = [obj objectForKey:@"nid"];
+    int remoteArticleNid = [[obj objectForKey:@"nid"] intValue];
     
     // get last article in local storage
     Article *localFirstArticle = [_fetchedRecordsArray firstObject];
     int localNid = [localFirstArticle.nid intValue];
     
-    // add each new remote item
-    for (int index=0; index < jsonArray.count; index++) {
-        
-        //get Article title and date
-        NSDictionary *obj = [jsonArray objectAtIndex:index];
-        int remoteNid = [[obj objectForKey:@"nid"] intValue];
-        
-        // if remote item id is lower then last item id, add it
-        if (remoteNid > localNid) {
-            NSLog(@"[Articles]adding item id:%@", remoteArticleNid);
+    // if remote is greater than local id
+    if (remoteArticleNid > localNid) {
+    
+        // add each new remote item
+        for (int index=0; index < jsonArray.count; index++) {
             
-            // save Item to database
-            [self addArticleToLocalDatabase:obj];
+            //get Article title and date
+            NSDictionary *obj = [jsonArray objectAtIndex:index];
+            int remoteNid = [[obj objectForKey:@"nid"] intValue];
             
-            refreshLocalData = YES;
-            //self.navigationController.tabBarItem.badgeValue = @"1";
+            // if remote item id is lower then last item id, add it
+            if (remoteNid > localNid) {
+                //NSLog(@"[Articles]adding item id:%@", remoteArticleNid);
+                
+                // save Item to database
+                [self addArticleToLocalDatabase:obj];
+                
+                refreshLocalData = YES;
+                //self.navigationController.tabBarItem.badgeValue = @"1";
+            }
         }
     }
-    NSLog(@"[Articles]refreshLocalData->%i", refreshLocalData);
+    //NSLog(@"[Articles]refreshLocalData->%i", refreshLocalData);
     return refreshLocalData;
 }
 
 -(NSArray*)addAllRemoteArticlesToLocalDatabase {
     
-    NSLog(@"[Articles]addAllRemoteArticlesToLocalDatabase");
+    //NSLog(@"[Articles]addAllRemoteArticlesToLocalDatabase");
     
     
     // read json remote source
@@ -226,7 +230,7 @@
 -(Article*)addArticleToLocalDatabase:(NSDictionary*)obj {
    
     
-    NSLog(@"[Articles]addArticleToLocalDatabase");
+    //NSLog(@"[Articles]addArticleToLocalDatabase");
     
     // save an item to database
     //
@@ -266,7 +270,7 @@
     
     NSError *error;
     if (![self.managedObjectContext save:&error]) {
-        NSLog(@"[Articles]addArticleToLocalDatabase->Whoops, couldn't new item save: %@", [error localizedDescription]);
+        //NSLog(@"[Articles]addArticleToLocalDatabase->Whoops, couldn't new item save: %@", [error localizedDescription]);
     }
     
     return newEntry;
@@ -275,7 +279,7 @@
 -(NSArray*)getAllArticles
 {
     
-    NSLog(@"[Articles]getAllArticles-> from Local Database");
+    //NSLog(@"[Articles]getAllArticles-> from Local Database");
     
     // initializing NSFetchRequest
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -353,7 +357,7 @@
         // update the database
         NSError *error;
         if (![self.managedObjectContext save:&error]) {
-            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+            //NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
         }
         
         // Get destination view

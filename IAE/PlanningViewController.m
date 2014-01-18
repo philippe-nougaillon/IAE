@@ -50,7 +50,7 @@
     
     if(remoteHostStatus != NotReachable) {
 
-        NSLog(@"[Planning]refreshListView->Connection OK");
+        //NSLog(@"[Planning]refreshListView->Connection OK");
 
         // remove all notification observer for this view
         [[NSNotificationCenter defaultCenter] removeObserver:self];

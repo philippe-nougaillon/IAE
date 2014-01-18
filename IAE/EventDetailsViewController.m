@@ -52,7 +52,7 @@
         _jsonArray = [NSArray arrayWithContentsOfJSONFile:url];
         return (_jsonArray != nil);
     } else {
-        NSLog(@"NOT Connected !");
+        //NSLog(@"NOT Connected !");
         return NO;
     }
 }
@@ -153,7 +153,7 @@
     // update the database
     NSError *error;
     if (![self.managedObjectContext save:&error]) {
-        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        //NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
     }
     
 }
