@@ -31,18 +31,34 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    [self.myProgressView startAnimating];
-    NSString* pdf = [@"http://www.iae-paris.com/sites/default/files/" stringByAppendingString:self.pdf];
-    
-    [self.myWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:pdf]]];
 
+    // Test if pdf exist in documents folder
+    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString* documentsDirectory = [paths objectAtIndex:0];
+    NSString* filePathToPDF = [NSString stringWithFormat:@"%@/%@", documentsDirectory, self.pdf];
+    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:filePathToPDF];
+    
+    if (!fileExists) {
+        // load PDF
+        NSString* url = [@"http://www.iae-paris.com/sites/default/files/" stringByAppendingString:self.pdf];
+        NSURL* fileURL = [[NSURL alloc] initWithString:url];
+        NSData* fileData = [NSData dataWithContentsOfURL:fileURL];
+    
+        // save PDF
+        NSError *error = nil;
+        if (![fileData writeToFile:filePathToPDF options:NSDataWritingAtomic error:&error]) {
+            NSLog(@"Unable to write PDF to %@. Error: %@", filePathToPDF, error);
+        }
+        fileData = nil;
+    }
+    // open pdf in local documents folder...
+    [self.myWebView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePathToPDF]]];
+    
 }
 
 - (IBAction)openWebSite:(id)sender {
     
     NSString* url = [@"http://www.iae-paris.com/formations/" stringByAppendingString:self.link];
-    
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 
 }
