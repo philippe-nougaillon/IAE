@@ -31,6 +31,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    [self.myProgressView startAnimating];
+    [self.myProgressView setHidden:NO];
 
     // Test if pdf exist in documents folder
     NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -39,21 +42,27 @@
     BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:filePathToPDF];
     
     if (!fileExists) {
-        // load PDF
-        NSString* url = [@"http://www.iae-paris.com/sites/default/files/" stringByAppendingString:self.pdf];
-        NSURL* fileURL = [[NSURL alloc] initWithString:url];
-        NSData* fileData = [NSData dataWithContentsOfURL:fileURL];
-    
-        // save PDF
-        NSError *error = nil;
-        if (![fileData writeToFile:filePathToPDF options:NSDataWritingAtomic error:&error]) {
-            NSLog(@"Unable to write PDF to %@. Error: %@", filePathToPDF, error);
-        }
-        fileData = nil;
+        // async load the PDF file
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSString* url = [@"http://www.iae-paris.com/sites/default/files/" stringByAppendingString:self.pdf];
+            NSURL* fileURL = [[NSURL alloc] initWithString:url];
+            NSData* fileData = [NSData dataWithContentsOfURL:fileURL];
+            
+            // save PDF
+            NSError *error = nil;
+            if (![fileData writeToFile:filePathToPDF options:NSDataWritingAtomic error:&error]) {
+                NSLog(@"Unable to write PDF to %@. Error: %@", filePathToPDF, error);
+            }
+            fileData = nil;
+            // update UI
+            dispatch_async(dispatch_get_main_queue(), ^(void) {
+                // open pdf in local documents folder...
+                [self.myWebView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePathToPDF]]];
+            });
+        });
+    } else {
+        [self.myWebView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePathToPDF]]];
     }
-    // open pdf in local documents folder...
-    [self.myWebView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePathToPDF]]];
-    
 }
 
 - (IBAction)openWebSite:(id)sender {
