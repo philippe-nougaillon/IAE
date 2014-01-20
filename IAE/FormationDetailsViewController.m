@@ -32,21 +32,19 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    [self.myProgressView startAnimating];
-    [self.myProgressView setHidden:NO];
-
     // Test if pdf exist in documents folder
     NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString* documentsDirectory = [paths objectAtIndex:0];
     NSString* filePathToPDF = [NSString stringWithFormat:@"%@/%@", documentsDirectory, self.pdf];
+    NSURLRequest* myRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePathToPDF]];
+    
     BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:filePathToPDF];
     
     if (!fileExists) {
         // async load the PDF file
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSString* url = [@"http://www.iae-paris.com/sites/default/files/" stringByAppendingString:self.pdf];
-            NSURL* fileURL = [[NSURL alloc] initWithString:url];
-            NSData* fileData = [NSData dataWithContentsOfURL:fileURL];
+            NSData* fileData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
             
             // save PDF
             NSError *error = nil;
@@ -54,14 +52,15 @@
                 NSLog(@"Unable to write PDF to %@. Error: %@", filePathToPDF, error);
             }
             fileData = nil;
+            
             // update UI
             dispatch_async(dispatch_get_main_queue(), ^(void) {
                 // open pdf in local documents folder...
-                [self.myWebView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePathToPDF]]];
+                [self.myWebView loadRequest:myRequest];
             });
         });
     } else {
-        [self.myWebView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePathToPDF]]];
+        [self.myWebView loadRequest:myRequest];
     }
 }
 
@@ -74,9 +73,7 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
 
-    // stop progress indicator
     [self.myProgressView stopAnimating];
-    [self.myProgressView setHidden:YES];
 
 }
 
