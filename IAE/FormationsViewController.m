@@ -63,8 +63,8 @@
     //NSLog(@"%@", formations_inter);
 
     // gather each section into one section and header array
-    _sections = [NSArray arrayWithObjects:formations_initiales, formations_continues, formations_mba, formations_apprentissage, formations_inter, nil];
-    _headers = [NSArray arrayWithObjects:@"Formations initiales", @"Formations continues", @"MBA", @"Apprentissage", @"Formations inter-entreprises", nil];
+    _sections = [NSArray arrayWithObjects:formations_apprentissage, formations_initiales, formations_continues, formations_mba, formations_inter, nil];
+    _headers = [NSArray arrayWithObjects:@"Apprentissage", @"Formations initiales", @"Formations continues", @"MBA", @"Formations inter-entreprises", nil];
     
 }
 

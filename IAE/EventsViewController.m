@@ -221,7 +221,7 @@
     //NSLog(@"[Events]refreshLocalData-> store events data from json items");
     
     // read json remote source
-    NSArray *jsonArray = [NSArray arrayWithContentsOfJSONFile:[@PRODSERVER stringByAppendingString:@"rest/evenements"]];
+    NSArray* jsonArray = [NSArray arrayWithContentsOfJSONFile:[@PRODSERVER stringByAppendingString:@"rest/evenements"]];
     NSMutableArray* temp = [NSMutableArray arrayWithCapacity:jsonArray.count];
         
     // for each array item
@@ -248,15 +248,16 @@
     NSString *nid = [obj objectForKey:@"nid"];
     NSString *soustitre = [obj objectForKey:@"chapo"];
     NSString *dateEvent = [[obj objectForKey:@"when"] objectAtIndex:0];
-    NSString *dateFR = [NSString stringDateSmallWithDateUSContent:dateEvent];
-    
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+
     // Add Entry to Article Database
     Event *newEntry = [NSEntityDescription insertNewObjectForEntityForName:@"Event"
                                                       inManagedObjectContext:self.managedObjectContext];
     newEntry.title = titre;
     newEntry.nid = nid;
     newEntry.subtitle = soustitre;
-    newEntry.when = dateFR;
+    newEntry.when = [df dateFromString:dateEvent];
     newEntry.read =[NSNumber numberWithInt:0];
     
     NSError *error;
@@ -280,7 +281,7 @@
     [fetchRequest setEntity:entity];
     
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
-                                        initWithKey:@"when" ascending:NO];
+                                        initWithKey:@"when" ascending:YES];
     
     [fetchRequest setSortDescriptors:@[sortDescriptor]];
     
@@ -321,7 +322,12 @@
     Event *event = [_fetchedRecordsArray objectAtIndex:indexPath.row];
     [cell.titleEvent setText:event.title];
     [cell.subTitleEvent setText:event.subtitle];
-    [cell.dateEvent setText:event.when];
+    
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setLocale:[NSLocale currentLocale]];
+    [df setTimeStyle:NSDateFormatterFullStyle];
+    [df setDateFormat:@"dd MMM"];
+    [cell.dateEvent setText:[df stringFromDate:event.when]];
 
     // change title color if item already marked as read
     if ([event.read intValue] == 1)
@@ -365,7 +371,13 @@
         // Pass the information to your destination view
         vc.indexOfEvent = event.nid;
         vc.eventTitre = event.title;
-        vc.eventDate = event.when;
+        
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        [df setLocale:[NSLocale currentLocale]];
+        [df setDateFormat:@"dd MMM"];
+
+        vc.eventDate = [df stringFromDate:event.when];
+        vc.eventDateUS = event.when;
         vc.eventAddedToCalendar = event.addedToCalendar;
     }
 }

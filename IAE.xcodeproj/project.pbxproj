@@ -27,7 +27,6 @@
 		4A127C3F18801DB000BB6708 /* NSString+stringWithDateUSContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A127C3E18801DB000BB6708 /* NSString+stringWithDateUSContent.m */; };
 		4A1F0D181827BD0200027A8B /* ArticlesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1F0D171827BD0200027A8B /* ArticlesCell.m */; };
 		4A3681B0182D2AA500310672 /* ArticlesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3681AF182D2AA500310672 /* ArticlesTableViewController.m */; };
-		4A39AC6518620F8400E5ECB9 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A39AC6418620F8400E5ECB9 /* Event.m */; };
 		4A3FD67D187EDCEF00A5C9BE /* calendar-date-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A3FD67C187EDCEF00A5C9BE /* calendar-date-bg.png */; };
 		4A45BADD183A0F4600F75772 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A45BADC183A0F4600F75772 /* SystemConfiguration.framework */; };
 		4A45BAE0183A10C600F75772 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A45BADF183A10C600F75772 /* Reachability.m */; };
@@ -46,6 +45,7 @@
 		4AAE223218587EBF003A3227 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAE223118587EBF003A3227 /* Article.m */; };
 		4AC744C1182A55E00087E45F /* EventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC744C0182A55E00087E45F /* EventDetailsViewController.m */; };
 		4AD246891827ECEE00ACDF4E /* ArticleDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD246881827ECEE00ACDF4E /* ArticleDetailsViewController.m */; };
+		4AD33196188D68BB0076C5EB /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD33195188D68BB0076C5EB /* Event.m */; };
 		4AE478C518044B0A00C8CD7E /* twitterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE478C418044B0A00C8CD7E /* twitterCell.m */; };
 		4AF8D0ED18293A3100437A49 /* EventsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF8D0EC18293A3100437A49 /* EventsCell.m */; };
 		4AF8D0F018293B1300437A49 /* EventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF8D0EF18293B1300437A49 /* EventsViewController.m */; };
@@ -97,8 +97,6 @@
 		4A1F0D171827BD0200027A8B /* ArticlesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticlesCell.m; sourceTree = "<group>"; };
 		4A3681AE182D2AA500310672 /* ArticlesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticlesTableViewController.h; sourceTree = "<group>"; };
 		4A3681AF182D2AA500310672 /* ArticlesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticlesTableViewController.m; sourceTree = "<group>"; };
-		4A39AC6318620F8400E5ECB9 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
-		4A39AC6418620F8400E5ECB9 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		4A3FD67C187EDCEF00A5C9BE /* calendar-date-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar-date-bg.png"; sourceTree = "<group>"; };
 		4A45BADC183A0F4600F75772 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		4A45BADE183A10C600F75772 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -122,6 +120,8 @@
 		4AC744C0182A55E00087E45F /* EventDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailsViewController.m; sourceTree = "<group>"; };
 		4AD246871827ECEE00ACDF4E /* ArticleDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleDetailsViewController.h; sourceTree = "<group>"; };
 		4AD246881827ECEE00ACDF4E /* ArticleDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleDetailsViewController.m; sourceTree = "<group>"; };
+		4AD33194188D68BB0076C5EB /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		4AD33195188D68BB0076C5EB /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		4AE478BF18043B2400C8CD7E /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		4AE478C118043B3100C8CD7E /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		4AE478C318044B0A00C8CD7E /* twitterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = twitterCell.h; sourceTree = "<group>"; };
@@ -304,8 +304,8 @@
 			isa = PBXGroup;
 			children = (
 				4AAE222D18587D95003A3227 /* Model.xcdatamodeld */,
-				4A39AC6318620F8400E5ECB9 /* Event.h */,
-				4A39AC6418620F8400E5ECB9 /* Event.m */,
+				4AD33194188D68BB0076C5EB /* Event.h */,
+				4AD33195188D68BB0076C5EB /* Event.m */,
 				4AAE223018587EBF003A3227 /* Article.h */,
 				4AAE223118587EBF003A3227 /* Article.m */,
 				845EA38F187AE3DB007E5F84 /* Formation.h */,
@@ -434,7 +434,7 @@
 				4A3681B0182D2AA500310672 /* ArticlesTableViewController.m in Sources */,
 				4A045C9017FC299900E2E2BA /* PlanningCell.m in Sources */,
 				845EA394187AE74D007E5F84 /* FormationsViewController.m in Sources */,
-				4A39AC6518620F8400E5ECB9 /* Event.m in Sources */,
+				4AD33196188D68BB0076C5EB /* Event.m in Sources */,
 				4AF8D0ED18293A3100437A49 /* EventsCell.m in Sources */,
 				4A045C6417FC036300E2E2BA /* AppDelegate.m in Sources */,
 				845EA397187B0670007E5F84 /* FormationDetailsViewController.m in Sources */,

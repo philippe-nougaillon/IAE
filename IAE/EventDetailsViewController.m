@@ -14,7 +14,6 @@
 
 @interface EventDetailsViewController ()
 @property (nonatomic,strong) NSArray *jsonArray;
-@property (nonatomic,strong) NSDate *eventDateUS;
 @property (nonatomic,strong) NSArray *fetchedRecordsArray;
 @property (weak, nonatomic) IBOutlet UILabel *labelTitle;
 @property (weak, nonatomic) IBOutlet UIWebView *articleWebview;
@@ -125,7 +124,7 @@
         
          dispatch_async(dispatch_get_main_queue(), ^(void) {
              // Update UI
-             NSString *msg = [@"Ajouté à votre agenda au " stringByAppendingString:self.eventDate];
+             NSString *msg = @"Evénement ajouté à votre agenda";
              UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:self.eventTitre message:msg delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
              alertView1.alertViewStyle = UIAlertViewStyleDefault;
              [alertView1 show];

@@ -106,6 +106,8 @@
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
+    NSLog(@"database path: %@", storeUrl);
+    
     if ([fileManager fileExistsAtPath:[storeUrl path]]) {
         
         // initializing NSFetchRequest

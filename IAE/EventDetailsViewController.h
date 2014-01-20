@@ -15,5 +15,6 @@
 @property (weak,nonatomic) NSString *indexOfEvent;
 @property (weak,nonatomic) NSString *eventTitre;
 @property (weak,nonatomic) NSString *eventDate;
+@property (weak,nonatomic) NSDate *eventDateUS;
 @property (weak,nonatomic) NSNumber *eventAddedToCalendar;
 @end
