@@ -172,7 +172,7 @@
     NSDictionary *obj = [jsonArray firstObject];
     int remoteArticleNid = [[obj objectForKey:@"nid"] intValue];
     
-    // get last article in local storage
+    // get last in article in local storage
     Article *localFirstArticle = [_fetchedRecordsArray firstObject];
     int localNid = [localFirstArticle.nid intValue];
     
@@ -190,8 +190,13 @@
             if (remoteNid > localNid) {
                 //NSLog(@"[Articles]adding item id:%@", remoteArticleNid);
                 
-                // save Item to database
+                // save his Item into database
                 [self addArticleToLocalDatabase:obj];
+                
+                // if articles list have more than 10 article, delete the last one
+                if (_fetchedRecordsArray.count > 10) {
+                    [self deleteLastArticleFromDatabase];
+                }
                 
                 refreshLocalData = YES;
                 //self.navigationController.tabBarItem.badgeValue = @"1";
@@ -274,6 +279,19 @@
     }
     
     return newEntry;
+}
+
+-(void)deleteLastArticleFromDatabase
+{
+
+    Article *lastArticle = [_fetchedRecordsArray lastObject];
+    [self.managedObjectContext deleteObject:lastArticle];
+    
+    NSError *error;
+    if (![self.managedObjectContext save:&error]) {
+        NSLog(@"[Articles]deleteLastArticleFromDatabase->Whoops, couldn't delete last item : %@", [error localizedDescription]);
+    }
+    
 }
 
 -(NSArray*)getAllArticles

@@ -268,6 +268,17 @@
     return newEntry;
 }
 
+-(void)deleteFirstEventFromDatabase
+{
+    Event *firstEvent = [_fetchedRecordsArray firstObject];
+    [self.managedObjectContext deleteObject:firstEvent];
+    
+    NSError *error;
+    if (![self.managedObjectContext save:&error]) {
+        NSLog(@"[Event]deleteFirstEventFromDatabase -> Whoops, couldn't delete first item : %@", [error localizedDescription]);
+    }
+}
+
 -(NSArray*)getAllEvents
 {
     //NSLog(@"[Events]getAllEvents");
@@ -284,6 +295,9 @@
                                         initWithKey:@"when" ascending:YES];
     
     [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"when > %@", [NSDate date]];
+
+    [fetchRequest setPredicate:predicate];
     
     // Query on managedObjectContext With Generated fetchRequest
     NSError* error;
