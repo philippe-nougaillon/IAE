@@ -18,4 +18,4 @@
     #import <Foundation/Foundation.h>
 #endif
 
-#define PRODSERVER "http://www.iae-paris.preprod.scoua.de/"
+#define PRODSERVER "http://www.iae-paris.com/"

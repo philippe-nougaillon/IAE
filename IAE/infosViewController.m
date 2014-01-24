@@ -30,16 +30,8 @@
 	// Do any additional setup after loading the view.
     
     // change scrollview height in order to show all content
-    [self.myScrollView setContentSize:CGSizeMake(320, 640)];
-    
-   // get all Articles
-   // dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-   //     ArticlesTableViewController* vc = [[ArticlesTableViewController alloc] init];
-   //     [vc loadData];
-   //     dispatch_async(dispatch_get_main_queue(), ^(void) {
-   //     });
-   // });
-    
+    [self.myScrollView setContentSize:CGSizeMake(320, 700)];
+
  }
 
 - (IBAction)buttonPressed:(id)sender {
