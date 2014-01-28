@@ -295,7 +295,7 @@
                                         initWithKey:@"when" ascending:YES];
     
     [fetchRequest setSortDescriptors:@[sortDescriptor]];
-    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"when > %@", [NSDate date]];
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"when >= %@", [NSDate date]];
 
     [fetchRequest setPredicate:predicate];
     
