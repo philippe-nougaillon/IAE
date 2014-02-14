@@ -188,28 +188,52 @@
     int remoteEventNid = [[obj objectForKey:@"nid"] intValue];
     
     // get last article in local storage
-    Event *localFirstEvent = [_fetchedRecordsArray firstObject];
-    int localNid = [localFirstEvent.nid intValue];
+    //Event *localFirstEvent = [_fetchedRecordsArray firstObject];
+    //int localNid = [localFirstEvent.nid intValue];
     
     // if remote is greater than local id
-    if (remoteEventNid > localNid) {
+    //if (remoteEventNid > localNid) {
     
         // add each new remote item
-        for (int index=0; index < jsonArray.count; index++) {
+      //  for (int index=0; index < jsonArray.count; index++) {
             
             //get Article title and date
-            NSDictionary *obj = [jsonArray objectAtIndex:index];
-            int remoteNid = [[obj objectForKey:@"nid"] intValue];
+        //    NSDictionary *obj = [jsonArray objectAtIndex:index];
+         //   int remoteNid = [[obj objectForKey:@"nid"] intValue];
             
             // if remote item id is lower then last item id, add it
-            if (remoteNid > localNid) {
+           // if (remoteNid > localNid) {
                 //NSLog(@"[Events]refreshLocalData-> adding item id:%@", remoteEventNid);
                 
                 // save Item to database
-                [self addEventToLocalDatabase:obj];
+             //   [self addEventToLocalDatabase:obj];
                 
-                refreshLocalData = YES;
-            }
+             //   refreshLocalData = YES;
+          //  }
+       // }
+    //}
+    
+    // add each new remote item
+    for (int index=0; index < jsonArray.count; index++) {
+    
+        //get Article title and date
+        NSDictionary *obj = [jsonArray objectAtIndex:index];
+        int remoteNid = [[obj objectForKey:@"nid"] intValue];
+        
+        // initializing NSFetchRequest
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        
+        //Setting Entity to be Queried
+        [fetchRequest setEntity:[NSEntityDescription entityForName:@"Event" inManagedObjectContext:self.managedObjectContext]];
+        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"nid = %i", remoteNid]];
+        
+        // Query on managedObjectContext With Generated fetchRequest
+        NSError* error;
+        NSArray* fetchedRecords = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        if (fetchedRecords.count == 0) {
+            // add event to database
+            [self addEventToLocalDatabase:obj];
+            refreshLocalData = YES;
         }
     }
     return refreshLocalData;

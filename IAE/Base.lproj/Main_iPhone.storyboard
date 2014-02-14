@@ -517,7 +517,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="O90-5f-TDG">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="640"/>
+                                        <rect key="frame" x="3" y="0.0" width="320" height="640"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroungLogo" id="8Tb-00-6UR">
@@ -525,36 +525,20 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iaM-b8-9YO">
-                                                <rect key="frame" x="5" y="490" width="309" height="63"/>
+                                                <rect key="frame" x="5" y="472" width="309" height="63"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" red="0.97531896829999998" green="0.63762241350000004" blue="0.25871078159999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="Centre LA ROCHEFOUCAULD">
                                                         <attributes>
-                                                            <color key="NSColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <font key="NSFont" size="15" name="HelveticaNeue"/>
-                                                            <font key="NSOriginalFont" size="14" name="HelveticaNeue"/>
+                                                            <color key="NSColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <font key="NSFont" size="15" name="HelveticaNeue-Bold"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                         </attributes>
                                                     </fragment>
-                                                    <fragment content=" ">
+                                                    <fragment content=" 37, rue de La Rochefoucauld 75009 PARIS">
                                                         <attributes>
-                                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                            <font key="NSFont" size="15" name="HelveticaNeue"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="37, rue de La Rochefoucauld">
-                                                        <attributes>
-                                                            <color key="NSColor" red="0.027450980392156862" green="0.074509803921568626" blue="0.22352941176470589" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <font key="NSFont" size="15" name="HelveticaNeue"/>
-                                                            <font key="NSOriginalFont" size="15" name="HelveticaNeue"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" 75009 PARIS, FRANCE">
-                                                        <attributes>
-                                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <color key="NSColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" size="15" name="HelveticaNeue"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                         </attributes>
@@ -563,82 +547,72 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yiZ-9y-hH6">
-                                                <rect key="frame" x="5" y="446" width="154" height="40"/>
+                                                <rect key="frame" x="5" y="429" width="154" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="0.35999999999999999" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                                 <state key="normal" title="01.53.55.28.00">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="phoneCallButtonPressed:" destination="ICp-Te-Hwn" eventType="touchUpInside" id="CN0-KE-kv0"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Vxh-TE-npq">
-                                                <rect key="frame" x="5" y="176" width="309" height="60"/>
+                                                <rect key="frame" x="5" y="239" width="154" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="18"/>
-                                                <state key="normal" title="Catalogue des Formations">
-                                                    <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" red="0.97531896829605103" green="0.63762241353259685" blue="0.258710781633394" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                                <state key="normal" title="Les programmes">
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
                                                     <segue destination="d9c-m6-hjk" kind="modal" id="QdP-ed-ENR"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ao9-H3-0jF">
-                                                <rect key="frame" x="5" y="557" width="154" height="40"/>
+                                                <rect key="frame" x="5" y="538" width="154" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="0.35999999999999999" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                                 <state key="normal" title="01.79.36.10.40">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="phonCall2buttonPressed:" destination="ICp-Te-Hwn" eventType="touchUpInside" id="vZn-Ga-BC9"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rf3-4P-dtc">
-                                                <rect key="frame" x="162" y="239" width="152" height="40"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
-                                                <state key="normal" title="iae@univ-paris1.fr"/>
-                                                <connections>
-                                                    <action selector="composeMailButtonPressed:" destination="ICp-Te-Hwn" eventType="touchUpInside" id="rDT-zh-Ejy"/>
-                                                </connections>
-                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5Nr-aD-ctq">
-                                                <rect key="frame" x="162" y="446" width="152" height="40"/>
+                                                <rect key="frame" x="162" y="429" width="152" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="0.35999999999999999" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                                 <state key="normal" title="Plan">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="buttonPressed:" destination="ICp-Te-Hwn" eventType="touchUpInside" id="XYK-6c-g1p"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ycs-aW-2jh">
-                                                <rect key="frame" x="162" y="557" width="152" height="40"/>
+                                                <rect key="frame" x="162" y="538" width="152" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="0.35999999999999999" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                                 <state key="normal" title="Plan">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="map2buttonPressed:" destination="ICp-Te-Hwn" eventType="touchUpInside" id="yl3-nC-uLT"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="IM0-At-bfZ">
-                                                <rect key="frame" x="5" y="239" width="154" height="40"/>
+                                                <rect key="frame" x="162" y="239" width="152" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" red="0.97531896829999998" green="0.63762241350000004" blue="0.25871078159999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                                 <state key="normal" title="www.iae-paris.com">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="titleShadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -691,26 +665,33 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ngh-5X-bq8">
-                                                <rect key="frame" x="5" y="376" width="309" height="66"/>
+                                                <rect key="frame" x="5" y="376" width="309" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" red="0.97531896829999998" green="0.63762241350000004" blue="0.25871078159999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="Centre BROCA">
+                                                    <fragment content="IAE de Paris">
                                                         <attributes>
-                                                            <color key="NSColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <font key="NSFont" size="15" name="HelveticaNeue"/>
-                                                            <font key="NSOriginalFont" size="15" name="HelveticaNeue"/>
+                                                            <color key="NSColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <font key="NSFont" size="15" name="HelveticaNeue-Bold"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                         </attributes>
                                                     </fragment>
-                                                    <fragment content=" 21, rue Broca 75005 PARIS, FRANCE">
+                                                    <fragment content=" 21, rue Broca 75005 PARIS">
                                                         <attributes>
-                                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <color key="NSColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" size="15" name="HelveticaNeue"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                         </attributes>
                                                     </fragment>
                                                 </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XSc-ya-Wov">
+                                                <rect key="frame" x="5" y="164" width="309" height="67"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <string key="text">Etablissement public d'enseignement supérieur spécialisé en gestion et management rattaché à l'Université Paris 1 Panthéon-Sorbonne</string>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -769,11 +750,11 @@
             </objects>
             <point key="canvasLocation" x="653" y="1966"/>
         </scene>
-        <!--Navigation Controller - Accueil-->
+        <!--Navigation Controller - Infos pratiques-->
         <scene sceneID="diZ-XN-pvf">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lGt-LB-osd" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Accueil" image="logo-IAE.png" id="cel-qL-FLe"/>
+                    <tabBarItem key="tabBarItem" title="Infos pratiques" image="logo-IAE.png" id="cel-qL-FLe"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2gQ-4F-Iem">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

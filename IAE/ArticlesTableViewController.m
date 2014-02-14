@@ -252,15 +252,16 @@
             NSString *imageFileName = [imageArray objectForKey:@"filename"];
             
             // load image
-            NSString *imagePath = [@PRODSERVER stringByAppendingString:[@"sites/default/files/" stringByAppendingString:imageFileName]];
-            NSURL *imageURL = [[NSURL alloc] initWithString:imagePath];
-            NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+            //NSString *imagePath = [@PRODSERVER stringByAppendingString:[@"sites/default/files/" stringByAppendingString:imageFileName]];
+            //NSURL *imageURL = [[NSURL alloc] initWithString:imagePath];
+            //NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
             
             // save image into app's document folder
-            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-            NSString *documentsDirectory = [paths objectAtIndex:0];
-            filePathToImage = [NSString stringWithFormat:@"%@/%@", documentsDirectory, imageFileName];
-            [imageData writeToFile:filePathToImage atomically:NO];
+            //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            //NSString *documentsDirectory = [paths objectAtIndex:0];
+            //filePathToImage = [NSString stringWithFormat:@"%@/%@", documentsDirectory, imageFileName];
+            //[imageData writeToFile:filePathToImage atomically:NO];
+            filePathToImage = imageFileName;
         }
     }
     
@@ -291,6 +292,8 @@
     if (![self.managedObjectContext save:&error]) {
         NSLog(@"[Articles]deleteLastArticleFromDatabase->Whoops, couldn't delete last item : %@", [error localizedDescription]);
     }
+    
+    // Todo: DELETE IMAGE !!
     
 }
 
@@ -342,15 +345,48 @@
     Article *article = [_fetchedRecordsArray objectAtIndex:indexPath.row];
     [cell.titre setText:article.title];
     [cell.date setText:article.postDate];
-    UIImage *articleCellImage = [UIImage imageWithContentsOfFile:article.image];
-    cell.image.image = articleCellImage;
+    
+    // load image
+    if (article.image) {
+
+        // FilePath
+        NSString *imageFileName = article.image;
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *filePathToImage = [NSString stringWithFormat:@"%@/%@", documentsDirectory, imageFileName];
+        
+        BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:filePathToImage];
+        if (!fileExists) {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                
+                // load image from server
+                NSString *imagePath = [@PRODSERVER stringByAppendingString:[@"sites/default/files/" stringByAppendingString:imageFileName]];
+                NSURL *imageURL = [[NSURL alloc] initWithString:imagePath];
+                NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+                
+                // save image into app's document folder
+                [imageData writeToFile:filePathToImage atomically:NO];
+                dispatch_async(dispatch_get_main_queue(), ^(void) {
+                    // show image
+                    UIImage *articleCellImage = [UIImage imageWithContentsOfFile:filePathToImage];
+                    cell.image.image = articleCellImage;
+                });
+            });
+        } else {
+            // show image local image
+            UIImage *articleCellImage = [UIImage imageWithContentsOfFile:filePathToImage];
+            cell.image.image = articleCellImage;
+        }
+    } else {
+        cell.image.image = nil;
+    }
+    
     if ([article.read intValue] == 1) {
         [cell.titre setTextColor:[UIColor grayColor]];
         cell.image.alpha = 0.8;
     } else {
         [cell.titre setTextColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:128/255.0 alpha:1]];
     }
-    
     return cell;
 }
 

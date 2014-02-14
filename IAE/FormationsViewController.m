@@ -64,7 +64,7 @@
 
     // gather each section into one section and header array
     _sections = [NSArray arrayWithObjects:formations_apprentissage, formations_initiales, formations_continues, formations_mba, formations_inter, nil];
-    _headers = [NSArray arrayWithObjects:@"Apprentissage", @"Formations initiales", @"Formations continues", @"MBA", @"Formations inter-entreprises", nil];
+    _headers = [NSArray arrayWithObjects:@"Apprentissage", @"Formation initiale", @"Formation continue", @"MBA", @"Formation inter-entreprises", nil];
     
 }
 
@@ -166,13 +166,13 @@ titleForHeaderInSection:(NSInteger)section
         NSDictionary* obj = (NSDictionary*)[[_sections objectAtIndex:indexPath.section]
                                             objectAtIndex:indexPath.row];
         
-        NSString* pdf = [obj objectForKey:@"pdf"];
-        if ([pdf isEqualToString:@""]) {
+        //NSString* pdf = [obj objectForKey:@"pdf"];
+        //if ([pdf isEqualToString:@""]) {
             // open webpage
             NSString* url = [@"http://www.iae-paris.com/formations/" stringByAppendingString:[obj objectForKey:@"link"]];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
             shouldSegue = NO;
-        }
+        //}
     }
     return shouldSegue;
 
