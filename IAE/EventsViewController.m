@@ -147,17 +147,15 @@
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
             // Check if remote data are more recent
-            BOOL refresh = [self refreshLocalData];
+            [self refreshLocalData];
             
             dispatch_async(dispatch_get_main_queue(), ^(void) {
                 
-                if (refresh) {
-                    // refresh tableview with local data
-                    _fetchedRecordsArray = [self getAllEvents];
-                    [self.tableView reloadData];
-                    //NSLog(@"[Events]refreshEventsList->tableView reloadData");
-                    
-                }
+                // refresh tableview with local data
+                _fetchedRecordsArray = [self getAllEvents];
+                [self.tableView reloadData];
+                //NSLog(@"[Events]refreshEventsList->tableView reloadData");
+                
                 // stop activity indicator
                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                 // register to refresh UI when ApplicationDidBecomeActive
@@ -182,36 +180,6 @@
     
     // read json remote source
     NSArray *jsonArray = [NSArray arrayWithContentsOfJSONFile:[@PRODSERVER stringByAppendingString:@"rest/evenements"]];
-    
-    //get first article nid
-    NSDictionary *obj = [jsonArray firstObject];
-    int remoteEventNid = [[obj objectForKey:@"nid"] intValue];
-    
-    // get last article in local storage
-    //Event *localFirstEvent = [_fetchedRecordsArray firstObject];
-    //int localNid = [localFirstEvent.nid intValue];
-    
-    // if remote is greater than local id
-    //if (remoteEventNid > localNid) {
-    
-        // add each new remote item
-      //  for (int index=0; index < jsonArray.count; index++) {
-            
-            //get Article title and date
-        //    NSDictionary *obj = [jsonArray objectAtIndex:index];
-         //   int remoteNid = [[obj objectForKey:@"nid"] intValue];
-            
-            // if remote item id is lower then last item id, add it
-           // if (remoteNid > localNid) {
-                //NSLog(@"[Events]refreshLocalData-> adding item id:%@", remoteEventNid);
-                
-                // save Item to database
-             //   [self addEventToLocalDatabase:obj];
-                
-             //   refreshLocalData = YES;
-          //  }
-       // }
-    //}
     
     // add each new remote item
     for (int index=0; index < jsonArray.count; index++) {

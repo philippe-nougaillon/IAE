@@ -51,6 +51,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     //Start an activity indicator here
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 

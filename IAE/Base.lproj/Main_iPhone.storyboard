@@ -244,7 +244,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="140"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar-date-bg.png" id="9rp-jH-kHt">
+                                        <imageView userInteractionEnabled="NO" alpha="0.79999999999999982" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar-date-bg.png" id="9rp-jH-kHt">
                                             <rect key="frame" x="-2" y="10" width="75" height="27"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
@@ -330,7 +330,7 @@
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
                             </webView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar-date-bg.png" id="nAX-YP-GgG">
+                            <imageView userInteractionEnabled="NO" alpha="0.79999999999999982" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar-date-bg.png" id="nAX-YP-GgG">
                                 <rect key="frame" x="-2" y="83" width="75" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -341,7 +341,7 @@
                                     <navigationItem id="Cwy-dd-IFb"/>
                                 </items>
                             </navigationBar>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LvJ-L6-3ZZ">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="LvJ-L6-3ZZ">
                                 <rect key="frame" x="14" y="112" width="286" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
@@ -385,7 +385,7 @@
             </objects>
             <point key="canvasLocation" x="1644" y="1263"/>
         </scene>
-        <!--Formations View Controller - Formations-->
+        <!--Formations View Controller - Les programmes-->
         <scene sceneID="67Q-3b-MpM">
             <objects>
                 <tableViewController id="YXT-gC-2Oa" customClass="FormationsViewController" sceneMemberID="viewController">
@@ -431,7 +431,7 @@
                             <outlet property="delegate" destination="YXT-gC-2Oa" id="yaE-eo-aom"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Formations" id="8LW-bg-VYs">
+                    <navigationItem key="navigationItem" title="Les programmes" id="8LW-bg-VYs">
                         <barButtonItem key="rightBarButtonItem" title="Fermer" style="done" id="fwN-W1-SCw">
                             <connections>
                                 <action selector="fermerButtonPressed:" destination="YXT-gC-2Oa" id="KVd-KB-UBO"/>
@@ -517,7 +517,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="O90-5f-TDG">
-                                        <rect key="frame" x="3" y="0.0" width="320" height="640"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="640"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroungLogo" id="8Tb-00-6UR">
@@ -550,7 +550,7 @@
                                                 <rect key="frame" x="5" y="429" width="154" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="0.35999999999999999" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
                                                 <state key="normal" title="01.53.55.28.00">
                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
@@ -561,7 +561,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Vxh-TE-npq">
                                                 <rect key="frame" x="5" y="239" width="154" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="0.97531896829605103" green="0.63762241353259685" blue="0.258710781633394" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" red="0.97531896829999998" green="0.61471028839999997" blue="0.178392045" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                                 <state key="normal" title="Les programmes">
                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -574,7 +574,7 @@
                                                 <rect key="frame" x="5" y="538" width="154" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="0.35999999999999999" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
                                                 <state key="normal" title="01.79.36.10.40">
                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
@@ -586,7 +586,7 @@
                                                 <rect key="frame" x="162" y="429" width="152" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="0.35999999999999999" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
                                                 <state key="normal" title="Plan">
                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
@@ -598,7 +598,7 @@
                                                 <rect key="frame" x="162" y="538" width="152" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="0.35999999999999999" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
                                                 <state key="normal" title="Plan">
                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
@@ -667,7 +667,7 @@
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ngh-5X-bq8">
                                                 <rect key="frame" x="5" y="376" width="309" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="0.97531896829999998" green="0.63762241350000004" blue="0.25871078159999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" red="0.97531896829999998" green="0.61471028844789544" blue="0.17839204496454197" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="IAE de Paris">
                                                         <attributes>

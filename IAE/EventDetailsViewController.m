@@ -60,6 +60,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
  
     [self.labelTitle setText:self.eventTitre];
     [self.dateEvent setText:self.eventDate];
