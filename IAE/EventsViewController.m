@@ -53,6 +53,10 @@
                                             selector:@selector(refreshEventsList)
                                                 name:UIApplicationDidBecomeActiveNotification
                                               object:nil];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[[GAIDictionaryBuilder createAppView] set:@"Liste agenda"
+                                                      forKey:kGAIScreenName] build]];
 }
 
 -(void)loadEventsData

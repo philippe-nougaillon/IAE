@@ -83,4 +83,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Détail formation"
+                                                          action:self.link
+                                                           label:nil
+                                                           value:nil] build]];
+}
+
 @end

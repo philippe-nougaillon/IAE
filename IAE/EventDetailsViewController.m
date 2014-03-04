@@ -137,6 +137,15 @@
          });
     });
     
+    NSDictionary *obj = [_jsonArray objectAtIndex:0];
+    NSString *titleEvent = [obj objectForKey:@"titre"];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Ajout calendrier"
+                                                          action:titleEvent
+                                                           label:nil
+                                                           value:nil] build]];
+    
 }
 
 -(void)markEventAsAddedToCalendar:(NSString*)indexOfEvent {
@@ -189,6 +198,18 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    NSDictionary *obj = [_jsonArray objectAtIndex:0];
+    NSString *titleEvent= [obj objectForKey:@"titre"];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Détail agenda"
+                                                          action:titleEvent
+                                                           label:nil
+                                                           value:nil] build]];
 }
 
 @end

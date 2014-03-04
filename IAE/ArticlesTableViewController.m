@@ -48,6 +48,10 @@
                                             selector:@selector(refreshArticlesList)
                                                 name:UIApplicationDidBecomeActiveNotification
                                               object:nil];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[[GAIDictionaryBuilder createAppView] set:@"Liste actualités"
+                                                      forKey:kGAIScreenName] build]];
 }
 
 -(void)loadData

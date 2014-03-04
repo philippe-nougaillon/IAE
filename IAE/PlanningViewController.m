@@ -39,6 +39,10 @@
                                             selector:@selector(refreshListView)
                                                 name:UIApplicationDidBecomeActiveNotification
                                               object:nil];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[[GAIDictionaryBuilder createAppView] set:@"Planning"
+                                                      forKey:kGAIScreenName] build]];
 
 }
 

@@ -86,4 +86,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    NSDictionary *obj = [_jsonArray objectAtIndex:0];
+    NSString *titleArticle = [obj objectForKey:@"titre"];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Détail article"
+                                                          action:titleArticle
+                                                           label:nil
+                                                           value:nil] build]];
+}
+
 @end
