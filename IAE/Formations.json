@@ -1,17 +1,19 @@
-{"apprentissages":[{"title":"Licence DISTRISUP", "subtitle":"Commerce et Distribution", "link":"formation-initiale/licence-commerce-distribution-distrisup-apprentissage","pdf":"Brochure%20de%20presentation%20Licence%20DISTRISUP.pdf"},
+{"apprentissages":[
+                   {"title":"Licence DISTRISUP", "subtitle":"Commerce et Distribution", "link":"formation-initiale/licence-commerce-distribution-distrisup-apprentissage","pdf":"Brochure%20de%20presentation%20Licence%20DISTRISUP.pdf"},
                    {"title":"Master MAE", "subtitle":"Administration des Entreprises - Gestion des dynamiques organisationnelles", "link":"formation-initiale/master-administration-des-entreprises-mae-gestion-des-dynamiques-organ", "pdf":"Brochure%20de%20presentation%20MAE%20ap.pdf"},
                    {"title":"Master Contrôle-Audit", "subtitle":"Audit - Contrôle de gestion", "link":"formation-initiale/master-controle-audit-apprentissage", "pdf":"Brochure%20de%20presentation%20Master%20CA%20ap.pdf"},
                    {"title":"Master Finance", "subtitle":"", "link":"formation-initiale/master-finance-apprentissage", "pdf":"Brochure%20de%20presentation%20Master%20Finance%20ap.pdf"},
                    {"title":"Master Management", "subtitle":"Audit, Contrôle de gestion, Finance, Management, Gestion, Marketing, RH - RSE", "link":"formation-initiale/master-management-apprentissage", "pdf":"Brochure%20de%20presentation%20Master%201.pdf"},
                    {"title":"Master Marketing", "subtitle":"Distribution, Commerce, Marketing", "link":"formation-initiale/master-marketing-pratiques-commerciales-apprentissage", "pdf":"Brochure%20de%20presentation%20Master%20Marketing%20ap.pdf"},
-                   {"title":"Master RH - RSE", "subtitle":"Ressources Humaines & Responsabilité Sociale de l'Entreprise", "link":"formation-initiale/master-ressources-humaines-responsabilite-sociale-entreprise-apprentissage", "pdf":"Brochure%20de%20presentation%20Master%20RH%20ap.pdf"}],
-"initiales":[{"title":"Master MAE", "subtitle":"Master Administration des Entreprises / MAE - Spécialité Administration des Affaires", "link":"formation-initiale/master-administration-des-entreprises-mae-administration-des-affaires", "pdf":"Brochure%20de%20presentation%20MAE%20FI.pdf"},
+                   {"title":"Master RH - RSE", "subtitle":"Ressources Humaines & Responsabilité Sociale de l'Entreprise", "link":"formation-initiale/master-ressources-humaines-responsabilite-sociale-entreprise-apprentissage", "pdf":"Brochure%20de%20presentation%20Master%20RH%20ap.pdf"},
+                    {"title":"Master Finance", "subtitle":"Parcours Conseiller Expert Banque de réseau", "link":"formation-initiale/master-finance-parcours-conseiller-expert-banque-de-reseau", "pdf":""},
+                    {"title":"Master Marketing", "subtitle":"Pratiques Commerciales parcours Management de la marque et communication", "link":"formation-initiale/master-marketing-et-pratiques-commerciales-parcours-management-de-la-m", "pdf":""}],
+"initiales":[
+             {"title":"Master MAE", "subtitle":"Master Administration des Entreprises / MAE - Spécialité Administration des Affaires", "link":"formation-initiale/master-administration-des-entreprises-mae-administration-des-affaires", "pdf":"Brochure%20de%20presentation%20MAE%20FI.pdf"},
              {"title":"Master Recherche", "subtitle":"Sciences de la décision et management des risques", "link":"formation-initiale/master-recherche-sciences-decision-management-risques", "pdf":""},
-             {"title":"Master Recherche Organisation Appliquée", "subtitle":"Management, Gestion, Recherche", "link":"formation-initiale/master-recherche-organisation-appliquee","pdf":"Brochure%20de%20presentation%20Master%20Recherche%20FI.pdf"},
-             {"title":"Master Finance", "subtitle":"Parcours Conseiller Expert Banque de réseau", "link":"formation-initiale/master-finance-parcours-conseiller-expert-banque-de-reseau", "pdf":""},
-             {"title":"Master Marketing", "subtitle":"Pratiques Commerciales parcours Management de la marque et communication", "link":"formation-initiale/master-marketing-et-pratiques-commerciales-parcours-management-de-la-m", "pdf":""},
              {"title":"Doctorat en Sciences de Gestion", "subtitle":"Management, Gestion, Recherche", "link":"formation-initiale/doctorat-sciences-gestion-management", "pdf":""}],
-"continues":[{"title":"Master Contrôle-Audit", "subtitle":"Audit - Contrôle de gestion", "link":"formation-continue/master-controle-audit", "pdf":"Brochure%20de%20presentation%20Master%20CA%20FC_sept.pdf"},
+"continues":[
+             {"title":"Master Contrôle-Audit", "subtitle":"Audit - Contrôle de gestion", "link":"formation-continue/master-controle-audit", "pdf":"Brochure%20de%20presentation%20Master%20CA%20FC_sept.pdf"},
              {"title":"Master Finance", "subtitle":"", "link":"formation-continue/master-finance", "pdf":"Brochure%20de%20presentation%20Master%20Finance%20FC.pdf"},
              {"title":"Master Management", "subtitle":"Audit, Contrôle de gestion, Finance, Management, Gestion, Marketing, RH-RSE", "link":"formation-continue/master-management-ressources-humaines-responsabilite-sociale", "pdf":"Brochure%20de%20presentation%20Master%20RH%20RSE%20FC.pdf"},
              {"title":"Master Management des Associations", "subtitle":"Management associatif", "link":"formation-continue/master-management-des-associations", "pdf":"Brochure%20de%20presentation%20Master%20MAS.pdf"},
@@ -28,6 +30,5 @@
     "Inter-entreprises":[
             {"title":"Audit informatique", "link":"formation-inter-entreprise/audit-informatique", "pdf":"Brochure%20de%20presentation%20Audit%20Informatique_2013.pdf"},
             {"title":"Diriger, créer ou reprendre une entreprise", "link":"formation-inter-entreprise/diriger-creer-ou-reprendre-une-entreprise", "pdf":"Mars%20Brochure%20presentation%20Entrepreneuriat-1.pdf"},
-            {"title":"Risk Management", "subtitle": "Management Transversal des Risques", "link":"formation-inter-entreprise/management-transversal-des-risques", "pdf":""}]
-    
+            {"title":"Management Transversal des Risques", "subtitle": "Management Transversal des Risques", "link":"formation-inter-entreprise/management-transversal-des-risques", "pdf":""}]
 }
