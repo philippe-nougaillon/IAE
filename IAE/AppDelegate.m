@@ -28,7 +28,7 @@
     [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
     
     // Initialize tracker.
-    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-48597609-1"];
+    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-48831730-1"];
     [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Générique"
                                                           action:@"Ouverture application"
                                                            label:nil
