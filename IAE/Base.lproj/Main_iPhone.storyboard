@@ -218,10 +218,10 @@
                         <color key="tintColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="lGt-LB-osd" kind="relationship" relationship="viewControllers" id="fKz-qv-qhs"/>
                         <segue destination="wiH-4q-OLN" kind="relationship" relationship="viewControllers" id="rPB-xn-2X3"/>
                         <segue destination="hRr-bz-aKP" kind="relationship" relationship="viewControllers" id="TWB-hi-5Qe"/>
                         <segue destination="TiZ-Zn-qWE" kind="relationship" relationship="viewControllers" id="BtQ-v6-xrO"/>
+                        <segue destination="lGt-LB-osd" kind="relationship" relationship="viewControllers" id="fKz-qv-qhs"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FNP-y4-bzi" sceneMemberID="firstResponder"/>
