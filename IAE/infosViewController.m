@@ -109,7 +109,7 @@
     
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     if (buttonTag == 1) {
-        url = [NSURL URLWithString:@"http://www.linkedin.com/company/iaeparis/products"];
+        url = [NSURL URLWithString:@"https://www.linkedin.com/edu/school?id=153036"];
         
         [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Lien externe"
                                                               action:@"LinkedIn de l'IAE"
