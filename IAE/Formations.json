@@ -25,8 +25,10 @@
            {"title":"Global Partners MBA", "subtitle":"Paris, Atlanta, Rio de Janeiro","link":"mba/global-partners-mba", "pdf":""},
            {"title":"International MBA", "link":"mba/international-mba", "pdf":""},
            {"title":"MBA International", "subtitle":"Paris, Alger, Beyrouth, Le Caire, Casablanca, Dakar, Maurice, Tunis","link":"mba/mba-international-paris", "pdf":""},
-           {"title":"MBA Renault", "link":"mba/mba-dauphine-sorbonne-renault", "pdf":""},
-           {"title":"MBA-MAE", "subtitle": "Master Administration des Entreprises - Management Général", "link":"mba/master-administration-des-entreprises-management-general-mae-mba", "pdf":""},{"title":"MBA-MAE Beijing", "subtitle": "Master Administration des Entreprises à Beijing (Chine)", "link":"mba/master-administration-des-entreprises-management-general-mae-mba", "pdf":""}],
+           {"title":"MBA Management International", "link":"mba/mba-management-international", "pdf":""},
+           {"title":"MBA-MAE", "subtitle": "Master Administration des Entreprises - Management Général", "link":"mba/master-administration-des-entreprises-management-general-mae-mba", "pdf":""},
+           {"title":"MBA-MAE Beijing", "subtitle": "Master Administration des Entreprises à Beijing (Chine)", "link":"mba/master-administration-des-entreprises-management-general-mae-mba", "pdf":""},
+           {"title":"MBA Marketing et Communication Santé", "subtitle": "Marketing et Communication Santé", "link":"mba/mba-marketing-et-communication-sante", "pdf":""}],
     "Inter-entreprises":[
             {"title":"Audit informatique", "link":"formation-inter-entreprise/audit-informatique", "pdf":"Brochure%20de%20presentation%20Audit%20Informatique_2013.pdf"},
             {"title":"Diriger, créer ou reprendre une entreprise", "link":"formation-inter-entreprise/diriger-creer-ou-reprendre-une-entreprise", "pdf":"Mars%20Brochure%20presentation%20Entrepreneuriat-1.pdf"},
