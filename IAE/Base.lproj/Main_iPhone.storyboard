@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="8YX-ce-x5E">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="8YX-ce-x5E">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
-        <!--Planning View Controller - Planning-->
+        <!--Planning-->
         <scene sceneID="W3I-pn-N6e">
             <objects>
                 <viewController title="Planning" id="CZ4-MO-1fc" customClass="PlanningViewController" sceneMemberID="viewController">
@@ -101,7 +102,7 @@
             </objects>
             <point key="canvasLocation" x="1179" y="1966"/>
         </scene>
-        <!--Articles Table View Controller - Actualités-->
+        <!--Actualités-->
         <scene sceneID="bJp-GT-Frc">
             <objects>
                 <tableViewController id="7RA-d9-CBO" customClass="ArticlesTableViewController" sceneMemberID="viewController">
@@ -228,7 +229,7 @@
             </objects>
             <point key="canvasLocation" x="-324" y="1630"/>
         </scene>
-        <!--Events View Controller - Agenda-->
+        <!--Agenda-->
         <scene sceneID="P8Y-HH-Trr">
             <objects>
                 <tableViewController id="alA-C0-E9v" customClass="EventsViewController" sceneMemberID="viewController">
@@ -385,7 +386,7 @@
             </objects>
             <point key="canvasLocation" x="1644" y="1263"/>
         </scene>
-        <!--Formations View Controller - Les programmes-->
+        <!--Les programmes-->
         <scene sceneID="67Q-3b-MpM">
             <objects>
                 <tableViewController id="YXT-gC-2Oa" customClass="FormationsViewController" sceneMemberID="viewController">
@@ -444,7 +445,7 @@
             </objects>
             <point key="canvasLocation" x="2175" y="2663"/>
         </scene>
-        <!--Formation Details View Controller - Title-->
+        <!--Title-->
         <scene sceneID="Qv1-cU-rlh">
             <objects>
                 <viewController id="10y-Ag-4q1" customClass="FormationDetailsViewController" sceneMemberID="viewController">
@@ -484,7 +485,7 @@
             </objects>
             <point key="canvasLocation" x="2650" y="2663"/>
         </scene>
-        <!--Navigation Controller - Formations-->
+        <!--Formations-->
         <scene sceneID="Kpk-gj-f50">
             <objects>
                 <navigationController definesPresentationContext="YES" id="d9c-m6-hjk" sceneMemberID="viewController">
@@ -529,14 +530,14 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.97531896829999998" green="0.63762241350000004" blue="0.25871078159999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="Centre LA ROCHEFOUCAULD">
+                                                    <fragment content="IAE de Paris - Centre Biopark">
                                                         <attributes>
                                                             <color key="NSColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" size="15" name="HelveticaNeue-Bold"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                         </attributes>
                                                     </fragment>
-                                                    <fragment content=" 37, rue de La Rochefoucauld 75009 PARIS">
+                                                    <fragment content=" 8 bis, rue de la Croix Jarry 75013 PARIS">
                                                         <attributes>
                                                             <color key="NSColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" size="15" name="HelveticaNeue"/>
@@ -575,7 +576,7 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="0.35999999999999999" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
-                                                <state key="normal" title="01.79.36.10.40">
+                                                <state key="normal" title="01.44.08.11.60">
                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
@@ -669,7 +670,7 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.97531896829999998" green="0.61471028844789544" blue="0.17839204496454197" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="IAE de Paris">
+                                                    <fragment content="IAE de Paris - Centre Broca">
                                                         <attributes>
                                                             <color key="NSColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" size="15" name="HelveticaNeue-Bold"/>
@@ -711,7 +712,7 @@
             </objects>
             <point key="canvasLocation" x="1179" y="2663"/>
         </scene>
-        <!--Navigation Controller - Agenda-->
+        <!--Agenda-->
         <scene sceneID="1CE-PM-kdA">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hRr-bz-aKP" sceneMemberID="viewController">
@@ -731,7 +732,7 @@
             </objects>
             <point key="canvasLocation" x="653" y="1263"/>
         </scene>
-        <!--Navigation Controller - Planning-->
+        <!--Planning-->
         <scene sceneID="vSe-DN-5Mi">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TiZ-Zn-qWE" sceneMemberID="viewController">
@@ -750,7 +751,7 @@
             </objects>
             <point key="canvasLocation" x="653" y="1966"/>
         </scene>
-        <!--Navigation Controller - Infos pratiques-->
+        <!--Infos pratiques-->
         <scene sceneID="diZ-XN-pvf">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lGt-LB-osd" sceneMemberID="viewController">
@@ -769,7 +770,7 @@
             </objects>
             <point key="canvasLocation" x="653" y="2663"/>
         </scene>
-        <!--Navigation Controller - Actualités-->
+        <!--Actualités-->
         <scene sceneID="8qt-wU-wyl">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wiH-4q-OLN" sceneMemberID="viewController">

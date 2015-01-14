@@ -69,7 +69,7 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:0153552800"]];
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Lien externe"
-                                                          action:@"Téléphone Larochefoucauld"
+                                                          action:@"Téléphone Centre Broca"
                                                            label:nil
                                                            value:nil] build]];
     
@@ -81,22 +81,22 @@
 }
 - (IBAction)phonCall2buttonPressed:(id)sender {
     
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:0179361040"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:0144081160"]];
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Lien externe"
-                                                          action:@"Téléphone Broca"
+                                                          action:@"Téléphone Centre Biopark"
                                                            label:nil
                                                            value:nil] build]];
 
 }
 - (IBAction)map2buttonPressed:(id)sender {
     
-    NSURL *url = [NSURL URLWithString:@"http://maps.apple.com/?q=IAE+PARIS,37+rue+de+La+Rochefoucauld,Paris,France"];
+    NSURL *url = [NSURL URLWithString:@"http://maps.apple.com/?q=IAE+PARIS,8+rue+de+la+Croix+Jarry+75013,Paris,France"];
     [[UIApplication sharedApplication] openURL:url];
     
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Lien externe"
-                                                          action:@"Plan Larochefoucauld"
+                                                          action:@"Plan Centre Biopark"
                                                            label:nil
                                                            value:nil] build]];
 
